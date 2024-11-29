@@ -1,0 +1,116 @@
+/*
+@font-face {
+    src: url(../fonts/RobotoCondensed/RobotoCondensed-Bold.ttf);
+    font-weight: 700;
+    font-family: 'Roboto Condensed';
+    font-display:swap;
+    font-style: normal;
+}
+@font-face {
+    src: url(../fonts/RobotoCondensed/RobotoCondensed-Regular.ttf);
+    font-weight: 400;
+    font-family: 'Roboto Condensed';
+    font-display:swap;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src:  url(../fonts/PlayfairDisplay/PlayfairDisplay-BoldItalic.ttf);
+    font-weight: 700;
+    font-display:swap;
+    font-style: normal;
+}
+*/
+
+.banner-slider.home .owl-item .sub-text {
+    font-family: 'PlayfairDisplay', serif;
+    font-weight: 700;
+}
+.banner-slider.home .owl-item .text-heading {
+    font-family: 'Poppins', serif;
+    font-weight: 500;
+    letter-spacing: 0;
+}
+.banner-slider.home .owl-item .sub-heading {
+    font-family: 'arial', serif;
+    font-weight: 700;
+    letter-spacing: 5px;
+}
+.banner-slider .ct-green {
+    display: block;
+    font-size: 40px;
+    color: #a8b74b;
+}
+.banner-slider .ct-rc-bold {
+    display: block;
+}
+.banner-slider .ct-rc-light {
+    font-size: 45px;
+    font-weight: 400;
+}
+.banner-slider.home .owl-item .sub-text{
+    font-size: 40px;
+    margin-bottom: 28px;
+}
+.banner-slider .ct-green {
+    font-weight: bolder;
+    font-size: 47px;
+}
+.banner-slider .ct-rc-bold {
+    font-size: 94px;
+    font-weight: bolder;
+    margin-bottom: -38px;
+}
+.banner-slider .ct-rc-light{
+    font-size: 54px;
+}
+
+lite-vimeo {
+  background-image: none !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .banner-slider.normal .text-heading {
+        font-size: 22px !important;
+    }
+    .banner-slider.normal{
+        min-height: 32vh;
+    }
+    .banner-slider.tour-program .img-wrapper img{
+        margin-top: 26px;
+    }
+    .banner-slider .ct-rc-bold{
+        margin-bottom: 5px;
+        font-size: 56px;
+    }
+    .banner-slider .ct-rc-light {
+        font-size: 46px;
+    }
+    .banner-slider.home .owl-item .sub-text {
+        font-size: 36px;
+        margin-bottom: 11px;
+    }
+
+}
+
+@media only screen and (max-width: 415px) {
+    .banner-slider.home .owl-item .sub-text {
+        font-size: 31px;
+        margin-bottom: 11px;
+    }
+
+    .banner-slider .ct-green {
+        font-size: 39px;
+    }
+    .banner-slider .ct-rc-bold {
+        font-size: 47px;
+    }
+    .banner-slider .ct-rc-light {
+        font-size: 37px;
+    }
+    .banner-slider.home .sub-heading{
+        font-size: 36px !important;
+    }
+}
+
+
