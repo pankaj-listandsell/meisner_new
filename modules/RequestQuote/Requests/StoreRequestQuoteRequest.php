@@ -40,6 +40,7 @@ class StoreRequestQuoteRequest extends FormRequest
             'name' => ['required', 'max:200', 'min:2'],
             'phone' => ['required', 'max:200'],
             'service' => ['required'],
+            'captcha'       => ['required', 'captcha'],
             // 'terms'  => ['required'],
         ];
     }
@@ -58,8 +59,8 @@ class StoreRequestQuoteRequest extends FormRequest
             'phone.required' => trans('Dieses Feld ist erforderlich'),
             'phone.numeric' => trans('Phone no is too long'),
             'service.required' => trans('Dieses Feld ist erforderlich'),
-            'captcha.required'  => trans('Captcha is required'),
-            'captcha.captcha'   => trans('Captcha does not match'),
+            'captcha.required'  => trans('Captcha ist erforderlich'),
+            'captcha.captcha'   => trans('Captcha stimmt nicht überein'),
 
         ];
     }

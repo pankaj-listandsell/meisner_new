@@ -6,7 +6,7 @@
           $image_url = get_file_url($val->image_id, 'full');
           $image_details = get_file_details($val->image_id, '#');
       ?>
-      <img src="{{$image_url}}" alt="" title="">
+      <img src="{{$image_url != '' ? $image_url : url('uploads/0000/1/2024/12/26/thumbmail-150.png')  }}" title="{{ isset($image_details['title']) ? $image_details['title'] : "#" }}" alt="{{ isset($image_details['alt']) ? $image_details['alt'] : "#" }}">
       <p>{{$val->title}}</p>
       <span>{!!$val->content!!}</span>
     </div>

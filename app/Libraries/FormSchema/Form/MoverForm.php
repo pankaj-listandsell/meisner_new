@@ -389,7 +389,15 @@ class MoverForm
                 'placeholder' => trans('Unpack boxes'),
                 'validation' => [],
             ],
-
+            [
+                'name' => 'assemble_kitchen',
+                'label' => trans('Küche montieren'),
+                'options' => [],
+                'default' => 0,
+                'type' => FormEntryTypes::checkbox->name,
+                'placeholder' => trans('Küche montieren'),
+                'validation' => [],
+            ],
             [
                 'name' => 'moving_date',
                 'label' => trans('Moving date'),
@@ -748,6 +756,14 @@ class MoverForm
                 'placeholder' => '',
                 'validation' => [],
                 'unit' => 0.8,
+            ],
+            [
+                'name' => 'custom_value_living_room_cabinet_disassembled',
+                'label' => trans('Cabinet Type'),
+                'options' => [],
+                'default' => '',
+                'type' => FormEntryTypes::text->name,
+                'placeholder' => '',
             ],
 
             [

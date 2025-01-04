@@ -65,7 +65,7 @@ $image_url = get_file_url($bg_image, 'full');
                 <span class="s1 text-danger">{{ $errors->first('service') }}</span>
             @endif
             </div>
-            
+
             </div>
             <span class="sub-box">
                 <span class="check-info">
@@ -75,7 +75,21 @@ $image_url = get_file_url($bg_image, 'full');
                     <span class="s1 text-danger">Dieses Feld ist erforderlich</span>
                     @endif
                 </span><br>
-                
+
+                <div class="form-group">
+                    <div class="captcha-img">
+                        <img src="{{ captcha_src() }}" id="captcha-image-pop" alt="captcha">
+                    </div>
+                    <button type="button" class="btn btn-secondary" id="refresh-captcha-pop"><img class="refs-img" src="/uploads/0000/1/2024/09/07/ref-black-icon.svg" slt="ref-img"></button>
+
+                    <div class="captcha-input">
+                        <input type="text" name="captcha" class="form-control"/>
+                    </div>
+                    @if ($errors->has('captcha'))
+                        <span class="s1 text-danger">{{ $errors->first('captcha') }}</span>
+                    @endif
+                </div>
+
             <input type="submit" value="Absenden"></span>
 
         </form>

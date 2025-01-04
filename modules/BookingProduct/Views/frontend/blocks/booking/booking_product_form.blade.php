@@ -50,8 +50,10 @@
                     <span class="s1 text-danger steofirst_error" id="zipcode_error" style="color:#d63637;font-size: 13px; display:none">Bitte Postleitzahl angeben</span>
                 </div>
                 <div class="form-box">
-                    <label>Wohnung <span style="color:red">*</span></label>
+                    <label>wähle Dein Stockwerk <span style="color:red">*</span></label>
                     <select id="building">
+                        <option value="Erdgeschoss">Erdgeschoss</option>
+                        <option value="Keller">Keller</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -92,10 +94,10 @@
                     <div class="search-box">
                         <input type="text" id="search_category" placeholder="Suche..">
                         <button type="button" class="searchcategory"
-                            onclick="search_category()"><span>&#128269;</span></button>
+                            onclick="search_category()"><span><img src="/uploads/0000/1/2024/12/26/search-interface-symbol.png"></span></button>
 
                     </div>
-                    <button type="button" style="display: none" class="clearcategory" onclick="clear_category()"><span>Klar</span></button>
+                    <button type="button" style="display: none" class="clearcategory" onclick="clear_category()"><span><img src="/uploads/0000/1/2024/12/26/close.png"></span></button>
                 </div>
                 <div class="help-text">
                     <p>Nicht sicher bei der Auswahl? Rufe kostenlos unsere Kundenberater an <a
@@ -109,7 +111,7 @@
                     $image_details = get_file_details($catVal->image_id, '#');
                                     ?>
                                 <div class="category-box" onclick="category_products({{ $catVal->id }})">
-                                    <img src="{{ $image_url }}"
+                                    <img src="{{$image_url != '' ? $image_url : url('uploads/0000/1/2024/12/26/thumbmail.png')  }}"
                                         title="{{ isset($image_details['title']) ? $image_details['title'] : '#' }}"
                                         alt="{{ isset($image_details['alt']) ? $image_details['alt'] : '#' }}">
                                     <p>{{ $catVal->name }}</p>
@@ -123,7 +125,10 @@
 
             <div class="step-next-btn">
                 <button type="button" class="prev-btn">Vorherige</button>
-                <button type="button" onclick="goCart()" class="next-btn">Weiter</button>
+                <div class="pr_next">
+                    <div class="cart_price"><span class="main_total">0 €</span> <img src="/uploads/0000/1/2024/12/26/grocery-store.png"></div>
+                    <button type="button" onclick="goCart()" class="next-btn">Weiter</button>
+                </div>
             </div>
         </div>
         <!-- Step 3: Social Links -->
@@ -134,6 +139,7 @@
                 <div class="step-three-main">
                     <div class="step-left">
                         <h2>Wunschtermin und Zeitraum auswählen</h2>
+                        <div class="name_row">
                         <div class="form-box-three box-one">
                             <select name="gender" id="gender">
                                 <option value="">Anrede</option>
@@ -146,6 +152,7 @@
                         </div>
                         <div class="form-box-three box-one">
                             <input type="text" class="form-control pac-target-input" id="lname" name="lname" autocomplete="off" placeholder="Nachname ">
+                        </div>
                         </div>
                         <span class="s1 text-danger error_msg" id="fname_error"style="color:#d63637;font-size: 13px; display:none">Bitte geben Sie Ihren Namen ein</span>
                         <div class="form-box-three">
@@ -189,10 +196,10 @@
                             <h2>Buchungsübersicht</h2>
 
                             <div class="section">
-                                <p class="section-title"><b>Gebiet:</b><span id="address_view">12203, Berlin, 1. Stock, kein Fahrstuhl</span></p>
+                                <p class="section-title"><b>Gebiet: </b><span id="address_view"></span></p>
                             </div>
 
-                            <div class="section">
+                            <div class="section product_detail">
                                 <p class="section-title"><b>Gegenstände</b></p>
                                 <div id="cart_section_view"></div>
                             </div>
@@ -207,11 +214,11 @@
                                     <span id="net_amount"> €</span>
                                 </div>
                                 <div class="line-item">
-                                    <span>MwSt.:({{setting_item_with_lang('vat', 'de')}} %)</span>
+                                    <span>MwSt.: ({{setting_item_with_lang('vat', 'de')}} %)</span>
                                     <span id="vat"> €</span>
                                 </div>
                                 <div class="line-item">
-                                    <span>Zusatzkosten inkl. MwSt.<br>(Mindestbestellung: 199,00 €):</span>
+                                    <span>Zusatzkosten inkl. MwSt.<br>(Mindestbestellung: 199,00 €)</span>
                                     <span id="additional_cost">+ €</span>
                                 </div>
                                 <div class="line-item total">
@@ -290,6 +297,12 @@
             }
 
             updateProgressBar(); // Initialize on load
+
+            document.getElementById('search_category').addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    search_category();
+                }
+            });
 
             document.querySelector('.search_category_result').addEventListener('click', function (event) {
                 // Check if the clicked element is a category-box
@@ -435,6 +448,8 @@
                 });
             }
 
+
+            var main_total = 0;
             function addtocart(id, price) {
                 let qty = $('.qty-' + id).val();
                 let val = id + ',' + qty + ',' + price;
@@ -446,6 +461,10 @@
                 let existingInput = form.querySelector(`input[data-id="${id}"]`);
 
                 if (existingInput) {
+                    let existingValue = existingInput.value.split(',');
+                    let existingQty = parseFloat(existingValue[1]);
+                    let existingPrice = parseFloat(existingValue[2]);
+                    main_total -= (existingQty * existingPrice);
                     form.removeChild(existingInput);
                 }
                 let idInput = document.createElement('input');
@@ -454,6 +473,10 @@
                 idInput.classList.add('added_cart', 'product_id_' + id);
                 idInput.name = 'cart_item[]';
                 idInput.value = val;
+                main_total = main_total + (price * qty);
+                if(main_total > 0){
+                   $('.main_total').html(priceConvert(main_total) + ' €');
+                }
                 form.appendChild(idInput);
                 toastr.success("Erfolg");
             }
@@ -483,7 +506,7 @@
                             if (response.summary.gross_total_amount < response.summary.max_order_amount) {
                                 $('.min_order_content').show();
                             }
-                            $('#address_view').html($('#address').val());
+                            $('#address_view').html($('#address').val() + ', ' +$('#zipcode').val() +' '+ $('#city').val());
                             $('#cart_section_view').html(response.data);
                             $('#total_pieces').html(response.summary.total_pieces);
                             $('#net_amount').html(priceConvert(response.summary.net_amount) + ' €');
@@ -522,7 +545,7 @@
                         toastr.error('Sie können mindestens '+localStorage.getItem('max_order_amount')+'€ bezahlen, Bitte fügen Sie weitere Artikel hinzu');
                         return false;
                     }
-                    
+
                     $('.error_msg').hide();
                     var errorM = true;
                     if ($('#fname').val() == '') {
@@ -683,7 +706,7 @@
                     var calculate_total = parseInt(cart_total_amount) - parseInt(price);
                     $('#cart_total_amount').val(calculate_total)
                 }
-                
+
                 let vatTaxAmount = (calculate_total * localStorage.getItem('vat_cart')) / 100;
                 // alert(vatTaxAmount);
                 $('#net_amount').html(priceConvert(calculate_total) + ' €');
@@ -745,16 +768,19 @@
                 }
 
                 function fillAddressFields(place) {
-                    let address = '', postalCode = '', city = '';
+                    let address = '', postalCode = '', city = ''; streetNumber = '';
 
                     // Extract address components
                     if (place.address_components) {
                         place.address_components.forEach(function (component) {
                             const componentType = component.types[0];
-
+                             console.log()
                             switch (componentType) {
                                 case 'route': // Alternative city representation
                                     address = component.long_name;
+                                    break;
+                                    case 'street_number':
+                                    streetNumber = component.long_name;  // Street number
                                     break;
                                 case 'postal_code':
                                     postalCode = component.long_name; // Get postal code
@@ -767,8 +793,9 @@
                         });
 
                         // Populate the form fields with the extracted values
-                        if (address) {
-                            $('#address').val(address);
+                        const fullStreetAddress = address + ' ' + streetNumber;
+                        if (fullStreetAddress) {
+                            $('#address').val(fullStreetAddress);
                         }
                         if (postalCode) {
                             $('#zipcode').val(postalCode);
@@ -783,6 +810,63 @@
             });
             const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
             document.getElementById("date").setAttribute("min", today);
+
+            document.addEventListener('click', function (event) {
+                // Check if the clicked element has the "remove" class
+                if (event.target.closest('.remove')) {
+                    // Get the parent element with the "remove" class
+                    const removeElement = event.target.closest('.remove');
+
+
+                    const itemId = removeElement.getAttribute('data-id');
+
+                    let form = document.getElementById('add_to_cart_form');
+                    let existingInput = form.querySelector(`input[data-id="${itemId}"]`);
+
+                    if (existingInput) {
+                        form.removeChild(existingInput);
+                    }
+
+                    $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "{{ route('bookingproduct.cartdata') }}",
+                    data: $('#add_to_cart_form').serialize(),
+                    method: 'post',
+                    // beforeSend: function() {
+                    //     $("#preload").show();
+                    // },
+                    success: function (response) {
+                        if (response.status == 1) {
+                            $('.min_order_content').hide();
+                            if (response.summary.gross_total_amount < response.summary.max_order_amount) {
+                                $('.min_order_content').show();
+                            }
+                            $('#address_view').html($('#address').val() + ', ' +$('#zipcode').val() +' '+ $('#city').val());
+                            $('#cart_section_view').html(response.data);
+                            $('#total_pieces').html(response.summary.total_pieces);
+                            $('#net_amount').html(priceConvert(response.summary.net_amount) + ' €');
+                            $('#vat').html(priceConvert(response.summary.vatTaxAmount) + ' €');
+                            $('#additional_cost').html(priceConvert(response.summary.additional_cost) + ' €');
+                            $('#gross_total_amount').html(priceConvert(response.summary.gross_total_amount) + ' €');
+
+                            localStorage.setItem('total_pieces_cart', response.summary.total_pieces);
+                            localStorage.setItem('net_amount_cart', response.summary.net_amount);
+                            localStorage.setItem('vat_cart_amount', response.summary.vatTaxAmount);
+                            localStorage.setItem('vat_cart', response.summary.vat);
+                            localStorage.setItem('additional_cost_cart', response.summary.additional_cost);
+                            localStorage.setItem('grand_amount_cart', response.summary.gross_total_amount);
+                            localStorage.setItem('max_order_amount', response.summary.max_order_amount);
+                        }
+                    },
+                    error: function (e) {
+                        toastr.error("Etwas ist schief gelaufen!");
+                        return false;
+                    }
+                });
+                }
+            });
         </script>
     @endpush
 @endonce

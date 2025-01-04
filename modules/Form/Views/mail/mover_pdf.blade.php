@@ -199,7 +199,7 @@ table.location-detail-title tr td.timetd {
                       <?php $logo = get_file_url($logo_id,'full') ?>
  							<img src="{{$logo}}"
                          alt="logo"/ width="170px" height="auto">
-                  @endif                       
+                  @endif
                 </figure>
             </td>
             <td>
@@ -231,8 +231,8 @@ table.location-detail-title tr td.timetd {
             <td>
                 <div class="header-bar datebar">
                     <strong> @lang('Flexible period')</strong>
-                    {{ isset($data['moving_date_from']) ? date('m/d/Y', strtotime($data['moving_date_from'])) : "" }}
-                    {{ isset($data['moving_date_to']) && $data['moving_date_to'] != '' ? ' - '.date('m/d/Y', strtotime($data['moving_date_to'])) : '' }}
+                    {{ isset($data['moving_date_from']) ? date('d.m.Y', strtotime($data['moving_date_from'])) : "" }}
+                    {{ isset($data['moving_date_to']) && $data['moving_date_to'] != '' ? ' - '.date('d.m.Y', strtotime($data['moving_date_to'])) : '' }}
                 </div>
                 <figure>
                     <img class="img-unloading"
@@ -292,7 +292,7 @@ table.location-detail-title tr td.timetd {
                 <p>@lang("I'm moving into an"): {{ $data['to_move_to'] }}</p>
                 <p>@lang('Floor'): {{ $data['from_floor'] }}</p>
                 <p>@lang('Elevator available'): {{ $data['to_has_elevator'] ? trans('Yes') : trans('No') }}</p>
-                <p>@lang('Furniture disassemble'): {{ $data['to_furniture_assemble'] ? trans('Yes') : trans('No') }}</p>
+                <p>Möbel montieren: {{ $data['to_furniture_assemble'] ? trans('Yes') : trans('No') }}</p>
                 <p>@lang('Unpacking boxes'): {{ $data['to_unpack_boxes'] }}</p>
                 <p>@lang('No parking zone'): {{ $data['to_no_stopping'] }}</p>
             </td>
@@ -309,13 +309,13 @@ table.location-detail-title tr td.timetd {
                 <p>@lang('Carrying distance'): {{ $data['from_carrying_distance'] }}</p>
                 <p>@lang('Staircase'): {{ $data['from_staircase'] }}</p>
                 <p>@lang('House position'): {{ $data['from_house_position'] }}</p>
-                <p>@lang('Loading Notes'): {{ $data['from_loading_note'] }}</p>
+                <p>Notiz: {{ $data['from_loading_note'] }}</p>
             </td>
             <td>
                 <p>@lang('Carrying distance'): {{ $data['to_carrying_distance'] }}</p>
                 <p>@lang('Staircase'): {{ $data['to_staircase'] }}</p>
                 <p>@lang('House position'): {{ $data['to_house_position'] }}</p>
-                <p>@lang('Loading Notes'): {{ $data['to_loading_note'] }}</p>
+                <p>Notiz: {{ $data['to_loading_note'] }}</p>
             </td>
         </tr>
     </table>
@@ -329,7 +329,7 @@ table.location-detail-title tr td.timetd {
 
             @endforeach
         @endforeach
-      
+
     </div>
 </body>
 </html>

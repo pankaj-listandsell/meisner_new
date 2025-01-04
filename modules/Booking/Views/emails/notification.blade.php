@@ -94,7 +94,7 @@
                         @endif
                         @if($booking->order_stopping_ban)
                         <tr class="info-first-name">
-                            <td class="label">{{__('Stoppverbot')}}</td>
+                            <td class="label">{{__('Halteverbot')}}</td>
                             <td class="val">{{$booking->order_stopping_ban}}</td>
                         </tr>
                         @endif
