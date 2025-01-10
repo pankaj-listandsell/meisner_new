@@ -700,22 +700,26 @@
                 $('#cart_prod_prive_show_' + id).html(priceConvert(qty * price) + ' €');
                 let cart_total_amount = $('#cart_total_amount').val();
                 if (calc == '+') {
-                    var calculate_total = parseInt(cart_total_amount) + parseInt(price);
+                    var calculate_total = parseFloat(cart_total_amount) + parseFloat(price);
                     $('#cart_total_amount').val(calculate_total)
                 } else {
-                    var calculate_total = parseInt(cart_total_amount) - parseInt(price);
+                    var calculate_total = parseFloat(cart_total_amount) - parseFloat(price);
                     $('#cart_total_amount').val(calculate_total)
                 }
 
                 let vatTaxAmount = (calculate_total * localStorage.getItem('vat_cart')) / 100;
                 // alert(vatTaxAmount);
                 $('#net_amount').html(priceConvert(calculate_total) + ' €');
-                $('#gross_total_amount').html(priceConvert(calculate_total+vatTaxAmount) + ' €');
+                $('#gross_total_amount').html(priceConvert(calculate_total) + ' €');
                 $('#vat').html(priceConvert(vatTaxAmount) + ' €');
+                
+                if(calculate_total > 0){
+                   $('.main_total').html(priceConvert(calculate_total) + ' €');
+                }
 
                 localStorage.setItem('vat_cart_amount', vatTaxAmount);
                 localStorage.setItem('net_amount_cart', calculate_total);
-                localStorage.setItem('grand_amount_cart', calculate_total+vatTaxAmount);
+                localStorage.setItem('grand_amount_cart', calculate_total);
                 // $('#net_amount_cart').val(calculate_total);
                 // $('#grand_amount_cart').val(calculate_total);
                 $('.min_order_content').hide();
@@ -850,6 +854,9 @@
                             $('#vat').html(priceConvert(response.summary.vatTaxAmount) + ' €');
                             $('#additional_cost').html(priceConvert(response.summary.additional_cost) + ' €');
                             $('#gross_total_amount').html(priceConvert(response.summary.gross_total_amount) + ' €');
+                            if(response.summary.gross_total_amount > 0){
+                                $('.main_total').html(priceConvert(response.summary.gross_total_amount) + ' €');
+                            }
 
                             localStorage.setItem('total_pieces_cart', response.summary.total_pieces);
                             localStorage.setItem('net_amount_cart', response.summary.net_amount);

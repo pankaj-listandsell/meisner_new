@@ -16,6 +16,7 @@ use Modules\Products\Models\Products;
 use Illuminate\Support\Str;
 use Modules\BookingProduct\Models\BookingProductDetail;
 use Modules\Products\Models\ProductsCategory;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BookingController extends Controller
 {
@@ -60,7 +61,7 @@ class BookingController extends Controller
         $vatTax = setting_item_with_lang('vat', 'de');
         $vatTaxAmount = ($net_amount * $vatTax) / 100;
         $additional_cost = 0;
-        $gross_total_amount = $net_amount + $vatTaxAmount + $additional_cost;
+        $gross_total_amount = $net_amount + $additional_cost;
         $summary = ['address'=>$request->address,'total_pieces'=>count($request->cart_item),'net_amount'=>$net_amount,'vat'=>$vatTax,'vatTaxAmount'=>$vatTaxAmount, 'max_order_amount'=>setting_item_with_lang('max_order_amount', 'de'),'additional_cost'=>$additional_cost,'gross_total_amount'=>$gross_total_amount];
         return response()->json(['status'=>1,'data'=>$viewRender,'summary'=>$summary]);
     }
@@ -101,10 +102,15 @@ class BookingController extends Controller
             $result = BookingProductDetail::insert($detail);
             if($result){
                 $detail = BookingProductDetail::where('core_booking_product_id',$row->id)->get();
+                // Generate PDF
+                $pdf = Pdf::loadView('BookingProduct::.frontend.blocks.booking.pdf', compact('row', 'detail'));
+                $pdfPath = storage_path('app/public/booking_product/invoice_' . $row->id . '.pdf');
+                $pdf->save($pdfPath);
                 // Send Mail
                 try {
-                    Mail::to($row->email)->send(new SendBookingFormMailToClient($row, $detail, false));
+                    Mail::to($row->email)->send(new SendBookingFormMailToClient($row, $detail, $pdfPath, false));
                     Mail::to(getAdminMail())->send(new SendBookingFormMailToAdmin($row, $detail, false));
+                    unlink($pdfPath);
                     return response()->json(['status'=>1,'message'=>'Your booking successfully booked']);
                 }catch (Exception $exception){
                     // Log::warning("Booking Send Mail: ".$exception->getMessage());
