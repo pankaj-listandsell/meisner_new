@@ -18,17 +18,18 @@ class SendBookingFormMailToAdmin extends Mailable
     public $isTesting;
     public $data;
     public $detail;
+    public $pdfPath;
 
 
     /**
      * Create a new message instance.
      *
      */
-    public function __construct($data, $detail,$isTesting = true)
+    public function __construct($data, $detail, $pdfPath, $isTesting = true)
     {
-        // $this->clientName = $clientName;
         $this->data = $data;
         $this->detail = $detail;
+        $this->pdfPath = $pdfPath;
         $this->isTesting = $isTesting;
     }
 
@@ -42,7 +43,11 @@ class SendBookingFormMailToAdmin extends Mailable
 
         return $this
             ->subject(trans('Produkt buchen'))
-            ->view('BookingProduct::emails.bookingmailtoadmin');
+            ->view('BookingProduct::emails.bookingmailtoadmin')
+            ->attach($this->pdfPath, [
+                'as' => 'Invoice_' . $this->data->id . '.pdf',
+                'mime' => 'application/pdf',
+            ]);
     }
 
 }

@@ -23,7 +23,18 @@
         $category = \Modules\Products\Models\ProductsCategory::get();
     @endphp
     <div class="multi-main-form">
-
+        @if (session('success'))
+        <div style="
+            background-color: #d4edda; 
+            color: #155724; 
+            border: 1px solid #c3e6cb; 
+            padding: 15px; 
+            border-radius: 5px; 
+            margin-bottom: 20px; 
+            font-size: 16px;">
+            {{ session('success') }}
+        </div>
+        @endif
         <div class="form-step active">
             <h2>Bitte beantworte uns einige kurze Fragen für deinen individuellen Festpreis</h2>
 
@@ -163,6 +174,9 @@
                                 ein</span>
                             <span class="s1 text-danger error_msg" id="email_valid_error"
                                 style="color:#d63637;font-size: 13px; display:none">bitte gültige E-Mail eingeben</span>
+                        </div>
+                        <div class="form-box-three">
+                            <input type="number" id="telephone" name="telephone"Telefon placeholder="Telefon" maxlength="15">
                         </div>
                         <div class="form-box-three">
                             <input type="company" id="company_name" name="company_name" placeholder="Name des Unternehmens">
@@ -448,8 +462,6 @@
                 });
             }
 
-
-            var main_total = 0;
             function addtocart(id, price) {
                 let qty = $('.qty-' + id).val();
                 let val = id + ',' + qty + ',' + price;
@@ -464,7 +476,7 @@
                     let existingValue = existingInput.value.split(',');
                     let existingQty = parseFloat(existingValue[1]);
                     let existingPrice = parseFloat(existingValue[2]);
-                    main_total -= (existingQty * existingPrice);
+                    // main_total -= (existingQty * existingPrice);
                     form.removeChild(existingInput);
                 }
                 let idInput = document.createElement('input');
@@ -473,11 +485,17 @@
                 idInput.classList.add('added_cart', 'product_id_' + id);
                 idInput.name = 'cart_item[]';
                 idInput.value = val;
-                main_total = main_total + (price * qty);
+            
+                form.appendChild(idInput);
+                //Summary
+                let main_total = 0;
+                $('input[name="cart_item[]"]').each(function() {
+                    let parts = $(this).val().split(','); 
+                    main_total +=  parts[1] * parts[2];
+                });
                 if(main_total > 0){
                    $('.main_total').html(priceConvert(main_total) + ' €');
                 }
-                form.appendChild(idInput);
                 toastr.success("Erfolg");
             }
 
@@ -600,7 +618,9 @@
                                 localStorage.clear();
                                 $("#add_to_cart_form")[0].reset();
                                 toastr.success(response.message);
-                                location.reload();
+                                setTimeout(() => {
+                                    location.reload();
+                                }, 5000);
                             }
                             if (response.status == 0) {
                                 toastr.error(response.message);
@@ -711,10 +731,14 @@
                 // alert(vatTaxAmount);
                 $('#net_amount').html(priceConvert(calculate_total) + ' €');
                 $('#gross_total_amount').html(priceConvert(calculate_total) + ' €');
-                $('#vat').html(priceConvert(vatTaxAmount) + ' €');
+                $('#vat').html(priceConvert(Math.floor(vatTaxAmount * 100) / 100) + ' €');
                 
                 if(calculate_total > 0){
                    $('.main_total').html(priceConvert(calculate_total) + ' €');
+                }
+
+                if ($('input[prod-id="'+id+'"]').length > 0) {
+                    $('input[prod-id="'+id+'"]').val(qty);
                 }
 
                 localStorage.setItem('vat_cart_amount', vatTaxAmount);
@@ -868,6 +892,7 @@
                         }
                     },
                     error: function (e) {
+                        location.reload();
                         toastr.error("Etwas ist schief gelaufen!");
                         return false;
                     }
