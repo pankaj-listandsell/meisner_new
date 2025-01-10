@@ -44,6 +44,7 @@
                                     <p><strong>Postleitzahl : </strong> {{ $row->zipcode}}</p> --}}
                                     <p><strong>Vollständiger Name : </strong> {{ $row->full_name}}</p>
                                     <p><strong>E-Mail : </strong> {{ $row->email}}</p>
+                                    <p><strong>Telefon : </strong> {{ $row->phone}}</p>
                                     <p><strong>Name des Unternehmens : </strong> {{ $row->company_name}}</p>
                                     <p><strong>USt-ID : </strong> {{ $row->vat_id}}</p>
 

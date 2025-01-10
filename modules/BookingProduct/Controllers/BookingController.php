@@ -62,7 +62,7 @@ class BookingController extends Controller
         $vatTaxAmount = ($net_amount * $vatTax) / 100;
         $additional_cost = 0;
         $gross_total_amount = $net_amount + $additional_cost;
-        $summary = ['address'=>$request->address,'total_pieces'=>count($request->cart_item),'net_amount'=>$net_amount,'vat'=>$vatTax,'vatTaxAmount'=>$vatTaxAmount, 'max_order_amount'=>setting_item_with_lang('max_order_amount', 'de'),'additional_cost'=>$additional_cost,'gross_total_amount'=>$gross_total_amount];
+        $summary = ['address'=>$request->address,'total_pieces'=>count($request->cart_item),'net_amount'=>$net_amount,'vat'=>$vatTax,'vatTaxAmount'=>floor($vatTaxAmount * 100) / 100, 'max_order_amount'=>setting_item_with_lang('max_order_amount', 'de'),'additional_cost'=>$additional_cost,'gross_total_amount'=>$gross_total_amount];
         return response()->json(['status'=>1,'data'=>$viewRender,'summary'=>$summary]);
     }
     
@@ -78,6 +78,7 @@ class BookingController extends Controller
         $row->flour = $request->flour;
         $row->full_name = $request->gender.' '.$request->fname.' '.$request->lname;
         $row->email = $request->email;
+        $row->phone = $request->telephone;
         $row->date = $request->date;
         $row->time = $request->time;
         $row->note = $request->note;
@@ -109,14 +110,17 @@ class BookingController extends Controller
                 // Send Mail
                 try {
                     Mail::to($row->email)->send(new SendBookingFormMailToClient($row, $detail, $pdfPath, false));
-                    Mail::to(getAdminMail())->send(new SendBookingFormMailToAdmin($row, $detail, false));
+                    Mail::to(getAdminMail())->send(new SendBookingFormMailToAdmin($row, $detail, $pdfPath, false));
                     unlink($pdfPath);
-                    return response()->json(['status'=>1,'message'=>'Your booking successfully booked']);
+                    $request->session()->flash('success', 'Ihre Buchung erfolgreich gebucht');
+                    return response()->json(['status'=>1,'message'=>'Ihre Buchung erfolgreich gebucht']);
                 }catch (Exception $exception){
                     // Log::warning("Booking Send Mail: ".$exception->getMessage());
-                    return response()->json(['status'=>1,'message'=>'Your booking successfully booked']);
+                    $request->session()->flash('success', 'Ihre Buchung erfolgreich gebucht');
+                    return response()->json(['status'=>1,'message'=>'Ihre Buchung erfolgreich gebucht']);
                 }
-                return response()->json(['status'=>1,'message'=>'Your booking successfully booked']);
+                $request->session()->flash('success', 'Ihre Buchung erfolgreich gebucht');
+                return response()->json(['status'=>1,'message'=>'Ihre Buchung erfolgreich gebucht']);
             }else{
                 return response()->json(['status'=>0,'message'=>'Something went wrong!, Please try again.']);
             }

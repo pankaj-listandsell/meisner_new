@@ -11,6 +11,7 @@
             </p>
             <p>Vollständiger Name : {{$data->full_name}}</p>
             <p>E-Mail : {{$data->email}}</p>
+            <p>Telefon : {{$data->phone}}</p>
             <p>USt-ID : {{$data->vat_id}}</p>
             <p>E-Mail : {{$data->email}}</p>
             <p>Buchungsdatum : {{ display_date($data->date)}}</p>

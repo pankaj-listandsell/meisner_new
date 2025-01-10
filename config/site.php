@@ -7,7 +7,7 @@ return [
     'phone_no_only' => '00493041723130',
     'phone_no_2' => '+49 (0)30 4172 3130',
     'phone_no_2_only' => '00493041723130',
-    'email' => 'info@meissner-entruempelung.de',
+    'email' => 'dev@listandsell.de',
     'domain' => 'meisner.com',
     'website' => 'www.meisner.com',
 ];

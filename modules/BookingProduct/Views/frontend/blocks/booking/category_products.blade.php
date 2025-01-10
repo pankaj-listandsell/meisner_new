@@ -13,7 +13,7 @@
     <div class="item-counter">
       <div class="counter-container">
         <button type="button" class="button decrement" onclick="decrement('{{$val->id}}')">-</button>
-        <input type="number" class="count-input qty-{{$val->id}}" id="counter" value="1" min="0" readonly>
+        <input type="number" class="count-input qty-{{$val->id}}" prod-id="{{$val->id}}" id="counter" value="1" min="0" readonly>
         <button type="button" class="button increment" onclick="increment('{{$val->id}}')">+</button>
       </div>
       <div class="item-btn">
