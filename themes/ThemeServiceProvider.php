@@ -46,8 +46,9 @@ class ThemeServiceProvider extends ServiceProvider
 
         foreach ($listModule as $module) {
 
-            if (is_dir(base_path('themes/'.ucfirst($theme) .'/'. $module))) {
-                $this->loadViewsFrom(base_path('themes/'.ucfirst($theme) .'/'. $module).'/Views', $module);
+            $viewsPath = base_path('themes/'.ucfirst($theme) .'/'. $module).'/Views';
+            if (is_dir($viewsPath)) {
+                $this->loadViewsFrom($viewsPath, $module);
             }
         }
 

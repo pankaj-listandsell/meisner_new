@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="google-site-verification" content="rE7dtCgRrkax4PM3voLeDf5GpGX3ZwlTGZ9WNPY807s" />
+    {{-- Preconnect to 3rd-party origins so DNS+TCP+TLS happens early in parallel --}}
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+    <link rel="preconnect" href="https://www.google.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
     <link rel="stylesheet" href="{{ asset('assests/css/general.css') }}">
     <link rel="stylesheet" href="{{ asset('assests/css/service.css') }}">
     @php event(new \Modules\Layout\Events\LayoutBeginHead()); @endphp
@@ -25,12 +32,19 @@
 
     @include('Layout::parts.seo-meta')
 
-    <link rel='stylesheet' href="{{ asset('assests/css/slick.min.css') }}">
-    <link rel='stylesheet' href="{{ asset('assests/css/slick.min.css') }}">
-    <link rel='stylesheet' href="{{ asset('assests/css/slick-theme.min.css') }}">
-    <link rel='stylesheet' href="{{ asset('assests/css/toastr.min.css') }}">
-    <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/themes/base/jquery-ui.min.css">
-    <link href="{{ asset('vendor/cookie-consent/css/cookie-consent.css')}}" rel="stylesheet">        
+    {{-- Non-critical CSS: load async to avoid render-blocking --}}
+    <link rel="preload" as="style" href="{{ asset('assests/css/slick.min.css') }}" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style" href="{{ asset('assests/css/slick-theme.min.css') }}" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style" href="{{ asset('assests/css/toastr.min.css') }}" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style" href="{{ asset('assests/css/jquery-ui.min.css') }}" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="{{ asset('assests/css/slick.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assests/css/slick-theme.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assests/css/toastr.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assests/css/jquery-ui.min.css') }}">
+    </noscript>
+    {{-- Cookie consent CSS: keep blocking to prevent banner flash/CLS --}}
+    <link href="{{ asset('vendor/cookie-consent/css/cookie-consent.css')}}" rel="stylesheet">
     @php
     $row_id = 0;
         if (!empty($row->id)) {
@@ -615,8 +629,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 @include('Layout::parts.footer')
 <script src="{{ asset('assests/js/jquery.min.js') }}"></script>
-<script src="{{ asset('assests/js/jquery-ui.min.js') }}"></script>
-<script src="{{ asset('assests/js/toastr.min.js') }}"></script>
+<script src="{{ asset('assests/js/jquery-ui.min.js') }}" defer></script>
+<script src="{{ asset('assests/js/toastr.min.js') }}" defer></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script src="{{ asset('assests/js/slick.min.js') }}" defer></script>
 <script src="{{ asset('assests/js/script.js') }}" defer></script>
