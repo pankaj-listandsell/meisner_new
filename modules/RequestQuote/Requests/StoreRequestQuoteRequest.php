@@ -40,6 +40,7 @@ class StoreRequestQuoteRequest extends FormRequest
             'name' => ['required', 'max:200', 'min:2'],
             'phone' => ['required', 'max:200'],
             'service' => ['required'],
+            'attachment' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:10240',
             // 'captcha'     => ['required', 'captcha'],
             'g-recaptcha-response' => [($hasGoogleCaptcha ? 'required' : 'nullable'),
                 function (string $attribute, mixed $value, \Closure $fail) use ($hasGoogleCaptcha) {

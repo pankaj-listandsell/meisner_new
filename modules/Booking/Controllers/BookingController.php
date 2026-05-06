@@ -145,12 +145,16 @@ class BookingController extends Controller
 
         // Handle multiple file uploads if present
         if ($request->hasFile('attachment')) {
+            $allowedExt = ['pdf', 'jpg', 'jpeg', 'png'];
             foreach ($request->file('attachment') as $file) {
-                // Store each file and get the path
-                $path = $file->store('attachments', 'public');
+                $ext = strtolower($file->getClientOriginalExtension());
+                if (!in_array($ext, $allowedExt, true)) {
+                    continue;
+                }
+                $safeName = bin2hex(random_bytes(16)) . '.' . $ext;
+                $path = $file->storeAs('attachments', $safeName, 'public');
                 $filePaths[] = $path;
             }
-            // Store the file paths as JSON in the validated data
             $validated['attachment'] = json_encode($filePaths);
         }
 

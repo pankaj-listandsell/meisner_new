@@ -134,8 +134,13 @@ class RequestQuoteController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('attachment')) {
-            $path = $request->file('attachment')->store('attachments');
-            $validated['attachment'] = $path;
+            $file = $request->file('attachment');
+            $ext = strtolower($file->getClientOriginalExtension());
+            if (in_array($ext, ['pdf', 'jpg', 'jpeg', 'png'], true)) {
+                $safeName = bin2hex(random_bytes(16)) . '.' . $ext;
+                $path = $file->storeAs('attachments', $safeName);
+                $validated['attachment'] = $path;
+            }
         }
         $validated['service'] = json_encode($validated['service']);
         $validated['extra_service'] = json_encode($validated['extra_service']);

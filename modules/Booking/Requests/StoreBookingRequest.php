@@ -54,8 +54,8 @@ class StoreBookingRequest extends FormRequest
             'contact_telephone_no' => 'required|string',
             'contact_email' => 'required|email',
             'work_detail' => 'nullable|string',
-            //pankaj change
-            // 'attachment' => 'nullable|file|mimes:pdf,jpeg,png',
+            'attachment'   => 'nullable|array|max:5',
+            'attachment.*' => 'file|mimes:pdf,jpg,jpeg,png|max:10240',
             'extra_service' => 'nullable|array', // Ensure it’s an array
             'extra_service.*' => 'string',
             'g-recaptcha-response' => [($hasGoogleCaptcha ? 'required' : 'nullable'),
