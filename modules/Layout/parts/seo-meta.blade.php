@@ -32,3 +32,8 @@
     <title>{{ $page_title }}</title>
     <meta name="description" content="{{setting_item_with_lang("site_desc")}}"/>
 @endif
+@if(!empty($seo_meta['schema']))
+    <script type="application/ld+json">
+        {!! $seo_meta['schema'] !!}
+    </script>
+@endif

@@ -12,6 +12,7 @@ class SEO extends BaseModel
         'seo_desc',
         'seo_image',
         'seo_share',
+        'schema',
     ];
 
     protected $casts = [

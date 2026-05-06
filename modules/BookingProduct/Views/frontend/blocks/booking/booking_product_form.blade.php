@@ -1,3 +1,21 @@
+<div class="entr-rec-logo">
+<a href="{{ getHomePageUrl() }}">
+                @php
+                    $logo_id = setting_item('logo_id');
+                    if (!empty($row->custom_logo)) {
+                        $logo_id = $row->custom_logo;
+                    }
+                @endphp
+                @if ($logo_id)
+                    <?php $logo = get_file_url($logo_id, 'full'); ?>
+                    <img width="250" height="60" src="{{ $logo }}" alt="{{ setting_item('site_title') }}">
+                @endif
+
+            </a>
+            <h1>
+            Entrümpelung Rechner
+            </h1>
+</div>
 {{-- <div id="notification-container"></div> --}}
 <div class="form-container">
     <!-- Visual Step Progress Bar -->
@@ -24,7 +42,7 @@
     @endphp
     <div class="multi-main-form">
         @if (session('success'))
-        <div style="
+        <div id="enter_booking_form" style="
             background-color: #d4edda; 
             color: #155724; 
             border: 1px solid #c3e6cb; 
@@ -36,7 +54,7 @@
         </div>
         @endif
         <div class="form-step active">
-            <h2>Bitte beantworte uns einige kurze Fragen für deinen individuellen Festpreis</h2>
+            <h2>Bitte beantworten Sie uns einige kurze Fragen für Ihren individuellen Festpreis</h2>
 
             <div class="form-inner">
                 <div class="form-box form-one">
@@ -111,7 +129,7 @@
                     <button type="button" style="display: none" class="clearcategory" onclick="clear_category()"><span><img src="/uploads/0000/1/2024/12/26/close.png"></span></button>
                 </div>
                 <div class="help-text">
-                    <p>Nicht sicher bei der Auswahl? Rufe kostenlos unsere Kundenberater an <a
+                    <p>Nicht sicher bei der Auswahl? Rufen Sie kostenlos unsere Kundenberater an <a
                             href="tel:03041723130">030 4172 3130</a></p>
                 </div>
             </div>
@@ -123,7 +141,6 @@
                                     ?>
                                 <div class="category-box" onclick="category_products({{ $catVal->id }})">
                                     <img src="{{$image_url != '' ? $image_url : url('uploads/0000/1/2024/12/26/thumbmail.png')  }}"
-                                        title="{{ isset($image_details['title']) ? $image_details['title'] : '#' }}"
                                         alt="{{ isset($image_details['alt']) ? $image_details['alt'] : '#' }}">
                                     <p>{{ $catVal->name }}</p>
                                 </div>
@@ -144,7 +161,7 @@
         </div>
         <!-- Step 3: Social Links -->
         <div class="form-step">
-            <h2>Wähle deinen Wunschtermin</h2>
+            <h2>Wähle Sie Ihren Wunschtermin</h2>
             <form id="add_to_cart_form">
 
                 <div class="step-three-main">
@@ -159,7 +176,7 @@
                             </select>
                             </div>
                         <div class="form-box-three box-one">
-                            <input type="firstname" id="fname" name="fname" placeholder="Vorname  *">
+                            <input type="firstname" id="fname" name="fname" placeholder="Vorname*">
                         </div>
                         <div class="form-box-three box-one">
                             <input type="text" class="form-control pac-target-input" id="lname" name="lname" autocomplete="off" placeholder="Nachname ">
@@ -168,7 +185,7 @@
                         <span class="s1 text-danger error_msg" id="fname_error"style="color:#d63637;font-size: 13px; display:none">Bitte geben Sie Ihren Namen ein</span>
                         <div class="form-box-three">
                             <input type="email" class="form-control pac-target-input" id="email" name="email"
-                                autocomplete="off" placeholder="E-Mail *">
+                                autocomplete="off" placeholder="E-Mail*">
                             <span class="s1 text-danger error_msg" id="email_error"
                                 style="color:#d63637;font-size: 13px; display:none">Bitte geben Sie Ihre E-Mail
                                 ein</span>
@@ -176,7 +193,9 @@
                                 style="color:#d63637;font-size: 13px; display:none">bitte gültige E-Mail eingeben</span>
                         </div>
                         <div class="form-box-three">
-                            <input type="number" id="telephone" name="telephone"Telefon placeholder="Telefon" maxlength="15">
+                            <input type="number" id="telephone" name="telephone" placeholder="Telefon*" maxlength="15">
+                            <span class="s1 text-danger error_msg" id="telephone_error"
+                                style="color:#d63637;font-size: 13px; display:none">Bitte geben Sie Ihre Telefon</span>
                         </div>
                         <div class="form-box-three">
                             <input type="company" id="company_name" name="company_name" placeholder="Name des Unternehmens">
@@ -186,10 +205,9 @@
                         </div>
                         <div class="form-box-three date-edit">
                             <label for="Date">Buchungsdatum</label>
-                            <input type="date" id="date" name="date">
+                            <input type="text" id="date" name="date">
                             <span class="s1 text-danger error_msg" id="date_error"
-                                style="color:#d63637;font-size: 13px; display:none">Bitte wählen Sie das
-                                Buchungsdatum</span>
+                                style="color:#d63637;font-size: 13px; display:none">Bitte wählen Sie das Buchungsdatum</span>
                         </div>
                         <div class="form-box-three">
                             <select name="time" id="time">
@@ -223,20 +241,20 @@
                                     <span>Gesamtstückzahl:</span>
                                     <span id="total_pieces"></span>
                                 </div>
-                                <div class="line-item">
+                                <!-- <div class="line-item">
                                     <span>Nettobetrag:</span>
                                     <span id="net_amount"> €</span>
-                                </div>
+                                </div> -->
                                 <div class="line-item">
-                                    <span>MwSt.: ({{setting_item_with_lang('vat', 'de')}} %)</span>
+                                    <span>inkl. MwSt.: ({{setting_item_with_lang('vat', 'de')}}%)</span>
                                     <span id="vat"> €</span>
                                 </div>
-                                <div class="line-item">
+                                <!-- <div class="line-item">
                                     <span>Zusatzkosten inkl. MwSt.<br>(Mindestbestellung: 199,00 €)</span>
                                     <span id="additional_cost">+ €</span>
-                                </div>
+                                </div> -->
                                 <div class="line-item total">
-                                    <span>Bruttogesamtbetrag</span>
+                                    <span>Gesamtsumme</span>
                                     <span id="gross_total_amount">199,00 €</span>
                                 </div>
                             </div>
@@ -557,6 +575,13 @@
                 return formattedPrice;
             }
 
+            $('.date-edit #date').datepicker({
+                dateFormat: 'dd.mm.yy',
+                monthNames: ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
+                dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag','Samstag'],
+                dayNamesMin: ['So', 'Mo', 'Die', 'Mi', 'Do', 'Fre', 'Sa']
+            });
+
             $(document).ready(function () {
                 $(".submitbooking").on("click", function () {
                     if (localStorage.getItem('grand_amount_cart') < localStorage.getItem('max_order_amount')) {
@@ -572,6 +597,10 @@
                     }
                     if ($('#email').val() == '') {
                         $('#email_error').show();
+                        errorM = false;
+                    }
+                    if ($('#telephone').val() == '') {
+                        $('#telephone_error').show();
                         errorM = false;
                     }
                     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

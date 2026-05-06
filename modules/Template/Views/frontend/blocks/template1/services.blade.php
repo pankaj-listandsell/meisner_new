@@ -11,7 +11,7 @@
                         <img title="{{ isset($image_details['title'])?$image_details['title']:'#' }}" alt="{{ isset($image_details['alt'])?$image_details['alt']:'#' }}" src="{{ $image_url }}">
                     </div>
                     <div>
-                        <h4>{{setting_item('first_counter_title') ?? ''}}</h4>
+                        <span>{{setting_item('first_counter_title') ?? ''}}</span>
                         <p>{{setting_item('first_counter_subtitle') ?? ''}}</p>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                         <img title="{{ isset($image_details['title'])?$image_details['title']:'#' }}" alt="{{ isset($image_details['alt'])?$image_details['alt']:'#' }}" src="{{ $image_url }}">
                     </div>
                     <div>
-                        <h4>{{setting_item('second_counter_title') ?? ''}}</h4>
+                        <span>{{setting_item('second_counter_title') ?? ''}}</span>
                         <p>{{setting_item('second_counter_subtitle') ?? ''}}</p>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                         <img title="{{ isset($image_details['title'])?$image_details['title']:'#' }}" alt="{{ isset($image_details['alt'])?$image_details['alt']:'#' }}" src="{{ $image_url }}">
                     </div>
                     <div>
-                        <h4>{{setting_item('third_counter_title') ?? ''}}</h4>
+                        <span>{{setting_item('third_counter_title') ?? ''}}</span>
                         <p>{{setting_item('third_counter_subtitle') ?? ''}}</p>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                         <img title="{{ isset($image_details['title'])?$image_details['title']:'#' }}" alt="{{ isset($image_details['alt'])?$image_details['alt']:'#' }}" src="{{ $image_url }}">
                     </div>
                     <div>
-                        <h4>{{setting_item('fourth_counter_title') ?? ''}}</h4>
+                        <span>{{setting_item('fourth_counter_title') ?? ''}}</span>
                         <p>{{setting_item('fourth_counter_subtitle') ?? ''}}</p>
                     </div>
                 </div>

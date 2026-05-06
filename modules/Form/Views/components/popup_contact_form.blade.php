@@ -43,26 +43,40 @@
             </label>
         </div>
         <div class="form-group">
-            <div class="captcha-img">
-                <img src="{{ captcha_src() }}" id="captcha-image-pop" alt="captcha">
+            <!-- <div class="captcha-img">
+                <img src="{{ captcha_src() }}" id="captcha-image-pops" alt="captcha">
             </div>
-            <button type="button" class="btn btn-secondary" id="refresh-captcha-pop"><img class="refs-img" src="/uploads/0000/1/2024/09/07/ref-black-icon.svg" slt="ref-img"></button>
+            <button type="button" class="btn btn-secondary callback-captcha-pop" id="refresh-captcha-pops"><img class="refs-img" src="/uploads/0000/1/2024/09/07/ref-black-icon.svg" slt="ref-img"></button>
 
             <div class="captcha-input">
                 <input type="text" name="captcha" class="form-control"/>
-            </div>
+            </div> -->
+            <div id="recaptcha-popup"></div>
         </div>
         <button type="submit" class="btn popup-form-btn">@lang('Absenden')</button>
     </div>
 </div>
 
+<script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoadCallback&render=explicit" async defer></script>
+
+<script>
+    let recaptchaPopupWidgetId;
+
+    function onRecaptchaLoadCallback() {
+        let siteKey = "{{setting_item('recaptcha_api_key')}}";
+        if (document.getElementById('recaptcha-popup')) {
+            recaptchaPopupWidgetId = grecaptcha.render('recaptcha-popup', {
+                sitekey: siteKey
+            });
+        }
+    }
+</script>
 
 <script>
     jQuery(document).ready(function($){
         $('.popup-contact-form [type=submit]').click(function (e) {
             e.preventDefault();
             let form = $(this).closest('.popup-form-elements');
-
             $.ajax({
                 url: '{{ route('frontend.register.popup_contact') }}',
                 data: {
@@ -70,6 +84,7 @@
                     'email': form.find('input[name=email]').val(),
                     'phone_no': form.find('input[name=phone_no]').val(),
                     'captcha': form.find('[name=captcha]').val(),
+                    // 'g-recaptcha-response': captchaResponse,
                     'terms': form.find('input[name=terms]').is(":checked") ? 1 : '',
                 },
                 method: 'POST',
@@ -92,7 +107,7 @@
                         return;
                     }
                     if (data.message) {
-                        form.find('.message-alert').show().html('<div class="alert alert-success">' + data.message + '</div>');
+                        form.find('.message-alert').show().html('<div class="alert alert-success" id="call_back_form">' + data.message + '</div>');
                         form.find('input').val('');
                         form.find('input[type=checkbox]').prop('checked', false);
                         form.find('.captcha-img').html(data.data);
@@ -136,9 +151,9 @@
 
 @push('js')
 <script>
-$('#refresh-captcha-pop').on('click', function() {
+$('#refresh-captcha-pops').on('click', function() {
     $.get('{{ route('captcha.refresh') }}', function (data) {
-        $('#captcha-image-pop').attr('src', data.captcha);
+        $('#captcha-image-pops').attr('src', data.captcha);
     });
 });
 </script>
@@ -146,6 +161,13 @@ $('#refresh-captcha-pop').on('click', function() {
 
 @push('css')
     <style>
+        button#refresh-captcha-pops {
+    background: transparent;
+    border: 0;
+    position: relative;
+    top: -17px;
+    right: -7px;
+}
         .popup-contact-form {
             width: 500px;
             padding: 30px;

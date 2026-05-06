@@ -1,97 +1,67 @@
-@extends('Email::layout')
-@section('content')
-
-{{-- <div class="container my-5"> --}}
-    <div style="">
-        <h5>Dear Admin,</h5>
-        <p>{{$data->full_name}} hat eine neue Produktbuchung aufgegeben </p>
-        <div class="my-4">
-            <h5>Buchungs-ID : {{$data->booking_id}}</h5>
-            <p><strong>Adresse : </strong><br>
-                {{$data->address}}<br>
-                {{$data->city}}, {{$data->zipcode}}
-            </p>
-            <p>Vollständiger Name : {{$data->full_name}}</p>
-            <p>E-Mail : {{$data->email}}</p>
-            <p>Name des Unternehmens : {{$data->company_name}}</p>
-            <p>USt-ID : {{$data->vat_id}}</p>
-            <p>E-Mail : {{$data->email}}</p>
-
-            <p>Buchungsdatum : {{ display_date($data->date)}}</p>
-
-        </div>
-
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead class="thead-light">
-                    <tr style="border: 1px solid black;">
-                        <th style="border: 1px solid black;">Bild</th>
-                        <th style="border: 1px solid black;">Produkt</th>
-                        <th class="text-center" style="border: 1px solid black;">QTY</th>
-                        <th class="text-right" style="border: 1px solid black;">Preis pro Einheit</th>
-                        <th class="text-right" style="border: 1px solid black;">Insgesamt</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($detail as $val)
-                    <?php
-                    $image_url = get_file_url($val->image_id, 'full');
-                    $image_details = get_file_details($val->image_id, '#');
-                    ?>
-                    <tr>
-                        <td style="border: 1px solid black;"><img style="height: 50px;width: 50px" src="{{$image_url}}" title="Container zur Gewerbemüllentsorgung bestellen" alt="Container zur Gewerbemüllentsorgung bestellen"></td>
-                        <td style="border: 1px solid black;">{{$val->product_title}}</td>
-                        <td class="text-center" style="border: 1px solid black;">{{$val->qty}}</td>
-                        <td class="text-right" style="border: 1px solid black;">{{priceConvert($val->unit_price)}} €</td>
-                        <td class="text-right" style="border: 1px solid black;">{{priceConvert($val->total_price)}} €</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-
-        <div class="row mt-4">
-            <div class="col-12">
-                <table class="table">
-                    {{-- <tr>
-                        <th>Subtotal:</th>
-                        <td class="text-right">$250.00</td>
-                    </tr>
-                    <tr>
-                        <th>Tax (5%):</th>
-                        <td class="text-right">$12.50</td>
-                    </tr>
-                    <tr class="table-active">
-                        <th>Total:</th>
-                        <td class="text-right font-weight-bold">$262.50</td>
-                    </tr> --}}
-                    <tr>
-                        <th>Stücke insgesamt:</th>
-                        <td>{{$data->total_pieces}}</td>
-                    </tr>
-                    <tr>
-                        <th>Nettobetrag:</th>
-                        <td>{{priceConvert($data->net_amount)}} €</td>
-                    </tr>
-                    <tr>
-                        <th>Vat :({{$data->vat_percent}} %)</th>
-                        <td>{{priceConvert($data->vat)}} €</td>
-                    </tr>
-                    <tr>
-                        <th>Zusätzliche Kosten einschließlich Mehrwertsteuer:</th>
-                        <td>{{priceConvert($data->additional_cost)}} €</td>
-                    </tr>
-                    <tr class="table-active">
-                        <th>Insgesamt:</th>
-                        <td class="text-right font-weight-bold">{{priceConvert($data->grand_amount)}} €</td>
-                    </tr>
-                </table>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; " />
+        <title>Meissner Entrümpelung</title>
+        <style type="text/css">
+            body {
+                margin: 0;
+                padding: 0;
+                min-width: 100% !important;
+                background-color: #f2f2f2;
+            }
+            .my-email-body img {
+                width: 32px;
+            }
+            .content {
+                width: 100%;
+                max-width: 600px;
+                margin: 0 auto;
+                border: 1px solid #f2f2f2;
+            }
+            .btn {
+                padding: 10px;
+                background-color: #fbf1f1;
+                margin: 25px auto;
+                width: 25%;
+                min-width: 200px;
+                color: #000000;
+                display: block;
+                text-align: center;
+            }
+            a {
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="content">
+            <div style="width: 100%; height: 50px; padding-top: 25px; background-color: #fff;">
+                <div style="margin: 0 auto; text-align: center;">
+                    <img width="250" src="https://meissner-entruempelung.de/uploads/0000/14/2025/03/04/meissner-logo.png" alt="Meissner Entrümpelung" />
+                </div>
+            </div>
+            <div style="width: 550px; background-color: #ffffff; padding: 50px 25px 50px; margin-bottom: 0px; color: #000000;">
+                <p>Sie haben eine neue Anfrage über den Entrümpelungs-Recher erhalten.</p>
+                <p>Anbei finden Sie die PDF-Datei mit der vollständigen Zusammenfassung der Anfrage.</p>
+                <p>Allgemeine Daten:</p>
+                <p>
+                    <b>Kunde:</b> {{$data->full_name}}<br>
+                    <b>E-Mail:</b> {{$data->email}}<br>
+                    <b>Telefon:</b> {{$data->phone}}<br>
+                    <b>Gesamtsumme:</b> {{priceConvert($data->grand_amount)}} €
+                </p>
+                <p>Schöne Grüße</p>
+                <hr style="border-color: #0000001c">
+                <div style="text-align: center;">
+                    <strong>Meissner Entrümpelung</strong><br />
+                    <span style="color: #000000 !important;">Oranienburgerstr. 47</span><br/>
+                    13437 Berlin<br/>
+                    Deutschland<br/>
+                    <br />
+                    Telefon: 030 4172 3130<br />
+                    <a href="mailto:info@meissner-entruempelung.de" style="color: #000000;"> info@meissner-entruempelung.de</a><br />
+                </div>
             </div>
         </div>
-        
-        <div class="text-center mt-4">
-            <p class="font-italic">Thank you for your purchase!</p>
-        </div>
-    </div>
-{{-- </div> --}}
-@endsection
+    </body>
+</html>

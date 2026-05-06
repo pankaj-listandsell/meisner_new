@@ -1,3 +1,26 @@
+window.addEventListener('load', function() {
+    // Define the classes you want to target
+    const classes = ['refresh-captcha-pop', 'callback-captcha-pop']; // replace 'your-second-class' with the actual class
+
+    // Function to trigger clicks on all matching elements
+    function triggerButtons() {
+        classes.forEach(className => {
+            const button = document.querySelector('.' + className);
+            if (button) {
+                button.click();
+                console.log(`Clicked button with class .${className}`);
+            } else {
+                console.warn(`Button with class .${className} not found`);
+            }
+        });
+    }
+
+    // Trigger once immediately after load
+    triggerButtons();
+
+    // Set interval to trigger every 60 seconds (1 minute)
+    setInterval(triggerButtons, 60000); // 60000 ms = 1 min
+});
 $(window).scroll(function() {
   if ($(this).scrollTop() > 50) { // adjust the value as needed
       $('.sticky_header').addClass('sticky');  
@@ -621,3 +644,5 @@ function scrollToTop() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
+
+

@@ -23,7 +23,7 @@
                     <p>{!! $booking_content !!}</p>
 
                     @if (session('success'))
-                        <div class="alert alert-success">
+                        <div id="anfrage_success" class="alert alert-success">
                             {{ session('success') }}
                         </div>
                     @endif
@@ -275,6 +275,12 @@
                                   <label class="radio-image-item"><input type="checkbox" name="extra_service[]" value="Renovierung"><div class="inner_label"><figure class="rii-image"><img src="https://aflex.de/uploads/0000/1/2024/02/26/aflex-renovation.png" alt="Renovierung"></figure> <span class="rii-name">Renovierung</span> </div></label>
                                 </div>
                           </div> --}}
+                            <div class="mess_input-group">
+                                <div class="g-recaptcha" id="recaptcha-form" data-sitekey="{{setting_item('recaptcha_api_key')}}"></div>
+                                @if ($errors->has('g-recaptcha-response'))
+                                    <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
+                                @endif
+                            </div>
                             <button type="button" class="mess_btn mess_btn-prev">Zurück</button>
                             <button type="submit" class="mess_btn mess_btn-submit">Absenden</button>
                         </div>
@@ -288,6 +294,12 @@
 @once
     @push('js')
     <script src="https://maps.googleapis.com/maps/api/js?language=de&region=DE&key=AIzaSyC6FL8cKJSHFIkwZzQZlbgesNpcmkyXC6Q&libraries=places&&callback=Function.prototype"></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaFormLoadCallback&render=explicit" async defer></script>
+    <script>
+    function onRecaptchaFormLoadCallback() {
+        console.log('✅ reCAPTCHA loaded');
+    }
+    </script>
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", function() {
         const form = document.getElementById('mess_form');
@@ -296,6 +308,7 @@
         const stepButtons = document.querySelectorAll('.mess_btn-next, .mess_btn-prev');
 
         let currentStep = 0;
+        
 
         function showStep(stepIndex) {
             steps.forEach((step, index) => {
@@ -419,6 +432,36 @@
                     }
                 }
             });
+
+            // ✅ reCAPTCHA validation (only on the last step)
+            if (stepIndex === steps.length - 1) {
+                const captchaContainer = document.getElementById('recaptcha-form');
+                const errorId = 'recaptcha-error';
+                let errorDiv = document.getElementById(errorId);
+
+                if (!errorDiv) {
+                    errorDiv = document.createElement('div');
+                    errorDiv.id = errorId;
+                    errorDiv.classList.add('error-message');
+                    captchaContainer.parentElement.appendChild(errorDiv);
+                }
+
+                if (typeof grecaptcha !== 'undefined') {
+                    const response = grecaptcha.getResponse();
+                    if (!response) {
+                        isValid = false;
+                        errorDiv.textContent = 'Bitte bestätigen Sie, dass Sie kein Roboter sind.';
+                        errorDiv.style.display = 'block';
+                        captchaContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    } else {
+                        errorDiv.style.display = 'none';
+                    }
+                } else {
+                    isValid = false;
+                    errorDiv.textContent = 'reCAPTCHA konnte nicht geladen werden.';
+                    errorDiv.style.display = 'block';
+                }
+            }
 
             return isValid;
         }

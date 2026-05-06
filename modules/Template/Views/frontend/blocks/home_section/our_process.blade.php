@@ -31,6 +31,7 @@
                     </div>
                     @endforeach
                 </div>
+                <div class="btn-nw prc-btn"><a href="../../../../../anfrage/"> Jetzt Anfrage stellen!</a></div>
             </div>
             @endif
         </div>

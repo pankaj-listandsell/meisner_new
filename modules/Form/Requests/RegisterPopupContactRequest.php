@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 use Illuminate\Contracts\Validation\Validator;
+use App\Helpers\ReCaptchaEngine;
 
 class RegisterPopupContactRequest extends FormRequest
 {
@@ -26,12 +27,22 @@ class RegisterPopupContactRequest extends FormRequest
      */
     public function rules()
     {
+        $hasGoogleCaptcha = ReCaptchaEngine::isEnable();
+
         return [
             'name'          => ['required', 'max:255'],
             'email'         => ['required', 'email'],
             'phone_no'      => ['required', 'max:200'],
             // 'terms'         => ['required'],
-            'captcha'       => ['required', 'captcha'],
+            // 'captcha'       => ['required', 'captcha'],
+            'g-recaptcha-response' => [($hasGoogleCaptcha ? 'required' : 'nullable'),
+                function (string $attribute, mixed $value, \Closure $fail) use ($hasGoogleCaptcha) {
+                    if ($hasGoogleCaptcha) {
+                        if (!ReCaptchaEngine::verify($value)) {
+                            $fail(__('Please verify the captcha'));
+                        }
+                    }
+                }],
         ];
     }
 
@@ -45,9 +56,11 @@ class RegisterPopupContactRequest extends FormRequest
             'name.max'          => trans('Name is too long'),
             'phone_no.required' => trans('Telefon ist ein Pflichtfeld'),
             'phone_no.max'      => trans('Phone no is too long'),
-            'captcha.required'  => trans('Captcha ist erforderlich'),
-            'captcha.captcha'   => trans('Captcha does not match'),
-            'terms.required'   => trans('Das Feld Datenschutz ist erforderlich'),
+            // 'captcha.required'  => trans('Captcha ist erforderlich'),
+            // 'captcha.captcha'   => trans('Captcha does not match'),
+            // 'terms.required'   => trans('Das Feld Datenschutz ist erforderlich'),
+            'g-recaptcha-response.required' => trans('Captcha Feld ist erforderlich'),
+            'g-recaptcha-response.captcha' => trans('Captcha does not match'),
         ];
     }
 

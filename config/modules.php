@@ -11,7 +11,6 @@ return [
         'media',
         'news',
         'page',
-        'products',
         'theme',
         'user',
         'template',

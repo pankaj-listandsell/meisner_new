@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="d-flex justify-content-between mb20">
                 <div class="">
-                    <h1 class="title-bar">{{$row->id ? __('Edit product: ').$row->title : __('Add new product')}}</h1>
+                    <h1 class="title-bar">{{$row->id ? __('Produkt bearbeiten: ').$row->title : __('Neues Produkt hinzufügen')}}</h1>
 
                 </div>
 

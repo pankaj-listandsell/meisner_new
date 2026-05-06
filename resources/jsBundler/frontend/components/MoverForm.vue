@@ -509,25 +509,12 @@
                                                 ></TextareaField>
                                             </div>
                                         </template>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <BooleanCheckboxField field-name="to_unpack_boxes"
-                                                                        :schema="findFormField('to_unpack_boxes')"
-                                                                        @change="updateField('to_unpack_boxes', $event)"
-                                                                        :error="getError('to_unpack_boxes')"
-                                                    ></BooleanCheckboxField>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <BooleanCheckboxField field-name="assemble_kitchen"
-                                                                        :schema="findFormField('assemble_kitchen')"
-                                                                        @change="updateField('assemble_kitchen', $event)"
-                                                                        :error="getError('assemble_kitchen')"
-                                                    ></BooleanCheckboxField>
-                                                </div>
-                                            </div>
+                                        <div class="form-group">
+                                            <BooleanCheckboxField field-name="to_unpack_boxes"
+                                                                  :schema="findFormField('to_unpack_boxes')"
+                                                                  @change="updateField('to_unpack_boxes', $event)"
+                                                                  :error="getError('to_unpack_boxes')"
+                                            ></BooleanCheckboxField>
                                         </div>
                                     </div>
                                 </div>
@@ -959,12 +946,6 @@
                                                                         :error="getError('living_room_cabinet_disassembled')"
                                                                         @change="updateField('living_room_cabinet_disassembled', $event)"
                                                         ></NumberIncField>
-                                                        <!-- Add a Text Field -->
-                                                        <InputField v-if="showCustomValueField" field-name="custom_value_living_room_cabinet_disassembled"
-                                                                    :schema="findFormField('custom_value_living_room_cabinet_disassembled')"
-                                                                    @change="updateField('custom_value_living_room_cabinet_disassembled', $event)"
-                                                                    :error="getError('custom_value_living_room_cabinet_disassembled')"
-                                                        ></InputField>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1906,7 +1887,6 @@ export default {
                 to_furniture_assemble: "",
                 to_furniture_assemble_detail: "",
                 to_unpack_boxes: "",
-                assemble_kitchen: "",
                 moving_date: "",
                 moving_date_from: "",
                 moving_date_to: "",
@@ -1944,7 +1924,6 @@ export default {
                 living_room_old_clock: "",
                 living_room_table: "",
                 living_room_cabinet_disassembled: "",
-                custom_value_living_room_cabinet_disassembled: '',
                 cartoon_existing: "",
                 cartoon_needed: "",
                 book_boxes_existing: "",
@@ -2055,7 +2034,6 @@ export default {
             directionsService: null,
             directionsRenderer: null,
             summaryPanel: '',
-            showCustomValueField: false
         };
     },
 
@@ -2392,9 +2370,7 @@ export default {
                     }
                 }
             }
-            if (key === 'living_room_cabinet_disassembled' && value > 0) {
-              this.showCustomValueField = true; // Show custom field for specific cases
-            }
+
         },
 
         loadingOn() {
@@ -2489,7 +2465,6 @@ export default {
                 to_furniture_assemble: "",
                 to_furniture_assemble_detail: "",
                 to_unpack_boxes: "",
-                assemble_kitchen: "",
                 moving_date: "",
                 moving_date_from: "",
                 moving_date_to: "",

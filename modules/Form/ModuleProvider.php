@@ -86,9 +86,10 @@ class ModuleProvider extends ModuleServiceProvider
                     ],
                     'booking_products'=>[
                         'url'        => route('admin.form.bookingproducts'),
-                        'title'      => __('Booking Product Form'),
+                        'title'     => __('Booking Product Form'),
                         'permission' => 'form_view',
                     ],
+
                     /*'contact_next'=>[
                         'url'        => route('contact.admin.index'),
                         'title'      => __('Contacts'),

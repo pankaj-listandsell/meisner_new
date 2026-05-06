@@ -66,14 +66,27 @@
                     <p class="f-text">Professionell, zuverlässig und umweltfreundlich – Wir entsorgen Ihre Altgeräte, Möbel und mehr. Kontaktieren Sie uns für ein unverbindliches Angebot.</p>
                     <div class="share-icon">
                         <div class="f-1">
-                            <img src="/uploads/0000/1/2024/09/14/proven-expert.webp">
+                            <a href="https://www.provenexpert.com/de-de/meissner-entruempelung/" target="_blank">
+                                <img src="/uploads/0000/1/2024/09/14/proven-expert.webp" alt="" srcset="">
+                            </a>
                         </div>
                         <div class="f-2">
                             <img src="/uploads/0000/1/2024/09/14/eco-friendly-seal.webp">
                         </div>
                         <div class="f-3">
                            <img src="/uploads/0000/1/2024/09/14/ssl-sheild.webp">
+                        </div>                       
+                        <div class="f-4">
+                             <a href="https://www.google.com/search?sca_esv=46e9a135ed8bd27b&sxsrf=ANbL-n68BX9l2RSMuyvm1sB0rVW4ONE8lQ:1776075675579&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOWJl6N3M7ntI6eUQTSsbH7Jd2yAHK224ifJ8K3z6hd1vaRJ5H-YxhlgB4z7caXbeZ-v-MzDrvSMVL8slB-d61Fdobxi099aq4Bjxvpnf4uU02BURl4PieOJJgJ2c6Z3W6UV1ULgg1Fun-KDhdqrYngoWhNWm&q=Meissner+Entr%C3%BCmpelung+-+Wohnungsaufl%C3%B6sung+%26+Entsorgung+Reviews&sa=X&ved=2ahUKEwj0t_K9zeqTAxXsTWwGHYltCrgQ0bkNegQIMhAH&biw=1707&bih=772&dpr=1.25" target="_blank">
+                                <img src="/uploads/0000/14/2026/04/13/aflex-google-review.webp" alt="" srcset="">
+                            </a>
+                        </div> 
+                        <div class="f-5">
+                            <a href="https://de.trustpilot.com/review/meissner-entruempelung.de"  target="_blank">
+                                <img src="/uploads/0000/14/2026/04/14/trustpilot-lgo-150.png" alt="" srcset="">
+                            </a> 
                         </div>
+                         
                     </div> 
                 </div>
                 <div class="footer-box-2 footer_list">
@@ -150,7 +163,7 @@
         </a>
     </div>
     <div class="col">
-        <a href="/anfrage" onclick="openMobileAnfrage();">
+        <a href="/anfrage/" onclick="openMobileAnfrage();">
             <span class="img"><img src="/assests/img/icons/f-web-icon.svg" alt="Anfrage"
                     width="28" height="28"></span>
             <span class="text">Anfrage</span>

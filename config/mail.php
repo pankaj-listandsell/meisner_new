@@ -43,7 +43,7 @@ return [
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME', 'info@meissner-entruempelung.de'),
-            'password' => env('MAIL_PASSWORD', 'fRW83L5M5u13a8S4'),
+            'password' => env('MAIL_PASSWORD', '6E10RgDj4JF66HL1'),
             'timeout' => null,
             'auth_mode' => null,
         ],
@@ -95,8 +95,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'info@aflex.de'),
-        'name' => env('MAIL_FROM_NAME', 'Aflex Dienstleistungen'),
+        'address' => env('MAIL_FROM_ADDRESS', 'info@meissner-entruempelung.de'),
+        'name' => env('MAIL_FROM_NAME', 'Meissner Entrümpelung'),
     ],
 
     /*

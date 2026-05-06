@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="{{$html_class ?? ''}}">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +28,8 @@
     <link rel='stylesheet' href="{{ asset('assests/css/slick.min.css') }}">
     <link rel='stylesheet' href="{{ asset('assests/css/slick.min.css') }}">
     <link rel='stylesheet' href="{{ asset('assests/css/slick-theme.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assests/css/toastr.min.css') }}">
+    <link rel='stylesheet' href="{{ asset('assests/css/toastr.min.css') }}">
+    <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/themes/base/jquery-ui.min.css">
     <link href="{{ asset('vendor/cookie-consent/css/cookie-consent.css')}}" rel="stylesheet">        
     @php
     $row_id = 0;
@@ -135,6 +137,462 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-KCMDMSP9');</script>
 <!-- End Google Tag Manager -->
+ <?php 
+    if (!empty($row->id) && $row->id == 116) {
+        $row_id = $row->id;
+ ?>
+   <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://meissner-entruempelung.de/#company",
+      "name": "Meissner Entrümpelung - Wohnungsauflösung & Entsorgung",
+      "alternateName": "Meissner Entrümpelungsfirma Berlin",
+      "description": "Meissner Entrümpelung ist ein professionelles Entrümpelungsunternehmen mit Sitz in Berlin, das sich auf Haushaltsauflösungen, Wohnungsentrümpelungen, Kellerentrümpelungen und Entsorgungsdienstleistungen spezialisiert hat. Das Unternehmen bietet umfassende Full-Service-Lösungen einschließlich Bewertung, fachgerechte Entsorgung, Reinigung, Wertstoffankauf und nachhaltige Recycling-Verfahren. Mit langjähriger Erfahrung bedient Meissner Entrümpelung Privat- und Gewerbekunden in Berlin, Brandenburg und deutschlandweit.",
+      "url": "https://meissner-entruempelung.de/",
+      "logo": "https://meissner-entruempelung.de/uploads/0000/1/2024/08/03/logo-site1.svg",
+      "image": [
+        "https://meissner-entruempelung.de/uploads/0000/1/2024/08/03/logo-site1.svg"
+      ],
+      "telephone": "+493041723130",
+      "priceRange": "€€",
+      "email": "info@meissner-entruempelung.de",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Oranienburger Str. 47",
+        "addressLocality": "Berlin",
+        "postalCode": "13437",
+        "addressCountry": "DE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 52.5876,
+        "longitude": 13.3628
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "https://schema.org/Monday",
+            "https://schema.org/Tuesday",
+            "https://schema.org/Wednesday",
+            "https://schema.org/Thursday",
+            "https://schema.org/Friday"
+          ],
+          "opens": "08:00",
+          "closes": "19:00"
+        }
+      ],
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+493041723130",
+          "contactType": "customer service",
+          "areaServed": "DE",
+          "availableLanguage": [
+            "de"
+          ]
+        }
+      ],
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Berlin",
+          "containedInPlace": {
+            "@type": "Country",
+            "name": "Deutschland"
+          }
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Mitte",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-mitte"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Pankow",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-pankow"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Neukölln",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-neukoelln"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Charlottenburg",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-charlottenburg"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Friedrichshain",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-friedrichshain"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Lichtenberg",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-lichtenberg"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Marzahn",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-marzahn"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Wilmersdorf",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-wilmersdorf"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Prenzlauer Berg",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-prenzlauer-berg"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Reinickendorf",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-reinickendorf"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Spandau",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-spandau"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Steglitz",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-steglitz"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Tempelhof",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-tempelhof"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Tiergarten",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-tiergarten"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Treptow",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-treptow"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Wedding",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-wedding"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Weissensee",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-weissensee"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Hellersdorf",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-hellersdorf"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Hohenschönhausen",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-hohenschoenhausen"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Köpenick",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-koepenick"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Kreuzberg",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-kreuzberg"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Schöneberg",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-schoeneberg"
+        },
+        {
+          "@type": "Place",
+          "name": "Berlin Zehlendorf",
+          "containedInPlace": {
+            "@type": "City",
+            "name": "Berlin"
+          },
+          "url": "https://meissner-entruempelung.de/berlin-zehlendorf"
+        },
+        {
+          "@type": "Country",
+          "name": "Deutschland",
+          "alternateName": "Germany"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "32",
+        "bestRating": "5"
+      },
+      "hasMap": "https://maps.app.goo.gl/PviBm5i3W8U2hQzm9"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://meissner-entruempelung.de/#service",
+      "serviceType": "Entrümpelung und Haushaltsauflösung",
+      "provider": {
+        "@id": "https://meissner-entruempelung.de/#company"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Deutschland"
+      },
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://meissner-entruempelung.de/",
+        "servicePhone": {
+          "@type": "ContactPoint",
+          "telephone": "+493041723130"
+        }
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Entrümpelungsleistungen",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Haushaltsauflösung",
+              "description": "Komplette Auflösung von Haushalten mit fachgerechter Entsorgung und Verwertung",
+              "url": "https://meissner-entruempelung.de/haushaltsaufloesung-berlin/"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Wohnungsentrümpelung",
+              "description": "Professionelle Entrümpelung von Wohnungen jeder Größe",
+              "url": "https://meissner-entruempelung.de/wohnungsentruempelung-berlin/"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Wohnungsauflösung",
+              "description": "Vollständige Auflösung von Wohnungen mit Entsorgung und Verwertung",
+              "url": "https://meissner-entruempelung.de/wohnungsaufloesung-berlin/"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Kellerentrümpelung",
+              "description": "Entrümpelung und Reinigung von Kellern und Abstellräumen",
+              "url": "https://meissner-entruempelung.de/kellerentruempelung-berlin/"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Dachentrümpelung",
+              "description": "Fachgerechte Räumung von Dachböden und Speichern",
+              "url": "https://meissner-entruempelung.de/dachboden-entruempeln-berlin/"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Messie-Wohnung Entrümpelung",
+              "description": "Einfühlsame Entrümpelung von Messie-Wohnungen",
+              "url": "https://meissner-entruempelung.de/messie-entruempelung/"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Gewerbeentrümpelung",
+              "description": "Entrümpelung von Geschäftsräumen und Betrieben",
+              "url": "https://meissner-entruempelung.de/gewerbeaufloesung-berlin/"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Büroauflösung",
+              "description": "Professionelle Auflösung von Büroräumen",
+              "url": "https://meissner-entruempelung.de/bueroaufloesung-berlin/"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Nachlassauflösung",
+              "description": "Würdevolle Auflösung von Nachlässen mit Wertanrechnung",
+              "url": "https://meissner-entruempelung.de/nachlassraeumung-berlin/"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Sperrmüllabholung",
+              "description": "Abholung und fachgerechte Entsorgung von Sperrmüll",
+              "url": "https://meissner-entruempelung.de/sperrmuellabholung/"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Garage entrümpeln",
+              "description": "Entrümpelung von Garagen und Carports",
+              "url": "https://meissner-entruempelung.de/garage-entruempeln-berlin/"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Gartenentrümpelung",
+              "description": "Entrümpelung von Gärten und Außenanlagen",
+              "url": "https://meissner-entruempelung.de/garten-entruempeln-berlin/"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Firmenauflösung",
+              "description": "Komplette Auflösung von Firmen und Betrieben",
+              "url": "https://meissner-entruempelung.de/firmenaufloesung-berlin/"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Betriebsauflösung",
+              "description": "Professionelle Betriebsauflösung mit Entsorgung",
+              "url": "https://meissner-entruempelung.de/betriebsaufloesung-berlin/"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Geschäftsauflösung",
+              "description": "Auflösung von Geschäften und Ladeneinrichtungen",
+              "url": "https://meissner-entruempelung.de/geschaeftsaufloesung-berlin/"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+   </script>
+    <?php 
+    }
+ ?>
 </head>
 <?php
 $row_id = 0;
@@ -157,9 +615,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 @include('Layout::parts.footer')
 <script src="{{ asset('assests/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assests/js/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('assests/js/toastr.min.js') }}"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script src="{{ asset('assests/js/slick.min.js') }}" defer></script>
 <script src="{{ asset('assests/js/script.js') }}" defer></script>
-<script src="{{ asset('assests/js/toastr.min.js') }}"></script>
 @stack('js')
 <script>
 
@@ -169,14 +629,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             e.preventDefault();
             let form = $(this).closest('.popup-form-elements');
-
+            let captchaResponse = grecaptcha.getResponse(recaptchaPopupWidgetId);
             $.ajax({
                 url: '{{ route('frontend.register.popup_contact') }}',
                 data: {
                     'name': form.find('input[name=name]').val(),
                     'email': form.find('input[name=email]').val(),
                     'phone_no': form.find('input[name=phone_no]').val(),
-                    'captcha': form.find('[name=captcha]').val(),
+                    // 'captcha': form.find('[name=captcha]').val(),
+                    'g-recaptcha-response': captchaResponse,
                     'terms': form.find('input[name=terms]').is(":checked") ? 1 : '',
                 },
                 method: 'POST',

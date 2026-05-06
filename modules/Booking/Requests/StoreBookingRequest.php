@@ -28,7 +28,7 @@ class StoreBookingRequest extends FormRequest
      */
     public function rules()
     {
-        //$hasGoogleCaptcha = ReCaptchaEngine::isEnable();
+        $hasGoogleCaptcha = ReCaptchaEngine::isEnable();
 
         return [
             'has_preferred_date' => 'required|string',
@@ -58,6 +58,14 @@ class StoreBookingRequest extends FormRequest
             // 'attachment' => 'nullable|file|mimes:pdf,jpeg,png',
             'extra_service' => 'nullable|array', // Ensure it’s an array
             'extra_service.*' => 'string',
+            'g-recaptcha-response' => [($hasGoogleCaptcha ? 'required' : 'nullable'),
+            function (string $attribute, mixed $value, \Closure $fail) use ($hasGoogleCaptcha) {
+                if ($hasGoogleCaptcha) {
+                    if (!ReCaptchaEngine::verify($value)) {
+                        $fail(__('Please verify the captcha'));
+                    }
+                }
+            }]
         ];
 
 
@@ -124,6 +132,9 @@ class StoreBookingRequest extends FormRequest
             "attachment.required" => trans('Attachment PDF/Image is required'),
             "extra_service.required" => trans('Extra service is required'),
             "terms.required" => trans('Terms must be checked'),
+            "g-recaptcha-response.required" => trans('Dieses Feld ist erforderlich'),
+            "captcha.required" => trans('Dieses Feld ist erforderlich'),
+            "captcha.captcha" => trans('Captcha does not match'),
         ];
     }
 

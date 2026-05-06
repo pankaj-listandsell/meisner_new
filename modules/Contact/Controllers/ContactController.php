@@ -54,13 +54,21 @@ class ContactController extends Controller
 
     public function store(Request $request)
     {
-
+        $hasGoogleCaptcha = ReCaptchaEngine::isEnable();
         $rules = [
             'full_name' => 'required|string|max:255',
             'email'     => 'required|email|max:255',
             'phone'     => 'required|string|max:20',
             'message'   => 'required|string',
-            'captcha'   => 'required|captcha',
+            // 'captcha'   => 'required|captcha',
+            'g-recaptcha-response' => [($hasGoogleCaptcha ? 'required' : 'nullable'),
+                function (string $attribute, mixed $value, \Closure $fail) use ($hasGoogleCaptcha) {
+                    if ($hasGoogleCaptcha) {
+                        if (!ReCaptchaEngine::verify($value)) {
+                            $fail(__('Please verify the captcha'));
+                        }
+                    }
+                }],
         ];
 
         $message = [
@@ -74,8 +82,9 @@ class ContactController extends Controller
             'phone.numeric' => trans('Phone no is too long'),
             'message.required' => trans('Dieses Feld ist erforderlich'),
             'g-recaptcha-response.required' => trans('Dieses Feld ist erforderlich'),
-            'captcha.required'  => trans('Dieses Feld ist erforderlich'),
-            'captcha.captcha'   => trans('Captcha stimmt nicht überein'),
+            // 'captcha.required'  => trans('Dieses Feld ist erforderlich'),
+            // 'captcha.captcha'   => trans('Captcha stimmt nicht überein'),
+            'g-recaptcha-response.captcha' => trans('Captcha does not match'),
         ];
 
         // Validate the request

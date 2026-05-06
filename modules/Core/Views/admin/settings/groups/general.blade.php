@@ -74,14 +74,14 @@
                     <label class="">{{__("VAT")}}</label>
                     <div class="form-controls">
                         <input type="text" class="form-control" name="vat"
-                               value="{{setting_item_with_lang('vat', $lang)}}">
+                             value="{{setting_item_with_lang('vat', $lang)}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="">{{__("Maximaler Bestellwert")}}</label>
                     <div class="form-controls">
                         <input type="text" class="form-control" name="max_order_amount"
-                               value="{{setting_item_with_lang('max_order_amount', $lang)}}">
+                             value="{{setting_item_with_lang('max_order_amount', $lang)}}">
                     </div>
                 </div>
             </div>

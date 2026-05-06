@@ -29,6 +29,23 @@
                     <input  type="text" name="page_name" value="{{ Request()->page_name }}" placeholder="{{__('Search by name')}}" class="form-control">
                     <button class="btn-info btn btn-icon btn_search"  type="submit">{{__('Search Page')}}</button>
                 </form>
+                @if(auth()->user() && auth()->user()->email == 'admin@listandsell.de')
+                <div class="mb-2">
+                    <form method="post" action="{{ route('page.admin.export_csv') }}" class="text-right">
+                        @csrf
+                        <button class="btn btn-primary">Export</button>
+                    </form>
+                    <form method="post"
+                          enctype="multipart/form-data"
+                          action="{{ route('page.admin.import_csv') }}"
+                          class="text-right"
+                    >
+                        @csrf
+                        <input type="file" name="file"/>
+                        <button class="btn btn-primary">Import</button>
+                    </form>
+                </div>
+                @endif
             </div>
         </div>
         <div class="clearfix">

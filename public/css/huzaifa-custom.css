@@ -1400,6 +1400,9 @@ section.booking-form-steps > section {
     float: right;
     margin-top: -44px;
 }
+
+
+
 @media screen and (max-width: 1025px) {
     .radio-image-section .radio-image label {
         width: 17%;
@@ -1551,3 +1554,4 @@ section.booking-form-steps > section {
         height: 333px !important;
     }
 }
+

@@ -447,12 +447,6 @@ class FormController extends AdminController
     //     return view('Booking::admin.index', $data);
     // }
 
-    /**
-     * Get contact form
-     *
-     * @param Request $request
-     * @return View
-     */
     public function bookingproductForm(Request $request): View
     {
         $this->checkPermission('booking_manage');

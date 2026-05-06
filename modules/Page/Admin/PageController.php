@@ -10,6 +10,14 @@ use Modules\AdminController;
 use Modules\Page\Models\Page;
 use Modules\Page\Models\PageTranslation;
 use Modules\Template\Models\Template;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Maatwebsite\Excel\Facades\Excel;
+use Modules\Core\Models\Menu;
+use Modules\Core\Models\SEO;
+use Modules\Page\Exports\PageSeoExport;
+use Modules\Page\Imports\PageSeo;
+use Modules\Page\Imports\PageSeoImport;
+
 
 class PageController extends AdminController
 {
@@ -216,5 +224,65 @@ class PageController extends AdminController
             }
         }
         return redirect()->back()->with('success', __('Update success!'));
+    }
+
+
+    /**
+     * Export CSV
+     *
+     * @return BinaryFileResponse
+     */
+    public function exportCsv(): BinaryFileResponse
+    {
+        return Excel::download(new PageSeoExport(), 'page_seo.csv', \Maatwebsite\Excel\Excel::CSV);
+    }
+
+    /**
+     * Import CSV
+     *
+     * @param Request $request
+     * @return RedirectResponse|void
+     */
+    public function importCsv(Request $request)
+    {
+        $request->validate(['file' => 'required|file|mimes:csv']);
+
+        $pages = Excel::toArray(new PageSeoImport(), request()->file('file'));
+
+        if ( !$pages ) {
+            return redirect()->back()->with('error',  __('Failed to import seo data'));
+        }
+        if ( !isset($pages[0]) ) {
+            return redirect()->back()->with('error',  __('Failed to import seo data'));
+        }
+        $pages = $pages[0];
+        $languageSlugs = get_language_codes();
+
+        $dbPages = [];
+        foreach ($pages as $page) {
+            if (isset($page[0]) && ((int) $page[0]) != 0 && isset($page[1]) && in_array($page[1], $languageSlugs)) {
+                $dbPages[] = new PageSeo((int) $page[0], $page[1], $page[2] ?? '', $page[4] ?? '', $page[5] ?? '');
+            }
+        }
+
+        foreach ($dbPages as $dbPage) {
+            $needUpdate = false;
+            $data = [];
+            if ($dbPage->seoTitle != '') {
+                $needUpdate = true;
+                $data['seo_title'] = $dbPage->seoTitle;
+            }
+            if ($dbPage->seoDescription != '') {
+                $needUpdate = true;
+                $data['seo_desc'] = $dbPage->seoDescription;
+            }
+            if ($needUpdate) {
+                SEO::where('object_id', $dbPage->id)
+                    ->where('object_model', $dbPage->type == PageSeo::PAGE_TYPE ? 'page' : 'page_translation_'.$dbPage->locale)
+                    ->update($data);
+            }
+        }
+
+        return redirect()->back()->with('success',  __('Page SEO updated'));
     }
 }

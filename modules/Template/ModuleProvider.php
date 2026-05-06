@@ -86,6 +86,8 @@ class ModuleProvider extends ModuleServiceProvider
              'video'=>"\\Modules\\Template\\Blocks\\AllServiceSection\\Video",
              'clearing_solution'=>"\\Modules\\Template\\Blocks\\AllServiceSection\\ClearingSolution",
 
+             'custom_html'=>"\\Modules\\Template\\Blocks\\CustomSection",
+
         ];
     }
 }

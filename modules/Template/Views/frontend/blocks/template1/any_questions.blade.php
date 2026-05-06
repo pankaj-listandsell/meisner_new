@@ -13,7 +13,7 @@
               </div>
               <div>
                 <span>{{ setting_item("any_questions_contact_title") }}</span>
-                <h4>{{ setting_item("phone_no") }}</h4>
+                <div class="phone_no">{{ setting_item("phone_no") }}</div>
               </div>
             </div>
         </div></a>

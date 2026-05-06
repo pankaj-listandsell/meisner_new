@@ -1,1 +1,0 @@
-@include("Contact::frontend.blocks.contact.index")

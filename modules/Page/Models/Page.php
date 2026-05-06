@@ -33,6 +33,11 @@ class Page extends BaseModel
 
     protected static $_blocks = [];
 
+    public function scopePublished($query)
+    {
+        $query->where('status','publish');
+    }
+
     public function getDetailUrl($locale = false)
     {
         return route('page.detail',['slug'=>$this->slug, 'branch'=>$this->slug_affix]);
@@ -292,6 +297,25 @@ class Page extends BaseModel
             $res[] = $item;
         }
         return $res;
+    }
+
+
+    public function getPagesWithLanguage()
+    {
+        $pages = parent::query()->where('status','publish')->get();
+
+        $language_codes = get_language_codes_except_default();
+
+        $languagePages = PageTranslation::whereIn('locale', $language_codes)
+            ->whereIn('origin_id', $pages->pluck('id')->toArray())
+            ->orderBy('locale')
+            ->get();
+
+        foreach ($languagePages as $languagePage) {
+            $pages->push($languagePage);
+        }
+
+        return $pages;
     }
 
 }

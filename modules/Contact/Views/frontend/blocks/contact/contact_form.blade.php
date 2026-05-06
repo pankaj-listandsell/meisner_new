@@ -34,7 +34,7 @@
                     @endif
 
                        <!-- CAPTCHA -->
-                       <div class="form-group">
+                       <!-- <div class="form-group">
                         <div class="captcha-img">
                             {{-- {!! captcha_img() !!} --}}
                             <img src="{{ captcha_src() }}" id="captcha-image" alt="captcha">
@@ -47,6 +47,12 @@
                             <span class="s5 text-danger">{{ $errors->first('captcha') }}</span>
                         @endif
 
+                    </div> -->
+                    <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="{{setting_item('recaptcha_api_key')}}"></div>
+                        @if ($errors->has('g-recaptcha-response'))
+                            <span class="s5 text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
+                        @endif
                     </div>
 
                     {{-- <input type="submit"> --}}
@@ -64,7 +70,7 @@
                             <a href="tel:{{ setting_item_with_lang("phone_no_link") }}"><li><img src="/assests/img/icons/k-call-icon.svg">{{ setting_item_with_lang("phone_no") }}</li></a>
                             <a target="_blank" href="https://wa.me/4915771443156"><li><img src="/uploads/0000/1/2024/09/18/whatapp-phone.svg">0157 7144 3156</li></a>
                             <a href="mailto:{{ setting_item_with_lang("email") }}"><li><img src="/assests/img/icons/mail-nc.svg">{{ setting_item_with_lang("email") }}</li></a>
-                            <a href="#"><li><img src="/assests/img/icons/k-watch-icon.svg">Mo -Sa: 8 Uhr - 20 Uhr</li></a>
+                            <a href="#"><li><img src="/assests/img/icons/k-watch-icon.svg">Mo – Fr: 8 Uhr – 19 Uhr</li></a>
                             <a target="_blank" href="{{ setting_item_with_lang("address_link") }}"><li><img src="/assests/img/icons/k-map-icon.svg">{{ setting_item_with_lang("address") }}</li></a>
                          </ul>
                          <h4>{{ $button_title }}</h4>

@@ -41,9 +41,8 @@
                         'map',
                         'address',
                         'address_link',
-                        'vat',
                         'max_order_amount',
-
+                        'vat',
                         'booking_term_conditions'
 					],
                     'filter_demo_mode'=>[

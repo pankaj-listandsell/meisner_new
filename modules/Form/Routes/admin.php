@@ -17,5 +17,4 @@ Route::get('requestquote',               [FormController::class, 'requestquoteFo
 Route::get('download-mover/{id}',   [FormController::class, 'downloadMoverFile'])->name('admin.form.download_mover_file');
 Route::get('/update-read-status/{id}', [FormController::class, 'updateReadStatus'])->name('form.admin.update_read_status');
 Route::post('/bulkEdit',            [FormController::class, 'bulkEdit'])->name('form.admin.bulkEdit');
-Route::get('/booking-products',            [FormController::class, 'bookingproductForm'])->name('admin.form.bookingproducts');
-
+Route::get('/booking-products',     [FormController::class, 'bookingproductForm'])->name('admin.form.bookingproducts');

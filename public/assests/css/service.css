@@ -714,7 +714,7 @@ ul.service_list li:before {
   padding-top: 4rem;
   padding-bottom: 0rem;
 }
-.page-id-1 .ls_rm_btn,.page-id-32 .ls_rm_btn,.page-id-8 .ls_rm_btn ,.page-id-51 .ls_rm_btn,.page-id-78 .ls_rm_btn{
+.page-id-32 .ls_rm_btn,.page-id-8 .ls_rm_btn ,.page-id-51 .ls_rm_btn,.page-id-78 .ls_rm_btn{
   display: none;
 }
 
@@ -731,7 +731,31 @@ ul.service_list li:before {
   height:auto !important;
   -webkit-mask-image:unset !important;
 }
-
+body.page-id-116 .section6.section .location-section3 {
+    /* padding: 0; */
+    background: transparent;
+}
+.location-section3 .row ul {
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.location-section3 .row ul li {
+    width: 32% !important;
+}
+.location-section3 ul li a {
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 43.26px;
+    text-align: left;
+    padding-left: 30px;
+    color: #2A343F;
+    text-decoration: none;
+}
+.google-review-seal {
+    padding-top: 20px;
+}
 /*--end--*/
 @media only screen and (max-width:1700px) {
 .faq-img img{

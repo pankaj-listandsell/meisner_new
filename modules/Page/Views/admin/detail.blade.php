@@ -55,36 +55,91 @@
 
                                     <div id="booking-page-edit">
 
-                                        <template v-if="template_id != 0">
-                                            <input type="hidden" name="content" v-bind:value="JSON.stringify(items)"/>
-
-                                            <div class="lang-content-box">
-                                                <div class="templates-items-zone">
-                                                    <div class="clearfix mb-3">
-                                                        <button v-on:click.prevent="reloadBlockItems"
-                                                                class="btn btn-primary pull-right"
-                                                        >
-                                                            <i class="fa fa-refresh"></i> Reload
-                                                        </button>
+                                        <div>
+                                            <div v-if="addBlockModal">
+                                                <div class="modal fade select-block-item-modal show in"
+                                                     id="selectBlockScreen"
+                                                     style="display: block;"
+                                                >
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Select Block</h5>
+                                                                <button type="button" @click="hideAddBlockModal" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="block-types-menu">
+                                                                    <div v-for="(block,index) in blocks" class="panel panel-toggle-able">
+                                                                        <div class="panel-title" @click="block.open = block.open ? false : true">@{{block.name}}
+                                                                            <i class="icon ion-md-arrow-dropdown"></i>
+                                                                        </div>
+                                                                        <div class="panel-body" v-show="block.open">
+                                                                            <div class="list-scrollable" v-show="block.items.length">
+                                                                                <div class="block-panel" v-for="item in block.items">
+                                                                                    <div class="block-title">
+                                                                                        @{{item.name}}
+                                                                                        <div class="title-right">
+                                                                                            <span class="menu-add"><i @click="addNewBlock(item)" class="icon ion-ios-add-circle-outline"></i></span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" @click="hideAddBlockModal" data-dismiss="modal">Cancel</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <draggable v-model="items">
-                                                        <component v-on:delete="deleteBlock"
-                                                                   :block="searchBlockById(item.type)"
-                                                                   :is="item.component"
-                                                                   :item="item"
-                                                                   v-for="(item,index) in items"
-                                                                   :index=index :key="index"
-                                                        ></component>
-                                                    </draggable>
                                                 </div>
+                                                <div class="modal-backdrop fade show"></div>
                                             </div>
-                                        </template>
-                                        <template v-else>
-                                            <div class="">
-                                                <textarea name="content" class="d-none has-ckeditor" cols="30" rows="10">{{$translation->content}}</textarea>
-                                            </div>
-                                        </template>
 
+                                            <template v-if="template_id != 0">
+                                                <input type="hidden" name="content" v-bind:value="JSON.stringify(items)"/>
+
+                                                <div class="lang-content-box">
+                                                    <div class="templates-items-zone">
+                                                        <div class="clearfix mb-3">
+                                                            <button v-on:click.prevent="reloadBlockItems"
+                                                                    class="btn btn-primary pull-right"
+                                                            >
+                                                                <i class="fa fa-refresh"></i> Reload
+                                                            </button>
+                                                        </div>
+                                                        <draggable v-model="items"
+                                                                   :key="getRandomNumber()"
+                                                                   :id="getRandomNumber()"
+                                                        >
+                                                            <component v-on:delete="deleteBlock"
+                                                                       v-for="(item,index) in items"
+                                                                       :is="item.component"
+                                                                       :item="item"
+                                                                       :block="searchBlockById(item.type)"
+                                                                       :index="index"
+                                                                       :key="item.type+index"
+                                                            ></component>
+                                                        </draggable>
+                                                        <div class="clearfix mb-3">
+                                                            <button v-on:click.prevent="showAddBlockModal"
+                                                                    class="btn btn-primary add-new-block pull-right"
+                                                            >
+                                                                <i class="fa fa-plus"></i> Add
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                            <template v-else>
+                                                <div class="">
+                                                    <textarea name="content" class="d-none has-ckeditor" cols="30" rows="10">{{$translation->content}}</textarea>
+                                                </div>
+                                            </template>
+                                        </div>
                                     </div>
 
                                     <div class="modal fade edit-block-item-modal" id="editBlockScreen" role="dialog" no-enforce-focus>

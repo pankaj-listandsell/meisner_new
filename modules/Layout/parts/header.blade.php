@@ -23,7 +23,7 @@
                     </div>
                     <div>
                         <span>Meissner-Hotline</span>
-                        <h4>{{ setting_item_with_lang('phone_no') }}</h4>
+                        <div class="phone_n">{{ setting_item_with_lang('phone_no') }}</div>
                     </div>
                 </div>
                 </a>
@@ -37,12 +37,15 @@
                         <a href="/anfrage/">Entrümpelung planen</a>
                     </div>
                 </div>
+                <!-- <div class="entrec-btn">
+                    <a href="/entruempelung-rechner/"><img src="/uploads/0000/14/2025/04/03/profit.png"> Entrümpelung Rechner</a>
+                </div> -->
             </div>
         
     </div>
     <div class="sticky_header">
     <div class="header-3">
-    <a href="{{ getHomePageUrl() }}" class="sticky_head" style="display:none">
+    <a href="{{ getHomePageUrl() }}" class="sticky_head" style="display:none;">
 
         @if ($logo_id)
             <?php $logo = get_file_url($logo_id, 'full'); ?>

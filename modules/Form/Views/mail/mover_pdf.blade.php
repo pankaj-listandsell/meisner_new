@@ -199,7 +199,7 @@ table.location-detail-title tr td.timetd {
                       <?php $logo = get_file_url($logo_id,'full') ?>
  							<img src="{{$logo}}"
                          alt="logo"/ width="170px" height="auto">
-                  @endif
+                  @endif                       
                 </figure>
             </td>
             <td>
@@ -329,7 +329,7 @@ table.location-detail-title tr td.timetd {
 
             @endforeach
         @endforeach
-
+      
     </div>
 </body>
 </html>

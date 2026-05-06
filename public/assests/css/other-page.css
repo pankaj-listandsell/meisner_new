@@ -169,7 +169,7 @@ color: #fff;
 .call-icon{width:83px; height:82px;border-radius:5px;background: #CFDE29;display: flex;justify-content: center;align-items: center;margin-right:11px;}
 .s3-2 span{font-family: Montserrat;font-size: 23px;font-weight: 700;line-height: 23.26px;text-align: left;color: #fff;}
 
-.s3-2 h4{font-size: 49px;font-weight: 700;line-height: 67.05px;text-align: left;color: #CFDE29;}
+.s3-2 .phone_no{font-size: 49px;font-weight: 700;line-height: 67.05px;text-align: left;color: #CFDE29;}
 
 .s3-2{
   display: flex;
@@ -430,7 +430,7 @@ padding: 0 13px;
 width: 76%;
 }
 
-.count-box h4{font-family: Montserrat;font-size: 44px;font-weight: 700;line-height: 49.05px;text-align: left;color: #2A343F;}
+.count-box span{font-family: Montserrat;font-size: 44px;font-weight: 700;line-height: 49.05px;text-align: left;color: #2A343F;}
 
 .count-box p{font-family: Montserrat;font-size: 16px;font-weight: 600;line-height: 20.26px;text-align: left;color: #2A343F;}
 
@@ -1005,6 +1005,14 @@ body.page-id-118 ul {
 
 /*-responsive code---*/
 
+@media only screen and (max-width:1568px) {
+  .book-service-form {
+    width:100% !important;
+  }
+  #mess_form .radio-image-item {
+    width: calc(50.33% - 10px) !important;
+}
+}
 
 
 @media only screen and (max-width:1500px) {
@@ -1028,6 +1036,27 @@ body.page-id-118 ul {
     width: 46% !important;
   }
 }
+
+@media(max-width: 1440px){
+  .float-container-btns a {right: -171px;padding-left: 7px;height: 57px;}
+  
+  .float-container-btns a img {
+      width: 23px;
+  }
+  
+  .float-container-btns a:nth-child(3):hover {
+      right: 0;
+  }
+  .float-container-btns a:nth-child(3) {
+      right: -127px;
+      width: 160px;
+  }
+  
+  .float-container-btns a:nth-child(3) img {
+      width: 19px !important;
+  }
+}
+  
 
 @media only screen and (max-width:1350px) {
 
@@ -1402,7 +1431,7 @@ div#city-suggestions {
     max-width: 100%;
 }
   
-.s3-2 h4 {
+.s3-2 .phone_no {
   font-size: 28px;
   font-weight: 700;
   line-height: 41.05px;
@@ -1466,7 +1495,7 @@ div#city-suggestions {
     font-weight: 700;
     line-height: 37.05px;}
 
-    .count-box h4 {
+    .count-box span {
       font-family: Montserrat;
       font-size: 26px;
       font-weight: 700;
@@ -1605,3 +1634,25 @@ text-align: center !important;
 }
 
 } 
+
+table.table-hm {
+  padding-top: 31px;
+  padding-bottom: 31px;
+}
+
+
+.table-hm th {
+  padding: 20px;
+  border: 1px solid #ddd;
+  background-color: #cfde29;
+  color: #2a343f;
+}
+
+.table-hm td {
+  padding: 20px;
+  border: 1px solid #ddd;
+}
+
+.t-b{
+  background-color:#F7F7F7;
+}

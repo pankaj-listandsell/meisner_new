@@ -3,9 +3,9 @@
 @section('content')
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb20">
-            <h1 class="title-bar">{{__("All Products")}}</h1>
+            <h1 class="title-bar">{{__("Alle Produkte")}}</h1>
             <div class="title-actions">
-                <a href="{{route('products.admin.create')}}" class="btn btn-primary">{{__("Add new product")}}</a>
+                <a href="{{route('products.admin.create')}}" class="btn btn-primary">{{__("Neues Produkt hinzufügen")}}</a>
             </div>
         </div>
         @include('admin.message')

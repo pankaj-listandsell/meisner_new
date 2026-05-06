@@ -1,2 +1,3 @@
 User-agent: *
 Disallow:
+Sitemap: https://meissner-entruempelung.de/sitemap.xml/

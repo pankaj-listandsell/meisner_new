@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://meisner.local/'),
+    'url' => env('APP_URL', 'https://dv1-meissner.shop-template.de/'),
 
     'asset_url' => env('ASSET_URL', false),
 

@@ -34,18 +34,18 @@ class ModuleProvider extends ModuleServiceProvider
             'products'=>[
                 "position"=>20,
                 'url'        => route('products.admin.index'),
-                'title'      => __("Products").($count ? ' <span class="badge badge-warning">'.$count.'</span>':''),
+                'title'      => __("Produkte").($count ? ' <span class="badge badge-warning">'.$count.'</span>':''),
                 'icon'       => 'ion-md-bookmarks',
                 'permission' => 'products_view',
                 'children'   => [
                     'products_view'=>[
                         'url'        => route('products.admin.index'),
-                        'title'      => __("All Products"),
+                        'title'      => __("Alle Produkte"),
                         'permission' => 'products_view',
                     ],
                     'products_create'=>[
                         'url'        => route('products.admin.create'),
-                        'title'      => __("Add Products"),
+                        'title'      => __("Produkt hinzufügen"),
                         'permission' => 'products_create',
                     ],
                     'products_categoty'=>[

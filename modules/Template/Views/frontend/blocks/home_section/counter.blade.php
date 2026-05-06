@@ -3,7 +3,7 @@
         @foreach ($list_item as $item)
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="count-box">
-                    <h4>{{ $item['title'] }}</h4>
+                    <div class="count_title">{{ $item['title'] }}</div>
                     <p>{{ $item['sub_title'] }}</p>
                 </div>
             </div>

@@ -44,6 +44,11 @@ $seo_share = $meta_seo['seo_share'] ?? false;
                     <label class="control-label">{{__("Seo Description")}}</label>
                     <textarea name="seo_desc" rows="3" class="form-control" placeholder="{{$row->short_desc ?? __("Enter description...")}}">{{$meta_seo['seo_desc'] ?? ""}}</textarea>
                 </div>
+                <div class="form-group">
+                    <label class="control-label">{{__("Schema")}}</label>
+                    <textarea name="schema" cols="30" rows="10" class="form-control" placeholder="{{$row->schema ?? __("Enter Schema...")}}">{{$meta_seo['schema'] ?? ""}}</textarea>
+                </div>
+
                 @if(is_default_lang())
                     <div class="form-group form-group-image">
                         <label class="control-label">{{__("Featured Image")}}</label>
