@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(php artisan *)",
-      "Bash(xargs grep -l \"auth:api\\\\|middleware\\\\\\(.*auth\")"
+      "Bash(xargs grep -l \"auth:api\\\\|middleware\\\\\\(.*auth\")",
+      "PowerShell(php -v)",
+      "PowerShell(php artisan --version)"
     ]
   }
 }
