@@ -24,8 +24,8 @@ foreach (get_language_codes() as $languageCode) {
 Route::get('/', 'PageController@homePage')->name('home');
 
 foreach (get_language_codes() as $languageCode) {
-    Route::group(['prefix'=> $languageCode], function() {
-        Route::get('{slug?}/{branch?}','PageController@detail')->name('page.lang.detail');
+    Route::group(['prefix'=> $languageCode], function() use ($languageCode) {
+        Route::get('{slug?}/{branch?}','PageController@detail')->name("page.lang.{$languageCode}.detail");
     });
 }
 Route::get('{slug?}/{branch?}','PageController@detail')->name('page.detail');// Detail

@@ -1,5 +1,5 @@
 <?php
-namespace Modules\News\Admin;
+namespace Modules\Products\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

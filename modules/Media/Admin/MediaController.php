@@ -12,7 +12,6 @@ use Illuminate\Support\Str;
 use Modules\AdminController;
 use Modules\Media\Helpers\FileHelper;
 use Modules\Media\Models\MediaFile;
-use Intervention\Image\ImageManagerStatic as Image;
 use Modules\Media\Models\MediaFolder;
 use Modules\Media\Resources\MediaResource;
 use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;

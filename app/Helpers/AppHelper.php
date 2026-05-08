@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use Intervention\Image\ImageManagerStatic as Image;
+use Intervention\Image\Laravel\Facades\Image;
 use Modules\Core\Models\Settings;
 use App\Currency;
 use Illuminate\Support\Facades\Cache;
@@ -1296,9 +1296,9 @@ function generate_timezone_list()
             $offset_prefix = $offset < 0 ? '-' : '+';
             $offset_formatted = gmdate( 'H:i', abs($offset) );
 
-            $pretty_offset = "UTC${offset_prefix}${offset_formatted}";
+            $pretty_offset = "UTC{$offset_prefix}{$offset_formatted}";
 
-            $timezone_list[$timezone] = "$timezone (${pretty_offset})";
+            $timezone_list[$timezone] = "$timezone ({$pretty_offset})";
         }
 
         return $timezone_list;
@@ -2113,11 +2113,9 @@ function generateThumbnail($filePath)
 
     if (in_array($extension, getThumbExtensions())) {
         foreach (getThumbSizes() as $thumbSize) {
-            $thumbImage = Image::make($filePath);
-            $thumbImage->resize($thumbSize['width'], $thumbSize['height'], function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($folderPath.'/'.$filename.$thumbSize['prefix'].'.'.$extension);
+            Image::read($filePath)
+                ->scaleDown($thumbSize['width'], $thumbSize['height'])
+                ->save($folderPath.'/'.$filename.$thumbSize['prefix'].'.'.$extension);
         }
     }
 }

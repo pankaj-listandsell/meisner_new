@@ -180,7 +180,7 @@ return [
         \Themes\ThemeServiceProvider::class,
         Modules\ServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class, // Xử lý ảnh,
+        Intervention\Image\Laravel\ServiceProvider::class, // Xử lý ảnh,
         Barryvdh\Debugbar\ServiceProvider::class, // Debug BAR
 
         App\Providers\RouteServiceProvider::class,

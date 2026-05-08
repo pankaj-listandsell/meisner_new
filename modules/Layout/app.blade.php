@@ -45,6 +45,8 @@
     </noscript>
     {{-- Cookie consent CSS: keep blocking to prevent banner flash/CLS --}}
     <link href="{{ asset('vendor/cookie-consent/css/cookie-consent.css')}}" rel="stylesheet">
+    {{-- jQuery loaded in <head> so inline scripts in content/footer can use it --}}
+    <script src="{{ asset('assests/js/jquery.min.js') }}"></script>
     @php
     $row_id = 0;
         if (!empty($row->id)) {
@@ -156,6 +158,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         $row_id = $row->id;
  ?>
    <script type="application/ld+json">
+    @verbatim
     {
   "@context": "https://schema.org",
   "@graph": [
@@ -603,8 +606,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
   ]
 }
+    @endverbatim
    </script>
-    <?php 
+    <?php
     }
  ?>
 </head>
@@ -628,7 +632,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 @include('Layout::parts.footer')
-<script src="{{ asset('assests/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assests/js/jquery-ui.min.js') }}" defer></script>
 <script src="{{ asset('assests/js/toastr.min.js') }}" defer></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>

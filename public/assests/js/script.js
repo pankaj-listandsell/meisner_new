@@ -8,9 +8,6 @@ window.addEventListener('load', function() {
             const button = document.querySelector('.' + className);
             if (button) {
                 button.click();
-                console.log(`Clicked button with class .${className}`);
-            } else {
-                console.warn(`Button with class .${className} not found`);
             }
         });
     }
@@ -528,7 +525,7 @@ if (document.querySelector('.wrapper-comp .scroller')) {
         scrollIt(x)
     })
 } else {
-    console.log('not found')
+   // console.log('not found')
 }
 
 $(document).ready(function(){
@@ -584,7 +581,7 @@ function closeCallp(){
 
 /*--mobile menu--*/
 let menu = document.querySelector('.mobile-menu');
-menu.addEventListener('click', openMenu);
+if (menu) menu.addEventListener('click', openMenu);
 function openMenu() {
     document.getElementById("mymenu").style.width = "100%"
 }
@@ -596,7 +593,7 @@ for (let x of closeList) {
     x.addEventListener('click', closeMenu)
 }
 let service = document.querySelector('.service-list');
-service.addEventListener('click', openServiceMenu);
+if (service) service.addEventListener('click', openServiceMenu);
 function openServiceMenu() {
     document.getElementById("mynav").style.width = "100%"
 }
@@ -614,9 +611,11 @@ function mobileHeader() {
     prevScrollpos = currentScrollPos
 }
 var modal = document.getElementById("Gutenmodalpopup");
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none"
+if (modal) {
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none"
+        }
     }
 }
 

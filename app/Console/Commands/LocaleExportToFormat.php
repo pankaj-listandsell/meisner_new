@@ -4,8 +4,8 @@ namespace App\Console\Commands;
 
 use Custom\Helpers\Traits\LocaleExporter;
 use Illuminate\Console\Command;
-use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
+use League\Flysystem\Local\LocalFilesystemAdapter;
 
 class LocaleExportToFormat extends Command
 {
@@ -57,17 +57,15 @@ class LocaleExportToFormat extends Command
         $this->filepath = resource_path('jsBundler');
         $filename = $this->file_name.'.js';
 
-        $adapter = new Local($this->filepath);
+        $adapter = new LocalFilesystemAdapter($this->filepath);
         $filesystem = new Filesystem($adapter);
 
         $contents = 'export default ' . json_encode($this->messages);
 
-        if ($filesystem->has($filename)) {
+        if ($filesystem->fileExists($filename)) {
             $filesystem->delete($filename);
-            $filesystem->write($filename, $contents);
-        } else {
-            $filesystem->write($filename, $contents);
         }
+        $filesystem->write($filename, $contents);
 
         $this->info('Messages exported to JavaScript file in ' . $this->filepath . DIRECTORY_SEPARATOR . $filename);
     }
@@ -77,17 +75,15 @@ class LocaleExportToFormat extends Command
         $this->filepath = base_path('custom/Helpers/Exporter/Locale');
         $filename = $this->file_name.'.php';
 
-        $adapter = new Local($this->filepath);
+        $adapter = new LocalFilesystemAdapter($this->filepath);
         $filesystem = new Filesystem($adapter);
 
         $contents = '<?php return ' . var_export($this->messages, true) . ';';
 
-        if ($filesystem->has($filename)) {
+        if ($filesystem->fileExists($filename)) {
             $filesystem->delete($filename);
-            $filesystem->write($filename, $contents);
-        } else {
-            $filesystem->write($filename, $contents);
         }
+        $filesystem->write($filename, $contents);
 
         $this->info('Messages exported to php file in ' . $this->filepath . DIRECTORY_SEPARATOR . $filename);
     }

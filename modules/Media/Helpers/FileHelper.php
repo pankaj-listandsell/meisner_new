@@ -3,7 +3,7 @@ namespace Modules\Media\Helpers;
 
 use Illuminate\Support\Facades\Storage;
 use Modules\Media\Models\MediaFile;
-use Intervention\Image\ImageManagerStatic as Image;
+use Intervention\Image\Laravel\Facades\Image;
 use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 
 class FileHelper
@@ -150,9 +150,9 @@ class FileHelper
             }
 
             // Start Resize
-            $img = Image::make($image_path)->resize($sizeData[0], null, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save(public_path('uploads/' . $resizeFile));
+            $img = Image::read($image_path)
+                ->scale(width: $sizeData[0])
+                ->save(public_path('uploads/' . $resizeFile));
 
             return asset('uploads/' . $resizeFile);
         }
