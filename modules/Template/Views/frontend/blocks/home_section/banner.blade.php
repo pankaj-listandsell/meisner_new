@@ -1,6 +1,11 @@
 <?php
 $image_url = get_file_url($bg_image, 'full');
+$mobile_image_url = !empty($mobile_bg_image) ? get_file_url($mobile_bg_image, 'full') : '';
 ?>
+<link rel="preload" as="image" href="{{ $image_url }}" fetchpriority="high" media="(min-width: 768px)">
+@if($mobile_image_url)
+<link rel="preload" as="image" href="{{ $mobile_image_url }}" fetchpriority="high" media="(max-width: 767px)">
+@endif
 <div class="home-banner lazyload" data-bg="{{$image_url}}">
     <div class="container">
         <div class="row">
@@ -11,7 +16,7 @@ $image_url = get_file_url($bg_image, 'full');
                     <div class="col-lg-5 col-md-4 col-sm-12"><a href="{{ $button_link }}"><button id="banner_btnid" class="banner-btn">{{ $button_text }}</button></a></div>
                     <div class="col-lg-5 col-md-6 col-sm-12 banner-sel">
                         <div class="banner-cta">
-                            <a href="tel:{{ setting_item("phone_no_link") }}"><img class="lazyload" title="{{ setting_item("phone_no") }}" alt="{{ setting_item("phone_no") }}" data-src="/assests/img/icons/green-telephone.svg"> {{ setting_item("phone_no") }}</a>
+                            <a href="tel:{{ setting_item("phone_no_link") }}"><img class="lazyload" width="20" height="20" title="{{ setting_item("phone_no") }}" alt="{{ setting_item("phone_no") }}" data-src="/assests/img/icons/green-telephone.svg"> {{ setting_item("phone_no") }}</a>
                         </div>
                         <?php
                         $mobile_bg_image = $mobile_bg_image ?? "";
@@ -23,13 +28,13 @@ $image_url = get_file_url($bg_image, 'full');
                 </div>
                 <div class="google-review-seal">
                     <a href="https://www.google.com/search?sca_esv=46e9a135ed8bd27b&sxsrf=ANbL-n68BX9l2RSMuyvm1sB0rVW4ONE8lQ:1776075675579&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOWJl6N3M7ntI6eUQTSsbH7Jd2yAHK224ifJ8K3z6hd1vaRJ5H-YxhlgB4z7caXbeZ-v-MzDrvSMVL8slB-d61Fdobxi099aq4Bjxvpnf4uU02BURl4PieOJJgJ2c6Z3W6UV1ULgg1Fun-KDhdqrYngoWhNWm&q=Meissner+Entr%C3%BCmpelung+-+Wohnungsaufl%C3%B6sung+%26+Entsorgung+Reviews&sa=X&ved=2ahUKEwj0t_K9zeqTAxXsTWwGHYltCrgQ0bkNegQIMhAH&biw=1707&bih=772&dpr=1.25" target="_blank">
-                        <img src="/uploads/0000/14/2026/04/13/aflex-google-review.webp" loading="lazy" alt="" srcset="">
+                        <img src="/uploads/0000/14/2026/04/13/aflex-google-review.webp" loading="lazy" width="120" height="40" alt="Google Reviews" srcset="">
                     </a>
                     <a href="https://www.provenexpert.com/de-de/meissner-entruempelung/" target="_blank">
-                        <img src="/uploads/0000/1/2024/09/14/proven-expert.webp" loading="lazy" alt="" srcset="">
+                        <img src="/uploads/0000/1/2024/09/14/proven-expert.webp" loading="lazy" width="120" height="40" alt="ProvenExpert" srcset="">
                     </a>
                     <a href="https://de.trustpilot.com/review/meissner-entruempelung.de" target="_blank">
-                        <img src="/uploads/0000/14/2026/04/14/trustpilot-lgo-150.png" loading="lazy" alt="" srcset="">
+                        <img src="/uploads/0000/14/2026/04/14/trustpilot-lgo-150.png" loading="lazy" width="120" height="40" alt="Trustpilot" srcset="">
                     </a>
                 </div>
             </div>
@@ -110,7 +115,7 @@ $image_url = get_file_url($bg_image, 'full');
                     <span class="s1 text-danger">{{ $errors->first('captcha') }}</span>
                 @endif
             </div> -->
-                <div class="form-group">
+                <div class="form-group" style="min-height: 78px;">
                     <div class="g-recaptcha" data-sitekey="{{setting_item('recaptcha_api_key')}}"></div>
                     @if ($errors->has('g-recaptcha-response'))
                     <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>

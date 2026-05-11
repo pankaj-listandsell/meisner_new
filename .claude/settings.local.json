@@ -4,7 +4,12 @@
       "Bash(php artisan *)",
       "Bash(xargs grep -l \"auth:api\\\\|middleware\\\\\\(.*auth\")",
       "PowerShell(php -v)",
-      "PowerShell(php artisan --version)"
+      "PowerShell(php artisan --version)",
+      "Bash(curl *)",
+      "Read(//tmp/**)",
+      "Bash(grep -rE 'setting_item\\\\\\(|\\\\$row->' modules/Template/Views/frontend/blocks/home_section/)",
+      "Bash(php *)",
+      "Bash(grep -vE \"^#|^$\")"
     ]
   }
 }

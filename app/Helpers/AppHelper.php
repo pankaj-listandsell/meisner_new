@@ -72,6 +72,7 @@ function setting_update_item($item,$val, $group = ''){
     $s->save();
 
     Cache::forget('setting_' . $item);
+    Cache::forget(\Modules\Core\Models\Settings::SETTING_KEY);
 
     return $s;
 }

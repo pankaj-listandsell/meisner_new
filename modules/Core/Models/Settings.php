@@ -31,27 +31,17 @@ class Settings extends BaseModel
         return $res;
     }
 
+    protected static $requestCache = null;
+
     public static function item($item, $default = false)
     {
-        $value = Cache::rememberForever('setting_' . $item, function () use ($item ,$default) {
+        if (self::$requestCache === null) {
+            self::$requestCache = self::getAllSettings();
+        }
 
-            $settings = self::getAllSettings();
+        $value = self::$requestCache[$item] ?? null;
 
-            $value = null;
-
-            foreach ($settings as $settingKey => $settingValue) {
-                if ($settingKey == $item) {
-                    $value = $settingValue;
-                }
-            }
-
-            return $value;
-
-            /*$val = Settings::where('name', $item)->first();
-            return $val?$val['val']:'';*/
-        });
-
-        return (empty($value) and strlen($value ?? '')===0)?$default:$value;
+        return (empty($value) and strlen($value ?? '') === 0) ? $default : $value;
     }
 
     public static function store($key,$data){
@@ -69,6 +59,8 @@ class Settings extends BaseModel
         }
 
         Cache::forget('setting_' . $key);
+        Cache::forget(self::SETTING_KEY);
+        self::$requestCache = null;
     }
 
     public static function getSettingPages($forMenu = false){

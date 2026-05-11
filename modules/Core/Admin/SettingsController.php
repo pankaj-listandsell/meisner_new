@@ -135,6 +135,7 @@ class SettingsController extends AdminController
         }
 
         Cache::forget('setting_' . $key);
+        Cache::forget(Settings::SETTING_KEY);
     }
 
 

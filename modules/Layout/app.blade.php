@@ -36,12 +36,10 @@
     <link rel="preload" as="style" href="{{ asset('assests/css/slick.min.css') }}" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" as="style" href="{{ asset('assests/css/slick-theme.min.css') }}" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" as="style" href="{{ asset('assests/css/toastr.min.css') }}" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" as="style" href="{{ asset('assests/css/jquery-ui.min.css') }}" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
         <link rel="stylesheet" href="{{ asset('assests/css/slick.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assests/css/slick-theme.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assests/css/toastr.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assests/css/jquery-ui.min.css') }}">
     </noscript>
     {{-- Cookie consent CSS: keep blocking to prevent banner flash/CLS --}}
     <link href="{{ asset('vendor/cookie-consent/css/cookie-consent.css')}}" rel="stylesheet">
@@ -632,19 +630,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 @include('Layout::parts.footer')
-<script src="{{ asset('assests/js/jquery-ui.min.js') }}" defer></script>
 <script src="{{ asset('assests/js/toastr.min.js') }}" defer></script>
-<script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoadCallback" async defer></script>
 <script>
     var recaptchaPopupWidgetId;
     function onRecaptchaLoadCallback() {
         var popupEl = document.getElementById('recaptcha-popup');
-        if (popupEl && !popupEl.hasChildNodes()) {
+        if (popupEl && !popupEl.hasChildNodes() && typeof grecaptcha !== 'undefined') {
             recaptchaPopupWidgetId = grecaptcha.render('recaptcha-popup', {
                 sitekey: "{{ setting_item('recaptcha_api_key') }}"
             });
         }
     }
+    (function () {
+        var loaded = false;
+        function loadRecaptcha() {
+            if (loaded) return;
+            loaded = true;
+            var s = document.createElement('script');
+            s.src = 'https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoadCallback';
+            s.async = true;
+            s.defer = true;
+            document.head.appendChild(s);
+            events.forEach(function (e) {
+                window.removeEventListener(e, loadRecaptcha, { passive: true });
+            });
+        }
+        var events = ['scroll', 'mousemove', 'touchstart', 'keydown', 'click'];
+        events.forEach(function (e) {
+            window.addEventListener(e, loadRecaptcha, { passive: true });
+        });
+        setTimeout(loadRecaptcha, 4000);
+    })();
 </script>
 <script src="{{ asset('assests/js/slick.min.js') }}" defer></script>
 <script src="{{ asset('assests/js/script.js') }}" defer></script>

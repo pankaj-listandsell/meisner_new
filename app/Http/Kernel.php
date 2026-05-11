@@ -26,6 +26,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
         \Statikbe\CookieConsent\CookieConsentMiddleware::class,
+        \App\Http\Middleware\CompressResponse::class,
     ];
 
     /**

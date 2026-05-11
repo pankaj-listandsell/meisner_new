@@ -1,3 +1,9 @@
+@push('css')
+<link rel="stylesheet" href="{{ asset('assests/css/jquery-ui.min.css') }}">
+@endpush
+@push('js')
+<script src="{{ asset('assests/js/jquery-ui.min.js') }}" defer></script>
+@endpush
 <div class="entr-rec-logo">
 <a href="{{ getHomePageUrl() }}">
                 @php
