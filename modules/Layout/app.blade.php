@@ -634,7 +634,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 @include('Layout::parts.footer')
 <script src="{{ asset('assests/js/jquery-ui.min.js') }}" defer></script>
 <script src="{{ asset('assests/js/toastr.min.js') }}" defer></script>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoadCallback" async defer></script>
+<script>
+    var recaptchaPopupWidgetId;
+    function onRecaptchaLoadCallback() {
+        var popupEl = document.getElementById('recaptcha-popup');
+        if (popupEl && !popupEl.hasChildNodes()) {
+            recaptchaPopupWidgetId = grecaptcha.render('recaptcha-popup', {
+                sitekey: "{{ setting_item('recaptcha_api_key') }}"
+            });
+        }
+    }
+</script>
 <script src="{{ asset('assests/js/slick.min.js') }}" defer></script>
 <script src="{{ asset('assests/js/script.js') }}" defer></script>
 @stack('js')

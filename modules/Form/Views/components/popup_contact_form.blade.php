@@ -57,21 +57,6 @@
     </div>
 </div>
 
-<script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoadCallback&render=explicit" async defer></script>
-
-<script>
-    let recaptchaPopupWidgetId;
-
-    function onRecaptchaLoadCallback() {
-        let siteKey = "{{setting_item('recaptcha_api_key')}}";
-        if (document.getElementById('recaptcha-popup')) {
-            recaptchaPopupWidgetId = grecaptcha.render('recaptcha-popup', {
-                sitekey: siteKey
-            });
-        }
-    }
-</script>
-
 <script>
     jQuery(document).ready(function($){
         $('.popup-contact-form [type=submit]').click(function (e) {
