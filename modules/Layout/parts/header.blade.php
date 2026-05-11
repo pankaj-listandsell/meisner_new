@@ -10,7 +10,7 @@
                 @endphp
                 @if ($logo_id)
                     <?php $logo = get_file_url($logo_id, 'full'); ?>
-                    <img width="250" height="60" src="{{ $logo }}" alt="{{ setting_item('site_title') }}">
+                    <img width="250" height="60" src="{{ $logo }}" alt="{{ setting_item('site_title') }}" fetchpriority="high">
                 @endif
 
             </a>

@@ -6,7 +6,7 @@
                 $image_url = get_file_url($image, 'full');
                 $image_details = get_file_details($image, '#');
             ?>
-            <img class="lazyload title="{{ isset($image_details['title']) ? $image_details['title'] : "#" }}" alt="{{ isset($image_details['alt']) ? $image_details['alt'] : "#" }}" data-src="{{ $image_url }}">
+            <img class="lazyload" title="{{ isset($image_details['title']) ? $image_details['title'] : "#" }}" alt="{{ isset($image_details['alt']) ? $image_details['alt'] : "#" }}" data-src="{{ $image_url }}">
         </div>
         @endif
         <div class="col-lg-5 col-md-5 col-sm-12">

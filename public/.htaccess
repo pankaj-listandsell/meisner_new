@@ -9,22 +9,6 @@
     RewriteEngine On
     RewriteBase /
 
-    # Redirect only index.php to homepage
-    RewriteCond %{THE_REQUEST} \s/index\.php[\s?]
-    RewriteRule ^index\.php$ / [R=301,L]
-    
-    # Redirect /en and everything under it
-    RewriteRule ^en/?$ / [R=301,L]
-    RewriteRule ^en/(.*)$ /$1 [R=301,L]
-
-    # Ensure this rule only applies to the main domain
-    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-    RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
-
-    # 2. Redirect /startseite/ to homepage
-    RewriteCond %{REQUEST_URI} ^/startseite/?$ [NC]
-    RewriteRule ^.*$ https://meissner-entruempelung.de/ [R=301,L]
-
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

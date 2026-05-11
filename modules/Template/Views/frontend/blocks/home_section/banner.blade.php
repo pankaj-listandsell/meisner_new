@@ -14,23 +14,23 @@ $image_url = get_file_url($bg_image, 'full');
                             <a href="tel:{{ setting_item("phone_no_link") }}"><img class="lazyload" title="{{ setting_item("phone_no") }}" alt="{{ setting_item("phone_no") }}" data-src="/assests/img/icons/green-telephone.svg"> {{ setting_item("phone_no") }}</a>
                         </div>
                         <?php
-                            $mobile_bg_image = $mobile_bg_image ?? "";
-                            $image_url = get_file_url($mobile_bg_image, 'full');
-                            $image_details = get_file_details($mobile_bg_image, '#');
+                        $mobile_bg_image = $mobile_bg_image ?? "";
+                        $image_url = get_file_url($mobile_bg_image, 'full');
+                        $image_details = get_file_details($mobile_bg_image, '#');
                         ?>
                         <img title="{{ isset($image_details['title']) ? $image_details['title'] : "#" }}" alt="{{ isset($image_details['alt']) ? $image_details['alt'] : "#" }}" class="banner-mob-img lazyload" data-src="{{$image_url}}">
                     </div>
                 </div>
                 <div class="google-review-seal">
                     <a href="https://www.google.com/search?sca_esv=46e9a135ed8bd27b&sxsrf=ANbL-n68BX9l2RSMuyvm1sB0rVW4ONE8lQ:1776075675579&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOWJl6N3M7ntI6eUQTSsbH7Jd2yAHK224ifJ8K3z6hd1vaRJ5H-YxhlgB4z7caXbeZ-v-MzDrvSMVL8slB-d61Fdobxi099aq4Bjxvpnf4uU02BURl4PieOJJgJ2c6Z3W6UV1ULgg1Fun-KDhdqrYngoWhNWm&q=Meissner+Entr%C3%BCmpelung+-+Wohnungsaufl%C3%B6sung+%26+Entsorgung+Reviews&sa=X&ved=2ahUKEwj0t_K9zeqTAxXsTWwGHYltCrgQ0bkNegQIMhAH&biw=1707&bih=772&dpr=1.25" target="_blank">
-                        <img src="/uploads/0000/14/2026/04/13/aflex-google-review.webp" alt="" srcset="">
-                    </a> 
-                    <a href="https://www.provenexpert.com/de-de/meissner-entruempelung/" target="_blank">
-                        <img src="/uploads/0000/1/2024/09/14/proven-expert.webp" alt="" srcset="">
+                        <img src="/uploads/0000/14/2026/04/13/aflex-google-review.webp" loading="lazy" alt="" srcset="">
                     </a>
-                    <a href="https://de.trustpilot.com/review/meissner-entruempelung.de"  target="_blank">
-                        <img src="/uploads/0000/14/2026/04/14/trustpilot-lgo-150.png" alt="" srcset="">
-                    </a>                   
+                    <a href="https://www.provenexpert.com/de-de/meissner-entruempelung/" target="_blank">
+                        <img src="/uploads/0000/1/2024/09/14/proven-expert.webp" loading="lazy" alt="" srcset="">
+                    </a>
+                    <a href="https://de.trustpilot.com/review/meissner-entruempelung.de" target="_blank">
+                        <img src="/uploads/0000/14/2026/04/14/trustpilot-lgo-150.png" loading="lazy" alt="" srcset="">
+                    </a>
                 </div>
             </div>
         </div>
@@ -40,51 +40,53 @@ $image_url = get_file_url($bg_image, 'full');
     <div class="container">
         <h2>Jetzt ein kostenloses Angebot anfordern!</h2>
         @if (session('success'))
-            <div class="alert alert-success" id="banner_home_form">
-                {{ session('success') }}
-            </div>
-            <script>
-            document.addEventListener("DOMContentLoaded", function () {
+        <div class="alert alert-success" id="banner_home_form">
+            {{ session('success') }}
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
                 const banner = document.getElementById("banner_btnid");
                 if (banner) {
-                    banner.scrollIntoView({ behavior: 'smooth' });
+                    banner.scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 }
             });
         </script>
         @endif
-        <form  method="post" action="{{ route("requestquote.store") }}">
+        <form method="post" action="{{ route("requestquote.store") }}">
             {{csrf_field()}}
             <div class="home_form_row">
-            <div>
-            <input placeholder="Name *" type="text" name="name" autocomplete="off" value="{{ old('name') }}">
-            @if ($errors->has('name'))
-                <span class="s1 text-danger">{{ $errors->first('name') }}</span>
-            @endif
-            </div>
-            <div>
-            <input placeholder="Telefonnummer *" type="number" autocomplete="off" name="phone" value="{{ old('phone') }}">
-            @if ($errors->has('phone'))
-                <span class="s1 text-danger">{{ $errors->first('phone') }}</span>
-            @endif
-            </div>
-            <div>
-            <input placeholder="E-Mail *" type="email" autocomplete="off" name="email" value="{{ old('email') }}">
-            @if ($errors->has('email'))
-                <span class="s1 text-danger">{{ $errors->first('email') }}</span>
-            @endif
-            </div>
-            <div>
-            <select id="select-option" name="service">
-                <option value="">Was können wir für Sie tun? *</option>
-                <option value="entruempelung">Entrümpelung</option>
-                <option value="entsorgung">Entsorgung</option>
-                <option value="umzug">Umzug</option>
-            </select>
-            @if ($errors->has('service'))
-                <span class="s1 text-danger">{{ $errors->first('service') }}</span>
-            @endif
-            </div>
-            
+                <div>
+                    <input placeholder="Name *" type="text" name="name" autocomplete="off" value="{{ old('name') }}">
+                    @if ($errors->has('name'))
+                    <span class="s1 text-danger">{{ $errors->first('name') }}</span>
+                    @endif
+                </div>
+                <div>
+                    <input placeholder="Telefonnummer *" type="number" autocomplete="off" name="phone" value="{{ old('phone') }}">
+                    @if ($errors->has('phone'))
+                    <span class="s1 text-danger">{{ $errors->first('phone') }}</span>
+                    @endif
+                </div>
+                <div>
+                    <input placeholder="E-Mail *" type="email" autocomplete="off" name="email" value="{{ old('email') }}">
+                    @if ($errors->has('email'))
+                    <span class="s1 text-danger">{{ $errors->first('email') }}</span>
+                    @endif
+                </div>
+                <div>
+                    <select id="select-option" name="service">
+                        <option value="">Was können wir für Sie tun? *</option>
+                        <option value="entruempelung">Entrümpelung</option>
+                        <option value="entsorgung">Entsorgung</option>
+                        <option value="umzug">Umzug</option>
+                    </select>
+                    @if ($errors->has('service'))
+                    <span class="s1 text-danger">{{ $errors->first('service') }}</span>
+                    @endif
+                </div>
+
             </div>
             <span class="sub-box">
                 <span class="check-info">
@@ -108,19 +110,20 @@ $image_url = get_file_url($bg_image, 'full');
                     <span class="s1 text-danger">{{ $errors->first('captcha') }}</span>
                 @endif
             </div> -->
-            <div class="form-group">
-                <div class="g-recaptcha" data-sitekey="{{setting_item('recaptcha_api_key')}}"></div>
-                @if ($errors->has('g-recaptcha-response'))
+                <div class="form-group">
+                    <div class="g-recaptcha" data-sitekey="{{setting_item('recaptcha_api_key')}}"></div>
+                    @if ($errors->has('g-recaptcha-response'))
                     <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
-                @endif
-            </div>
-                
-            <input type="submit" value="Absenden"></span>
+                    @endif
+                </div>
+
+                <input type="submit" value="Absenden">
+            </span>
 
         </form>
     </div>
 </div>
 
 @push('css')
-  <link rel="stylesheet" href="{{ asset('assests/css/home-page.css') }}">
+<link rel="stylesheet" href="{{ asset('assests/css/home-page.css') }}">
 @endpush

@@ -6,7 +6,7 @@
             <div class="col-lg-6 col-md-6 col-sm-12 ">
                 <!--<img alt="#" title="#" src="/assests/img/our-process.webp">-->
                 <div class="sec-7-img">
-                    <video class="lazyload" autoplay muted loop playsinline width="675" height="587">
+                    <video class="lazyload" autoplay muted loop playsinline width="675" height="587" preload="none">
                     <source src="{{$video_url}}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
