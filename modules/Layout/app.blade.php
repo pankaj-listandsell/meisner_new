@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="google-site-verification" content="rE7dtCgRrkax4PM3voLeDf5GpGX3ZwlTGZ9WNPY807s" />
-    {{-- Preconnect to 3rd-party origins so DNS+TCP+TLS happens early in parallel --}}
+    {{-- Preconnect only to origins used early (analytics/GTM). --}}
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
-    <link rel="preconnect" href="https://www.google.com" crossorigin>
-    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    {{-- reCAPTCHA is lazy-loaded on interaction, so use cheaper dns-prefetch instead of preconnect for its origins. --}}
+    <link rel="dns-prefetch" href="https://www.google.com">
+    <link rel="dns-prefetch" href="https://www.gstatic.com">
     <link rel="stylesheet" href="{{ asset('assests/css/general.css') }}">
     <link rel="stylesheet" href="{{ asset('assests/css/service.css') }}">
     @php event(new \Modules\Layout\Events\LayoutBeginHead()); @endphp
@@ -41,10 +42,8 @@
         <link rel="stylesheet" href="{{ asset('assests/css/slick-theme.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assests/css/toastr.min.css') }}">
     </noscript>
-    {{-- Cookie consent CSS: keep blocking to prevent banner flash/CLS --}}
-    <link href="{{ asset('vendor/cookie-consent/css/cookie-consent.css')}}" rel="stylesheet">
-    {{-- jQuery loaded in <head> so inline scripts in content/footer can use it --}}
-    <script src="{{ asset('assests/js/jquery.min.js') }}"></script>
+    {{-- Cookie consent CSS inlined (~1KB) to drop a render-blocking request while still preventing banner flash/CLS --}}
+    <style>[class^=lcc-]{box-sizing:border-box!important;color:#111;font-size:16px;line-height:22px}[class^=lcc-]:first-child{margin-top:0}[class^=lcc-]:last-child{margin-bottom:0}[class^=lcc-][inert]{cursor:default;pointer-events:none}[class^=lcc-][inert],[class^=lcc-][inert] *{user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}.lcc-text{font-size:16px;margin:0 0 22px}.lcc-button{background:none;background-color:#111;border:1px solid #111;color:#fff;cursor:pointer;display:inline-block;font-size:inherit;margin:1px 0;outline:none;padding:6px 15px;transition:color .2s ease,background-color .2s ease,border-color .2s ease}.lcc-button:focus,.lcc-button:hover{background:#777;border-color:#777}.lcc-button.lcc-button--link{background:transparent;border-color:transparent;color:inherit;padding-left:0;padding-right:0;text-decoration:underline}.lcc-button.lcc-button--link:focus,.lcc-button.lcc-button--link:hover{background:transparent;border-color:transparent;text-decoration:none}.lcc-button.lcc-button--link+.lcc-button.lcc-button--link{margin-top:0}.lcc-label{align-items:baseline;display:flex;margin-bottom:5px}.lcc-label[for]{cursor:pointer}.lcc-label>*{margin-right:10px}input[id^=lcc-]:disabled{color:#777;cursor:default;opacity:.55}input[id^=lcc-]:disabled+span{cursor:default;opacity:.6}.lcc-backdrop{background:rgba(0,0,0,.6);bottom:0;left:0;position:fixed;right:0;top:0;transition:opacity .2s ease-in-out;z-index:10000}.lcc-modal{background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.25);left:50%;max-height:90%;max-width:90%;overflow:auto;padding:30px;position:fixed;top:50%;transform:translate(-50%,-50%);width:475px;z-index:10001}.lcc-modal .lcc-modal__close{background:none;border:none;color:inherit;cursor:pointer;font-size:24px;line-height:1.25;position:absolute;right:0;top:0;transition:color .2s ease;width:30px}.lcc-modal .lcc-modal__close:focus,.lcc-modal .lcc-modal__close:hover{color:#777}.lcc-modal .lcc-modal__title{font-size:22px;margin-bottom:1em}.lcc-modal .lcc-modal__section{margin-bottom:20px}.lcc-modal .lcc-modal__actions{margin-top:30px}.lcc-modal .lcc-modal__actions>*{display:block;margin-top:8px}.lcc-modal.lcc-modal--settings{z-index:10002}.lcc-u-sr-only{clip:rect(0,0,0,0);border:0;height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.lcc-u-text-center{text-align:center!important}</style>
     @php
     $row_id = 0;
         if (!empty($row->id)) {
@@ -629,6 +628,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     @yield('content')
 </div>
 
+{{-- jQuery moved out of <head> so it no longer blocks first render. Placed here (before the footer, @stack('js') and the inline scripts below) so every $-dependent script still runs after it. --}}
+<script src="{{ asset('assests/js/jquery.min.js') }}"></script>
 @include('Layout::parts.footer')
 <script src="{{ asset('assests/js/toastr.min.js') }}" defer></script>
 <script>

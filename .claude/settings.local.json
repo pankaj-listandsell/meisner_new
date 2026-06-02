@@ -9,7 +9,13 @@
       "Read(//tmp/**)",
       "Bash(grep -rE 'setting_item\\\\\\(|\\\\$row->' modules/Template/Views/frontend/blocks/home_section/)",
       "Bash(php *)",
-      "Bash(grep -vE \"^#|^$\")"
+      "Bash(grep -vE \"^#|^$\")",
+      "Bash(grep -n \"<script\\\\|\\\\$\\(\\\\|@push\\\\|@endpush\\\\|@stack\" modules/Template/Views/frontend/blocks/home_section/banner.blade.php)",
+      "Bash(grep -n \"<script\\\\|\\\\$\\(\\\\|@push\\\\|@stack\" resources/views/shortcodes/home.blade.php)",
+      "Bash(grep -n \"<script\\\\|\\\\$\\(\\\\|@push\\\\|@endpush\" modules/Form/Views/components/popup_contact_form.blade.php)",
+      "Bash(grep -o \"body{[^}]*font-family[^}]*}\\\\|h1{[^}]*}\\\\|h1,[^{]*{[^}]*font-family[^}]*}\" general.css)",
+      "Bash(npm --version)",
+      "Bash(node -e ' *)"
     ]
   }
 }

@@ -2,11 +2,16 @@
 $image_url = get_file_url($bg_image, 'full');
 $mobile_image_url = !empty($mobile_bg_image) ? get_file_url($mobile_bg_image, 'full') : '';
 ?>
+{{-- Preload the LCP hero image from the <head> so it starts downloading immediately --}}
+@push('css')
 <link rel="preload" as="image" href="{{ $image_url }}" fetchpriority="high" media="(min-width: 768px)">
 @if($mobile_image_url)
 <link rel="preload" as="image" href="{{ $mobile_image_url }}" fetchpriority="high" media="(max-width: 767px)">
 @endif
-<div class="home-banner lazyload" data-bg="{{$image_url}}">
+@endpush
+{{-- LCP element: background set eagerly via inline style (not lazysizes data-bg) so it is not async-deferred.
+     Narrower-breakpoint backgrounds in home-page.css use !important and still override this. --}}
+<div class="home-banner" style="background-image:url('{{ $image_url }}')">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-8 col-sm-12">
