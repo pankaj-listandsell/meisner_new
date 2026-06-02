@@ -13,8 +13,11 @@ return [
     |
     | Supported: "gd", "imagick"
     |
+    | NOTE: Intervention Image v3 expects the driver CLASS here; the v2 "gd"/"imagick"
+    | string no longer resolves ("Unable to resolve driver"). GD matches the prior config.
+    |
     */
 
-    'driver' => 'gd'
+    'driver' => \Intervention\Image\Drivers\Gd\Driver::class,
 
 ];

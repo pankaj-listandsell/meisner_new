@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{-- LCP resource hints rendered first so the preload scanner finds them before the inlined CSS below. --}}
+    @stack('preload_top')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="google-site-verification" content="rE7dtCgRrkax4PM3voLeDf5GpGX3ZwlTGZ9WNPY807s" />
     {{-- Preconnect only to origins used early (analytics/GTM). --}}

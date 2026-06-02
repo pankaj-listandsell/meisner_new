@@ -1,11 +1,12 @@
 <?php
 $image_url = get_file_url($bg_image, 'full');
-{{-- 'medium' (800px) instead of 'full' (1138px): the mobile image is displayed at <=700px,
-     so the full-size file wasted ~80KB. The platform generates the …-800.webp variant on first request. --}}
-$mobile_image_url = !empty($mobile_bg_image) ? get_file_url($mobile_bg_image, 'medium') : '';
+// 'banner' (800px) instead of 'full' (1138px): the mobile hero is displayed at ~700px,
+// so the full-size file wasted ~95KB. The 800px variant is ~36KB vs 132KB.
+$mobile_image_url = !empty($mobile_bg_image) ? get_file_url($mobile_bg_image, 'banner') : '';
 ?>
-{{-- Preload the LCP hero image from the <head> so it starts downloading immediately --}}
-@push('css')
+{{-- Preload the LCP hero image into the very top of <head> (preload_top stack) so the preload
+     scanner finds it before the inlined CSS and it starts downloading immediately. --}}
+@push('preload_top')
 <link rel="preload" as="image" href="{{ $image_url }}" fetchpriority="high" media="(min-width: 768px)">
 @if($mobile_image_url)
 <link rel="preload" as="image" href="{{ $mobile_image_url }}" fetchpriority="high" media="(max-width: 767px)">
@@ -27,8 +28,8 @@ $mobile_image_url = !empty($mobile_bg_image) ? get_file_url($mobile_bg_image, 'm
                         </div>
                         <?php
                         $mobile_bg_image = $mobile_bg_image ?? "";
-                        // 'medium' (800px) keeps this in sync with the preload above so the LCP image is not downloaded twice.
-                        $image_url = get_file_url($mobile_bg_image, 'medium');
+                        // 'banner' (800px) keeps this in sync with the preload above so the LCP image is not downloaded twice.
+                        $image_url = get_file_url($mobile_bg_image, 'banner');
                         $image_details = get_file_details($mobile_bg_image, '#');
                         ?>
                         {{-- This image is the mobile/tablet LCP element (visible at <=1050px, hidden on desktop).
@@ -37,7 +38,7 @@ $mobile_image_url = !empty($mobile_bg_image) ? get_file_url($mobile_bg_image, 'm
                              display:contents keeps the <img> a direct child of .banner-sel for the float/width CSS. --}}
                         <picture style="display:contents">
                             <source media="(max-width:1050px)" srcset="{{ $image_url }}">
-                            <img title="{{ isset($image_details['title']) ? $image_details['title'] : "#" }}" alt="{{ isset($image_details['alt']) ? $image_details['alt'] : "#" }}" class="banner-mob-img" width="1138" height="564" fetchpriority="high" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                            <img title="{{ isset($image_details['title']) ? $image_details['title'] : "#" }}" alt="{{ isset($image_details['alt']) ? $image_details['alt'] : "#" }}" class="banner-mob-img" width="800" height="397" fetchpriority="high" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
                         </picture>
                     </div>
                 </div>

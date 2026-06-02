@@ -21,6 +21,11 @@ class FileHelper
             1024,
             1024
         ],
+        // Sized for the mobile hero banner (displayed ~700px); keeps the LCP image small.
+        'banner' => [
+            800,
+            800
+        ],
         'max_large' => [
             2500,
             2500
@@ -126,7 +131,14 @@ class FileHelper
         if (!isset($size, static::$defaultSize))
             $size = 'medium';
         $sizeData = static::$defaultSize[$size];
-        if ($sizeData[0] >= $fileObj->file_width) {
+        // file_width is NULL for many legacy uploads; fall back to the real file dimensions
+        // so the "image already small enough" short-circuit doesn't skip every resize.
+        $fileWidth = (int) $fileObj->file_width;
+        if ($fileWidth <= 0) {
+            $dim = @getimagesize(public_path('uploads/' . $fileObj->file_path));
+            $fileWidth = $dim ? (int) $dim[0] : 0;
+        }
+        if ($sizeData[0] >= $fileWidth) {
             return asset('uploads/' . $fileObj->file_path);
         }
         $resizeFile = substr($fileObj->file_path, 0, strrpos($fileObj->file_path, '.')) . '-' . $sizeData[0] . '.' . $fileObj->file_extension;
@@ -149,12 +161,15 @@ class FileHelper
                 return static::resizeSimple($fileObj,$size);
             }
 
-            // Start Resize
-            $img = Image::read($image_path)
-                ->scale(width: $sizeData[0])
-                ->save(public_path('uploads/' . $resizeFile));
-
-            return asset('uploads/' . $resizeFile);
+            // Start Resize. Guard against encoder/GD failures so a resize error can never 500 the page.
+            try {
+                Image::read($image_path)
+                    ->scale(width: $sizeData[0])
+                    ->save(public_path('uploads/' . $resizeFile), quality: 82);
+                return asset('uploads/' . $resizeFile);
+            } catch (\Throwable $e) {
+                return asset('uploads/' . $fileObj->file_path);
+            }
         }
     }
 
