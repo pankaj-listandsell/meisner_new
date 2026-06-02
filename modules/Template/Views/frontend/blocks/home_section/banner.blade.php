@@ -4,13 +4,14 @@ $image_url = get_file_url($bg_image, 'full');
 // so the full-size file wasted ~95KB. The 800px variant is ~36KB vs 132KB.
 $mobile_image_url = !empty($mobile_bg_image) ? get_file_url($mobile_bg_image, 'banner') : '';
 ?>
-{{-- Preload the LCP hero image into the very top of <head> (preload_top stack) so the preload
-     scanner finds it before the inlined CSS and it starts downloading immediately. --}}
+{{-- Preload the LCP hero BACKGROUND into the very top of <head> (preload_top stack). The .home-banner
+     background changes by breakpoint, so each preload mirrors what home-page.css actually paints:
+       >1050px  -> brandenburg-berlingate (inline style + <=1564 media rule)  [desktop LCP]
+       <=1050px -> berlin-gate.webp via !important override                    [mobile/tablet LCP]
+     CSS backgrounds aren't seen by the preload scanner, so without these the LCP image starts late. --}}
 @push('preload_top')
-<link rel="preload" as="image" href="{{ $image_url }}" fetchpriority="high" media="(min-width: 768px)">
-@if($mobile_image_url)
-<link rel="preload" as="image" href="{{ $mobile_image_url }}" fetchpriority="high" media="(max-width: 767px)">
-@endif
+<link rel="preload" as="image" href="{{ $image_url }}" fetchpriority="high" media="(min-width: 1051px)">
+<link rel="preload" as="image" href="{{ asset('uploads/0000/1/2024/09/11/berlin-gate.webp') }}" fetchpriority="high" media="(max-width: 1050px)">
 @endpush
 {{-- LCP element: background set eagerly via inline style (not lazysizes data-bg) so it is not async-deferred.
      Narrower-breakpoint backgrounds in home-page.css use !important and still override this. --}}

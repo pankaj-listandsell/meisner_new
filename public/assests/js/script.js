@@ -269,9 +269,10 @@ document.addEventListener("DOMContentLoaded", function() {
   showStep(currentStep);
 });
 
-if ($('.service-sec-8 .last_rm').height() > 500) {
+var $serviceLastRm = $('.service-sec-8 .last_rm');
+if ($serviceLastRm.length && $serviceLastRm.height() > 500) {
   // Add class if height is greater than 500px
-  $('.service-sec-8 .last_rm').addClass('big_content');
+  $serviceLastRm.addClass('big_content');
 }
 
 $('.ls_rm_btn a').click(function(e) {
@@ -358,93 +359,58 @@ $(".before-after-slider #slider").on("input change", (e)=>{
   $('.before-after-slider .slider-button').css('left', `calc(${sliderPos}% - 28px)`)
 });
 
-$(".service-slider").slick({
-  infinite: true,
-  autoplay: true,
-  slidesToShow: 3,
-  slidesToScroll: 3,
-  autoplaySpeed: 4000,
-  responsive: [
-    {
-      breakpoint: 1300,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1
-      }
-    },
-    {
-      breakpoint: 900,
-      settings: {
-        dots: true,
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
+// Lazy-initialise the carousels. slick reads layout (offsetWidth etc.) when it inits, which
+// forced a reflow during load. These sliders are mostly below the fold, so we defer each init
+// until it scrolls near the viewport — off the critical load path, lower TBT, no reflow at load.
+(function () {
+  var sliderConfigs = [
+    { sel: ".service-slider", opts: {
+      infinite: true, autoplay: true, slidesToShow: 3, slidesToScroll: 3, autoplaySpeed: 4000,
+      responsive: [
+        { breakpoint: 1300, settings: { slidesToShow: 2, slidesToScroll: 1 } },
+        { breakpoint: 900,  settings: { dots: true, slidesToShow: 1, slidesToScroll: 1 } }
+      ]
+    } },
+    { sel: ".slider-2", opts: {
+      infinite: true, autoplay: true, dots: true, slidesToShow: 3, slidesToScroll: 3, autoplaySpeed: 4000,
+      responsive: [
+        { breakpoint: 1300, settings: { slidesToShow: 2, slidesToScroll: 1 } },
+        { breakpoint: 900,  settings: { slidesToShow: 1, slidesToScroll: 1 } }
+      ]
+    } },
+    { sel: ".slider-top", opts: {
+      infinite: true, autoplay: true, dots: true, slidesToShow: 5, slidesToScroll: 3, autoplaySpeed: 4000,
+      responsive: [
+        { breakpoint: 1300, settings: { slidesToShow: 5, slidesToScroll: 1 } },
+        { breakpoint: 900,  settings: { slidesToShow: 2, slidesToScroll: 1 } },
+        { breakpoint: 550,  settings: { slidesToShow: 2, slidesToScroll: 1 } }
+      ]
+    } }
+  ];
+
+  function initSlider(cfg) {
+    var $el = $(cfg.sel);
+    if ($el.length && !$el.hasClass("slick-initialized")) {
+      $el.slick(cfg.opts);
     }
+  }
 
-  ]
-});
-
-
-$(".slider-2").slick({
-  infinite: true,
-  autoplay: true,
-  dots: true,
-  slidesToShow: 3,
-  slidesToScroll: 3,
-  autoplaySpeed: 4000,
-  responsive: [
-    {
-      breakpoint: 1300,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1
-      }
-    },
-    {
-      breakpoint: 900,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-
-  ]
-});
-
-
-$(".slider-top").slick({
-  infinite: true,
-  autoplay: true,
-  dots: true,
-  slidesToShow: 5,
-  slidesToScroll: 3,
-  autoplaySpeed: 4000,
-  responsive: [
-    {
-      breakpoint: 1300,
-      settings: {
-        slidesToShow: 5,
-        slidesToScroll: 1
-      }
-    },
-    {
-      breakpoint: 900,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1
-      }
-    },
-    {
-      breakpoint: 550,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1
-      }
-    }
-
-
-  ]
-});
+  if ("IntersectionObserver" in window) {
+    sliderConfigs.forEach(function (cfg) {
+      var el = document.querySelector(cfg.sel);
+      if (!el) return;
+      var io = new IntersectionObserver(function (entries, obs) {
+        if (entries[0].isIntersecting) {
+          initSlider(cfg);
+          obs.disconnect();
+        }
+      }, { rootMargin: "300px" }); // init a bit before it scrolls into view
+      io.observe(el);
+    });
+  } else {
+    sliderConfigs.forEach(initSlider);
+  }
+})();
 
 $(".testimonial-btn1").on('click', function(event){
   $(".slick-prev").onclick();
