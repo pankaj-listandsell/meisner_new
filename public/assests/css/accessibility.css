@@ -1,0 +1,23 @@
+/* Accessibility helpers — touch target size & spacing (WCAG 2.2 SC 2.5.8).
+   Targets are sized to at least 24x24 CSS px with adequate spacing. */
+
+/* CTA buttons wrap an inner <a>; make the anchor fill the button so its
+   touch target matches the (already large) button instead of just the text. */
+.cta-btn-1 a,
+.cta-btn-2 a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Footer column links and the mobile side-menu links are tight inline text.
+   Give each an adequate vertical hit area. */
+.footer_list a,
+.menu-list.mobile a {
+    display: inline-block;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    min-height: 24px;
+}

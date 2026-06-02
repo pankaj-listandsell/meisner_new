@@ -19,7 +19,7 @@
             <a href="tel:{{ setting_item_with_lang('phone_no_link') }}">
                 <div class="row head_call">
                     <div class="call-icon">
-                        <img src="/assests/img/icons/cta-phone-icon.svg">
+                        <img src="/assests/img/icons/cta-phone-icon.svg" alt="">
                     </div>
                     <div>
                         <span>Meissner-Hotline</span>
@@ -49,7 +49,7 @@
 
         @if ($logo_id)
             <?php $logo = get_file_url($logo_id, 'full'); ?>
-            <img src="{{ $logo }}">
+            <img src="{{ $logo }}" alt="{{ setting_item('site_title') }}">
         @endif
         </a>
         {!! generate_primary_menu() !!}
@@ -63,7 +63,7 @@
 
         @if ($logo_id)
             <?php $logo = get_file_url($logo_id, 'full'); ?>
-            <img src="{{ $logo }}">
+            <img src="{{ $logo }}" alt="{{ setting_item('site_title') }}">
         @endif
     </a>
 </div>

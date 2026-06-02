@@ -98,7 +98,7 @@ $mobile_image_url = !empty($mobile_bg_image) ? get_file_url($mobile_bg_image, 'b
                     @endif
                 </div>
                 <div>
-                    <select id="select-option" name="service">
+                    <select id="select-option" name="service" aria-label="Was können wir für Sie tun?">
                         <option value="">Was können wir für Sie tun? *</option>
                         <option value="entruempelung">Entrümpelung</option>
                         <option value="entsorgung">Entsorgung</option>

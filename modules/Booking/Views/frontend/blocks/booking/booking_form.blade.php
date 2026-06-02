@@ -8,7 +8,7 @@
                 <a href="tel:00493041723130">
                 <div class="row head_call" style="margin-top:20px">
                     <div class="call-icon">
-                        <img src="/assests/img/icons/cta-phone-icon.svg">
+                        <img src="/assests/img/icons/cta-phone-icon.svg" alt="">
                     </div>
                     <div>
                         <span>Meissner-Hotline</span>

@@ -67,7 +67,7 @@
                     <div class="share-icon">
                         <div class="f-1">
                             <a href="https://www.provenexpert.com/de-de/meissner-entruempelung/" target="_blank">
-                                <img src="/uploads/0000/1/2024/09/14/proven-expert.webp" alt="" srcset="">
+                                <img src="/uploads/0000/1/2024/09/14/proven-expert.webp" alt="Meissner Entrümpelung Bewertungen auf ProvenExpert" srcset="">
                             </a>
                         </div>
                         <div class="f-2">
@@ -78,12 +78,12 @@
                         </div>                       
                         <div class="f-4">
                              <a href="https://www.google.com/search?sca_esv=46e9a135ed8bd27b&sxsrf=ANbL-n68BX9l2RSMuyvm1sB0rVW4ONE8lQ:1776075675579&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOWJl6N3M7ntI6eUQTSsbH7Jd2yAHK224ifJ8K3z6hd1vaRJ5H-YxhlgB4z7caXbeZ-v-MzDrvSMVL8slB-d61Fdobxi099aq4Bjxvpnf4uU02BURl4PieOJJgJ2c6Z3W6UV1ULgg1Fun-KDhdqrYngoWhNWm&q=Meissner+Entr%C3%BCmpelung+-+Wohnungsaufl%C3%B6sung+%26+Entsorgung+Reviews&sa=X&ved=2ahUKEwj0t_K9zeqTAxXsTWwGHYltCrgQ0bkNegQIMhAH&biw=1707&bih=772&dpr=1.25" target="_blank">
-                                <img src="/uploads/0000/14/2026/04/13/aflex-google-review.webp" alt="" srcset="">
+                                <img src="/uploads/0000/14/2026/04/13/aflex-google-review.webp" alt="Meissner Entrümpelung Bewertungen auf Google" srcset="">
                             </a>
                         </div> 
                         <div class="f-5">
                             <a href="https://de.trustpilot.com/review/meissner-entruempelung.de"  target="_blank">
-                                <img src="/uploads/0000/14/2026/04/14/trustpilot-lgo-150.png" alt="" srcset="">
+                                <img src="/uploads/0000/14/2026/04/14/trustpilot-lgo-150.png" alt="Meissner Entrümpelung Bewertungen auf Trustpilot" srcset="">
                             </a> 
                         </div>
                          
@@ -239,7 +239,7 @@
 <!--side menu--->
 <div id="mymenu" class="overlay">
     <!-- Button to close the overlay navigation -->
-    <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()"><svg xmlns="http://www.w3.org/2000/svg"
+    <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()" aria-label="Menü schließen"><svg xmlns="http://www.w3.org/2000/svg"
             version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="35" height="35" x="0" y="0"
             viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
             <g>
@@ -270,7 +270,7 @@
                 <a href="tel:00493041723130">
                     <div class="row popup-call">
                         <div class="call-icon">
-                            <img src="/uploads/0000/1/2024/08/03/cta-phone-icon.svg">
+                            <img src="/uploads/0000/1/2024/08/03/cta-phone-icon.svg" alt="">
                         </div>
                         <div>
                             <span>Meissner-Hotline</span>
@@ -285,7 +285,7 @@
 
 <div id="mynav" class="overlay">
     <!-- Button to close the overlay navigation -->
-    <a href="javascript:void(0)" class="closebtn" onclick="closeServiceMenu()"><svg xmlns="http://www.w3.org/2000/svg"
+    <a href="javascript:void(0)" class="closebtn" onclick="closeServiceMenu()" aria-label="Menü schließen"><svg xmlns="http://www.w3.org/2000/svg"
             version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="35" height="35" x="0" y="0"
             viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
             <g>
@@ -355,7 +355,7 @@
     <a href="tel:00493041723130">
                     <div class="row popup-call">
                         <div class="call-icon">
-                            <img src="/uploads/0000/1/2024/08/03/cta-phone-icon.svg">
+                            <img src="/uploads/0000/1/2024/08/03/cta-phone-icon.svg" alt="">
                         </div>
                         <div>
                             <span>Meissner-Hotline</span>

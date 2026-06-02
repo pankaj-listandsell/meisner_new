@@ -25,6 +25,7 @@
          blocks render with separate network requests. Both files are above-the-fold/critical. --}}
     <style id="inline-general-css">{!! inline_css_asset('general.css') !!}</style>
     <style id="inline-service-css">{!! inline_css_asset('service.css') !!}</style>
+    <style id="inline-accessibility-css">{!! inline_css_asset('accessibility.css') !!}</style>
     @php event(new \Modules\Layout\Events\LayoutBeginHead()); @endphp
     @php
         $favicon = setting_item('site_favicon');

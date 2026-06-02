@@ -10,7 +10,7 @@
     <div class="container">
         <div class='img background-img' style="background-image: url({{ $before_image_url }});"></div>
         <div class='img foreground-img' style="background-image: url({{ $after_image_url }});"></div>
-        <input type="range" min="1" max="100" value="50" class="slider" name='slider' id="slider">
+        <input type="range" min="1" max="100" value="50" class="slider" name='slider' id="slider" aria-label="Vorher-Nachher-Vergleich Schieberegler">
         <div class='slider-button'></div>
     </div>
 </div>

@@ -9,7 +9,7 @@
           <a href="tel:{{ setting_item("phone_no_link") }}">
             <div class="row">
               <div class="call-icon">
-                <img src="{{asset('assests/img/icons/cta-phone-icon.svg') }}">
+                <img src="{{asset('assests/img/icons/cta-phone-icon.svg') }}" alt="">
               </div>
               <div>
                 <span>{{ setting_item("any_questions_contact_title") }}</span>
