@@ -15,7 +15,12 @@
       "Bash(grep -n \"<script\\\\|\\\\$\\(\\\\|@push\\\\|@endpush\" modules/Form/Views/components/popup_contact_form.blade.php)",
       "Bash(grep -o \"body{[^}]*font-family[^}]*}\\\\|h1{[^}]*}\\\\|h1,[^{]*{[^}]*font-family[^}]*}\" general.css)",
       "Bash(npm --version)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(node --check \"d:\\\\xampp\\\\htdocs\\\\meisner_new\\\\public\\\\assests\\\\js\\\\script.js\")",
+      "Bash(file d:/xampp/htdocs/meisner_new/public/uploads/0000/14/2025/10/28/__TRACKED_VAR__.webp)",
+      "Bash(grep -oE 'url\\\\\\(['\\\\''\"]?[^\\)]*\\\\\\)' d:/xampp/htdocs/meisner_new/public/assests/css/__TRACKED_VAR__.css)",
+      "Bash(grep -nE \"@import|\\\\.\\\\./\\\\.\\\\./\" \"d:/xampp/htdocs/meisner_new/public/assests/css/general.css\" \"d:/xampp/htdocs/meisner_new/public/assests/css/service.css\" \"d:/xampp/htdocs/meisner_new/public/assests/css/home-page.css\" \"d:/xampp/htdocs/meisner_new/public/assests/css/other-page.css\")",
+      "Bash([ -f \"$d/$x\" ])"
     ]
   }
 }

@@ -218,6 +218,24 @@ function get_file_details($file_id){
     return \Modules\Media\Helpers\FileHelper::getMedisDetails($file_id);
 }
 
+/**
+ * Return the contents of a CSS file under public/assests/css for inlining in <style>.
+ *
+ * Inlined CSS resolves relative url(../...) against the document URL instead of the
+ * stylesheet location, so ../ references are rewritten to absolute /assests/ paths.
+ * Result is cached per file modification time so the read+rewrite runs only once.
+ */
+function inline_css_asset($file){
+    $path = public_path('assests/css/'.$file);
+    if(!is_file($path)) return '';
+    $key = 'inline_css_'.md5($file).'_'.filemtime($path);
+    return \Illuminate\Support\Facades\Cache::rememberForever($key, function() use ($path){
+        $css = file_get_contents($path);
+        // url(../x) | url('../x') | url("../x")  ->  url(.../assests/x)
+        return preg_replace('#url\((\s*["\']?)\.\./#', 'url($1/assests/', $css);
+    });
+}
+
 function get_file_path_by_media_id($file_id) {
     if(empty($file_id)) return null;
     return \Modules\Media\Helpers\FileHelper::path($file_id);

@@ -14,8 +14,15 @@
     {{-- reCAPTCHA is lazy-loaded on interaction, so use cheaper dns-prefetch instead of preconnect for its origins. --}}
     <link rel="dns-prefetch" href="https://www.google.com">
     <link rel="dns-prefetch" href="https://www.gstatic.com">
-    <link rel="stylesheet" href="{{ asset('assests/css/general.css') }}">
-    <link rel="stylesheet" href="{{ asset('assests/css/service.css') }}">
+    {{-- Preload only the two above-the-fold web fonts (banner <h1> = Montserrat 700, body = Open Sans
+         regular). crossorigin is required even same-origin, or the preload won't match the font request.
+         The LCP image keeps priority via its own fetchpriority="high" preload. --}}
+    <link rel="preload" as="font" type="font/woff2" href="{{ asset('assests/fonts/montserrat-v26-latin-700.woff2') }}" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="{{ asset('assests/fonts/open-sans-v40-latin-regular.woff2') }}" crossorigin>
+    {{-- Critical site-wide CSS is inlined (with ../ rewritten to /assests/) so it no longer
+         blocks render with separate network requests. Both files are above-the-fold/critical. --}}
+    <style id="inline-general-css">{!! inline_css_asset('general.css') !!}</style>
+    <style id="inline-service-css">{!! inline_css_asset('service.css') !!}</style>
     @php event(new \Modules\Layout\Events\LayoutBeginHead()); @endphp
     @php
         $favicon = setting_item('site_favicon');
@@ -52,7 +59,7 @@
     @endphp
 
     @if($row_id != 116)
-        <link rel="stylesheet" href="{{ asset('assests/css/other-page.css') }}">
+        <style id="inline-other-page-css">{!! inline_css_asset('other-page.css') !!}</style>
     @endif
     @stack('css')
 

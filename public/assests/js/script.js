@@ -18,13 +18,38 @@ window.addEventListener('load', function() {
     // Set interval to trigger every 60 seconds (1 minute)
     setInterval(triggerButtons, 60000); // 60000 ms = 1 min
 });
-$(window).scroll(function() {
-  if ($(this).scrollTop() > 50) { // adjust the value as needed
-      $('.sticky_header').addClass('sticky');  
-  } else {
-      $('.sticky_header').removeClass('sticky');  
+// Single rAF-throttled scroll handler. Reading scrollTop once per frame and
+// batching all class writes avoids the forced reflows that occurred when
+// several independent scroll listeners each read layout and then mutated it.
+(function () {
+  var scrollTicking = false;
+
+  function onScrollFrame() {
+    scrollTicking = false;
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+
+    // --- reads done; everything below is writes only ---
+    $('.sticky_header').toggleClass('sticky', scrollTop > 50);
+
+    var showFloating = scrollTop > 100;
+    $('.float-container-btns').toggleClass('show', showFloating);
+    $('.topbutton').toggleClass('show', showFloating);
+
+    $('.children-menu').removeClass('show');
+
+    var topButt = document.querySelector('.topbutton');
+    if (topButt) {
+      topButt.style.display = scrollTop > 20 ? 'block' : 'none';
+    }
   }
-});
+
+  window.addEventListener('scroll', function () {
+    if (!scrollTicking) {
+      scrollTicking = true;
+      window.requestAnimationFrame(onScrollFrame);
+    }
+  }, { passive: true });
+})();
 
 document.querySelector('.anf_dropdown-button').addEventListener('click', function() {
   document.querySelector('.anf_dropdown-content').classList.toggle('show');
@@ -42,16 +67,6 @@ window.onclick = function(event) {
       }
   }
 };
-
-$(window).scroll(function() {
-  if ($(this).scrollTop() > 100) { // adjust the value as needed
-      $('.float-container-btns').addClass('show');
-      $('.topbutton').addClass('show');    
-  } else {
-      $('.float-container-btns').removeClass('show');
-      $('.topbutton').removeClass('show');  
-  }
-});
 
 $(document).ready(function(){
 
@@ -156,11 +171,6 @@ $(document).on('click', function (e) {
       $menu.removeClass('show');
   }
 });
-
-// Function to handle scrolling the page
-  $(window).on('scroll', function () {
-      $('.children-menu').removeClass('show');
-  });
 
 document.addEventListener("DOMContentLoaded", function() {
   const form = document.getElementById('mess_form');
@@ -622,21 +632,8 @@ if (modal) {
 
 
 
-// Get the button
-let topButt = document.querySelector('.topbutton');
-
-// Show the button when the user scrolls down 20px from the top
-window.onscroll = function() {
-    scrollFunction();
-};
-
-function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        topButt.style.display = "block";
-    } else {
-        topButt.style.display = "none";
-    }
-}
+// The ".topbutton" show/hide on scroll is handled by the consolidated
+// rAF-throttled scroll handler near the top of this file.
 
 // Scroll back to the top when the button is clicked
 function scrollToTop() {

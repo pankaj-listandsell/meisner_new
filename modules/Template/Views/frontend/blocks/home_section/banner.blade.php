@@ -1,6 +1,8 @@
 <?php
 $image_url = get_file_url($bg_image, 'full');
-$mobile_image_url = !empty($mobile_bg_image) ? get_file_url($mobile_bg_image, 'full') : '';
+{{-- 'medium' (800px) instead of 'full' (1138px): the mobile image is displayed at <=700px,
+     so the full-size file wasted ~80KB. The platform generates the …-800.webp variant on first request. --}}
+$mobile_image_url = !empty($mobile_bg_image) ? get_file_url($mobile_bg_image, 'medium') : '';
 ?>
 {{-- Preload the LCP hero image from the <head> so it starts downloading immediately --}}
 @push('css')
@@ -25,10 +27,18 @@ $mobile_image_url = !empty($mobile_bg_image) ? get_file_url($mobile_bg_image, 'f
                         </div>
                         <?php
                         $mobile_bg_image = $mobile_bg_image ?? "";
-                        $image_url = get_file_url($mobile_bg_image, 'full');
+                        // 'medium' (800px) keeps this in sync with the preload above so the LCP image is not downloaded twice.
+                        $image_url = get_file_url($mobile_bg_image, 'medium');
                         $image_details = get_file_details($mobile_bg_image, '#');
                         ?>
-                        <img title="{{ isset($image_details['title']) ? $image_details['title'] : "#" }}" alt="{{ isset($image_details['alt']) ? $image_details['alt'] : "#" }}" class="banner-mob-img lazyload" data-src="{{$image_url}}">
+                        {{-- This image is the mobile/tablet LCP element (visible at <=1050px, hidden on desktop).
+                             It must NOT be lazy-loaded, or LCP waits on lazysizes JS. A media-gated <picture>
+                             source loads it eagerly only where it is shown, and skips the download on desktop.
+                             display:contents keeps the <img> a direct child of .banner-sel for the float/width CSS. --}}
+                        <picture style="display:contents">
+                            <source media="(max-width:1050px)" srcset="{{ $image_url }}">
+                            <img title="{{ isset($image_details['title']) ? $image_details['title'] : "#" }}" alt="{{ isset($image_details['alt']) ? $image_details['alt'] : "#" }}" class="banner-mob-img" width="1138" height="564" fetchpriority="high" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                        </picture>
                     </div>
                 </div>
                 <div class="google-review-seal">
@@ -135,5 +145,7 @@ $mobile_image_url = !empty($mobile_bg_image) ? get_file_url($mobile_bg_image, 'f
 </div>
 
 @push('css')
-<link rel="stylesheet" href="{{ asset('assests/css/home-page.css') }}">
+{{-- Inlined instead of a render-blocking <link>: home-page.css holds the above-the-fold
+     .home-banner / .banner-mob-img (LCP) rules, so it must be present without a network round-trip. --}}
+<style id="inline-home-page-css">{!! inline_css_asset('home-page.css') !!}</style>
 @endpush
