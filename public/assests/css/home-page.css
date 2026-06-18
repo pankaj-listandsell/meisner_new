@@ -112,3 +112,10 @@ table.table-hm {
     width: auto;
     height: auto !important;
 }
+
+@media only screen and (max-width: 800px) {
+    .banner-mob-img {
+    
+        height: auto;
+    }
+}
