@@ -6,7 +6,7 @@
             <div class="col-lg-12">
                 <ul>
                     @foreach($rows as $row)
-                    <li><a href="{{$row->getDetailUrl(request()->query('lang'))}}" alert="{{ $row['title'] }}">{{ $row['title'] }}</a></li>
+                    <li><a href="{{ rtrim($row->getDetailUrl(request()->query('lang')), '/') . '/' }}" alert="{{ $row['title'] }}">{{ $row['title'] }}</a></li>
                     @endforeach
                 </ul>
             </div>
