@@ -15,7 +15,7 @@
                 <div class="sec5_readmore">
                     {!! $content !!}
                 </div>
-                <a class="sec5_read_more_btn" href="{{ $button_link }}">{{ $button_text }} &#10142;</a>
+                <a class="sec5_read_more_btn" href="{{ rtrim($button_link, '/') . '/' }}">{{ $button_text }} &#10142;</a>
             </div>
         </div>
 

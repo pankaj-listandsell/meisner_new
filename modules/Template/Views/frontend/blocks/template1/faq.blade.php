@@ -27,7 +27,7 @@
           </main>
           @endif
           <div class="form-cta-btn">
-            <a href="{{$button_link ?? '#'}}" class="cta-btn-n">{{ $button_text }}</a>
+            <a href="{{ !empty($button_link) ? rtrim($button_link, '/') . '/' : '#' }}" class="cta-btn-n">{{ $button_text }}</a>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 faq-img">

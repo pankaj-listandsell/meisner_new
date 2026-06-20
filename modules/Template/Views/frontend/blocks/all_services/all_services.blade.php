@@ -7,7 +7,7 @@
         @foreach($list_services as $service)
 
         <div class="col-lg-3 col-md-4 col-sm-6">
-          <a href="{{ $service['link'] }}">
+          <a href="{{ rtrim($service['link'], '/') . '/' }}">
             <div class="leistungen-box">
                  <?php
                     $image_url = get_file_url($service['image'], 'full');

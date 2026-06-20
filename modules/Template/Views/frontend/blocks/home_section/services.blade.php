@@ -13,7 +13,7 @@
                                 <?php
                                     $image_url = get_file_url($service['image'], 'full');
                                 ?>
-                                <a href="{{ $service['link'] }}" class="service-box1" style="position: relative; background: none;" title="{{ $service['title'] }}">
+                                <a href="{{ rtrim($service['link'], '/') . '/' }}" class="service-box1" style="position: relative; background: none;" title="{{ $service['title'] }}">
                                     <img alt="{{ $service['title'] }}" title="{{ $service['title'] }}" class="service-box1-img lazyload" data-src="{{ $image_url }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
                                     <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0) 28.93%, rgba(0, 0, 0, 0.655002) 70.93%, rgba(0, 0, 0, 0.82) 100%); border-radius: 10px; pointer-events: none; z-index: 1;"></span>
                                     <p style="position: relative; z-index: 2;"> {{ $service['title'] }}</p>
@@ -28,7 +28,7 @@
             <div class="col-lg-5 col-md-5  col-sm-12 service-content">
                 <p>{{ $content_title }}</p>
                 {!! $content !!}
-                <a href="{{ $button_link }}"><button class="home-service-btn">{{ $button_text }}</button></a>
+                <a href="{{ rtrim($button_link, '/') . '/' }}"><button class="home-service-btn">{{ $button_text }}</button></a>
             </div>
         </div>
     </div>

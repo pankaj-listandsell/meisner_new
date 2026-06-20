@@ -22,7 +22,7 @@ $mobile_image_url = !empty($mobile_bg_image) ? get_file_url($mobile_bg_image, 'b
                 <h1>{{ $title }}</h1>
                 {!! $content !!}
                 <div class="row">
-                    <div class="col-lg-5 col-md-4 col-sm-12"><a href="{{ $button_link }}"><button id="banner_btnid" class="banner-btn">{{ $button_text }}</button></a></div>
+                    <div class="col-lg-5 col-md-4 col-sm-12"><a href="{{ rtrim($button_link, '/') . '/' }}"><button id="banner_btnid" class="banner-btn">{{ $button_text }}</button></a></div>
                     <div class="col-lg-5 col-md-6 col-sm-12 banner-sel">
                         <div class="banner-cta">
                             <a href="tel:{{ setting_item("phone_no_link") }}"><img class="lazyload" width="20" height="20" title="{{ setting_item("phone_no") }}" alt="{{ setting_item("phone_no") }}" data-src="/assests/img/icons/green-telephone.svg"> {{ setting_item("phone_no") }}</a>

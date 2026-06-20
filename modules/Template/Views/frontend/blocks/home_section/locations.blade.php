@@ -5,7 +5,7 @@
                 <span class="top-text">{!! $main_title !!}</span>
                 <h2>{!! $title !!}</h2>
                 {!! $content !!}
-                <a href="{{ $button_link }}"><button>{{ $button_text }}</button></a>
+                <a href="{{ rtrim($button_link, '/') . '/' }}"><button>{{ $button_text }}</button></a>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 sec6-img">
                 <?php
