@@ -43,14 +43,14 @@
                     </a>
                 </div>
                 <div class="f1-box-4">
-                    <a target="_blank" href="https://maps.app.goo.gl/6NvACgavh2TN99RT6">
+                    <a target="_blank" href="{{ setting_item_with_lang("address_link") }}">
                         <div class="footer-icons">
                             <div class="f-b-1">
                                 <img src="/assests/img/icons/footer-icon-location.svg">
                             </div>
                             <div class="f-b-2">
                                 <span>Adresse</span>
-                                <p>{{ setting_item_with_lang("address") }}</p>
+                                <address>{{ setting_item_with_lang("address") }}</address>
                             </div>
                         </div>
                     </a>
@@ -274,7 +274,7 @@
                         </div>
                         <div>
                             <span>Meissner-Hotline</span>
-                            <h4>030 4172 3130</h4>
+                            <p class="phone_no">030 4172 3130</p>
                         </div>
                     </div>
                 </a>
@@ -359,7 +359,7 @@
                         </div>
                         <div>
                             <span>Meissner-Hotline</span>
-                            <h4>030 4172 3130</h4>
+                            <p class="phone_no">030 4172 3130</p>
                         </div>
                     </div>
                 </a>

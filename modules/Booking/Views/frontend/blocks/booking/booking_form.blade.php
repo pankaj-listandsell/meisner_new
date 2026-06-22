@@ -12,7 +12,7 @@
                     </div>
                     <div>
                         <span>Meissner-Hotline</span>
-                        <h4>030 4172 3130</h4>
+                        <p class="phone_no">030 4172 3130</p>
                     </div>
                 </div>
                 </a>

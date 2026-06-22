@@ -71,7 +71,7 @@
                             <a target="_blank" href="https://wa.me/4915771443156"><li><img src="/uploads/0000/1/2024/09/18/whatapp-phone.svg">0157 7144 3156</li></a>
                             <a href="mailto:{{ setting_item_with_lang("email") }}"><li><img src="/assests/img/icons/mail-nc.svg">{{ setting_item_with_lang("email") }}</li></a>
                             <a href="#"><li><img src="/assests/img/icons/k-watch-icon.svg">Mo – Fr: 8 Uhr – 19 Uhr</li></a>
-                            <a target="_blank" href="{{ setting_item_with_lang("address_link") }}"><li><img src="/assests/img/icons/k-map-icon.svg">{{ setting_item_with_lang("address") }}</li></a>
+                            <a target="_blank" href="{{ setting_item_with_lang("address_link") }}"><li><img src="/assests/img/icons/k-map-icon.svg"><address>{{ setting_item_with_lang("address") }}</address></li></a>
                          </ul>
                          <h4>{{ $button_title }}</h4>
                          <a href="{{ $button_link }}" class="k-info-btn">{{ $button_text }}</a>
