@@ -301,7 +301,7 @@
             });
         });
         $(document).on('focusin', function(e) {
-            if ($(e.target).closest(".tox-textfield").length)
+            if ($(e.target).closest(".tox-textfield, .tox-textarea, .tox-dialog, .tox-tinymce-aux, .tox-dialog-wrap").length)
                 e.stopImmediatePropagation();
         });
     </script>
