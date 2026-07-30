@@ -3,7 +3,7 @@
              <div class="row">
                 <div class="col-lg-7 col-md-7 col-sm-12">
                 <div class="k-form">
-                  <h2>{{ $title }}</h2>
+                  <h1>{{ $title }}</h1>
                   <p>{{ $content }} </p>
                   @if (session('success'))
                     <div class="alert alert-success">

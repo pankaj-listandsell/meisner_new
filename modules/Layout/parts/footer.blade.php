@@ -119,7 +119,7 @@
         data-bs-target="#ruckruf"><img width="60" height="60" class=" lazyloaded"
             data-src="/assests/img/icons/float-phone-icon.svg"
             src="/assests/img/icons/float-phone-icon.svg"> Anruf</a>
-    <a href="https://maps.app.goo.gl/6NvACgavh2TN99RT6" rel="noopener noreferrer" target="_blank" class="icons-btns two"><img width="60"
+    <a href="https://maps.app.goo.gl/Mhccryq3Bk57sU1q8" rel="noopener noreferrer" target="_blank" class="icons-btns two"><img width="60"
             height="60" class=" lazyloaded" data-src="/assests/img/icons/float-location-icon.svg"
             src="/assests/img/icons/float-location-icon.svg">Anfahrt</a>
 
