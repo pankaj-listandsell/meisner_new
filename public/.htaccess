@@ -13,6 +13,10 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
+    # Redirect /index.php and /index.php/ To Home Page...
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\s/+index\.php/*(\?[^\s]*)?\s [NC]
+    RewriteRule ^ / [L,R=301]
+
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f

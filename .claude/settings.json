@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /dev/null -w \"%{http_code} %{redirect_url}\\\\n\" -H \"Host: meissner-entruempelung.de\" http://localhost/index.php)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} %{redirect_url}\\\\n\" -H \"Host: meissner-entruempelung.de\" http://localhost/index.php/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} %{redirect_url}\\\\n\" -H \"Host: meissner-entruempelung.de\" http://localhost/)",
+      "Bash(grep -ril \"meisner_new\\\\|meissner\" /d/xampp/apache/conf/extra/ 2>/dev/null | head; grep -rn \"DocumentRoot\" /d/xampp/apache/conf/extra/httpd-vhosts.conf 2>/dev/null | head -20)",
+      "Read(//d/xampp/apache/conf/extra//**)",
+      "Read(//d/xampp/apache/conf/extra/**)",
+      "Bash(sed -n 114,126p /d/xampp/apache/conf/extra/httpd-vhosts.conf)",
+      "Bash(ls -la \"/c/Users/PC/AppData/Local/Temp/scp56825/public_html/\" 2>/dev/null | head -40; echo \"-----\"; ls -la \"/c/Users/PC/AppData/Local/Temp/scp56825/\" 2>/dev/null)",
+      "Read(//c/Users/PC/AppData/Local/Temp/scp56825/public_html//**)",
+      "Read(//c/Users/PC/AppData/Local/Temp/scp56825//**)",
+      "Read(//c/Users/PC/AppData/Local/Temp/scp56825/public_html/public/**)",
+      "Bash(curl -skI -A \"Mozilla/5.0\" \"https://meissner-entruempelung.de/index.php/\")",
+      "Bash(curl -sk -o /dev/null -w \"%{http_code}\\\\n\" \"https://meissner-entruempelung.de/en/\")",
+      "Bash(curl -sk -o /dev/null -w \"%{http_code} %{redirect_url}\\\\n\" \"https://meissner-entruempelung.de/public/\")",
+      "Bash(curl -sk -o /dev/null -w \"%{http_code} %{redirect_url}\\\\n\" \"https://meissner-entruempelung.de/public/index.php\")",
+      "Bash(curl -sk -o /dev/null -w \"%{http_code}\\\\n\" \"https://meissner-entruempelung.de/robots.txt\")",
+      "Bash(ls -la /d/xampp/htdocs/meisner_new/.vscode 2>/dev/null; cat /d/xampp/htdocs/meisner_new/.vscode/sftp.json 2>/dev/null; ls /c/Users/PC/AppData/Local/Temp/ | grep -i \"^scp\" | head)",
+      "Read(//c/Users/PC/AppData/Local/Temp//**)",
+      "Bash(cat ~/.ssh/config 2>/dev/null | head -60; echo \"=== known_hosts \\(hosts only\\) ===\"; cut -d' ' -f1 ~/.ssh/known_hosts 2>/dev/null | tr ',' '\\\\n' | sort -u | head -30)",
+      "Read(//c/Users/PC/.ssh/**)",
+      "Bash(ls -la /c/Users/PC/AppData/Local/Temp/scp56825/public_html/public/ | head -30)",
+      "Read(//c/Users/PC/AppData/Local/Temp/scp56825/public_html/public//**)",
+      "Bash(nslookup meissner-entruempelung.de 8.8.8.8)",
+      "Bash(nslookup dedi2877.your-server.de 8.8.8.8)",
+      "Bash(nslookup dedi6190.your-server.de 8.8.8.8)"
+    ]
+  }
+}
