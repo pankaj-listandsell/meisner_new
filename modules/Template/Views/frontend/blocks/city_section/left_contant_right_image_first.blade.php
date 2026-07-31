@@ -2,7 +2,7 @@
     $isStandorteMap = isset($class) && str_contains($class, 'standorte-map-sec');
 @endphp
 
-<div class="location-section2 test {{ $class ?? '' }}">
+<div class="location-section2 {{ $class ?? '' }}">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -31,5 +31,4 @@
                 </div>
             @endif
         </div>
-    </div>
-</div>
+    

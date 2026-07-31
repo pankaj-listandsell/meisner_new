@@ -20,7 +20,7 @@
                     <a href="tel:{{ setting_item_with_lang("phone_no_link") }}" alt="{{ setting_item_with_lang("phone_no") }}">
                         <div class="footer-icons">
                             <div class="f-b-1">
-                                <img src="/assests/img/icons/footer-icon-phone.svg">
+                                <img src="/assests/img/icons/footer-icon-phone.svg" alt="Telefon">
                             </div>
                             <div class="f-b-2">
                                 <span>Telefon</span>
@@ -33,7 +33,7 @@
                     <a href="mailto:{{ setting_item_with_lang("email") }}" alt="{{ setting_item_with_lang("email") }}">
                         <div class="footer-icons">
                             <div class="f-b-1">
-                                <img src="/assests/img/icons/footer-icon-envelope.svg">
+                                <img src="/assests/img/icons/footer-icon-envelope.svg" alt="">
                             </div>
                             <div class="f-b-2">
                                 <span>E-Mail-Adresse</span>
@@ -46,7 +46,7 @@
                     <a target="_blank" href="{{ setting_item_with_lang("address_link") }}">
                         <div class="footer-icons">
                             <div class="f-b-1">
-                                <img src="/assests/img/icons/footer-icon-location.svg">
+                                <img src="/assests/img/icons/footer-icon-location.svg" alt="">
                             </div>
                             <div class="f-b-2">
                                 <span>Adresse</span>
