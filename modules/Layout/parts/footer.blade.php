@@ -33,7 +33,7 @@
                     <a href="mailto:{{ setting_item_with_lang("email") }}" alt="{{ setting_item_with_lang("email") }}">
                         <div class="footer-icons">
                             <div class="f-b-1">
-                                <img src="/assests/img/icons/footer-icon-envelope.svg" alt="">
+                                <img src="/assests/img/icons/footer-icon-envelope.svg" alt="E-mail">
                             </div>
                             <div class="f-b-2">
                                 <span>E-Mail-Adresse</span>
@@ -46,7 +46,7 @@
                     <a target="_blank" href="{{ setting_item_with_lang("address_link") }}">
                         <div class="footer-icons">
                             <div class="f-b-1">
-                                <img src="/assests/img/icons/footer-icon-location.svg" alt="">
+                                <img src="/assests/img/icons/footer-icon-location.svg" alt="Adresse">
                             </div>
                             <div class="f-b-2">
                                 <span>Adresse</span>
@@ -71,10 +71,10 @@
                             </a>
                         </div>
                         <div class="f-2">
-                            <img src="/uploads/0000/1/2024/09/14/eco-friendly-seal.webp">
+                            <img src="/uploads/0000/1/2024/09/14/eco-friendly-seal.webp" alt="Siegel für umweltfreundliche Entsorgung">
                         </div>
                         <div class="f-3">
-                           <img src="/uploads/0000/1/2024/09/14/ssl-sheild.webp">
+                           <img src="/uploads/0000/1/2024/09/14/ssl-sheild.webp" alt="Meissner Entrümpelung Bewertungen auf SSL">
                         </div>                       
                         <div class="f-4">
                              <a href="https://www.google.com/search?sca_esv=46e9a135ed8bd27b&sxsrf=ANbL-n68BX9l2RSMuyvm1sB0rVW4ONE8lQ:1776075675579&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOWJl6N3M7ntI6eUQTSsbH7Jd2yAHK224ifJ8K3z6hd1vaRJ5H-YxhlgB4z7caXbeZ-v-MzDrvSMVL8slB-d61Fdobxi099aq4Bjxvpnf4uU02BURl4PieOJJgJ2c6Z3W6UV1ULgg1Fun-KDhdqrYngoWhNWm&q=Meissner+Entr%C3%BCmpelung+-+Wohnungsaufl%C3%B6sung+%26+Entsorgung+Reviews&sa=X&ved=2ahUKEwj0t_K9zeqTAxXsTWwGHYltCrgQ0bkNegQIMhAH&biw=1707&bih=772&dpr=1.25" target="_blank">
@@ -118,14 +118,14 @@
     <a onclick="opencallb();" href="#" class="icons-btns one" data-bs-toggle="modal"
         data-bs-target="#ruckruf"><img width="60" height="60" class=" lazyloaded"
             data-src="/assests/img/icons/float-phone-icon.svg"
-            src="/assests/img/icons/float-phone-icon.svg"> Anruf</a>
+            src="/assests/img/icons/float-phone-icon.svg" alt="Anruf"> Anruf</a>
     <a href="https://maps.app.goo.gl/Mhccryq3Bk57sU1q8" rel="noopener noreferrer" target="_blank" class="icons-btns two"><img width="60"
             height="60" class=" lazyloaded" data-src="/assests/img/icons/float-location-icon.svg"
-            src="/assests/img/icons/float-location-icon.svg">Anfahrt</a>
+            src="/assests/img/icons/float-location-icon.svg" alt="Anfahrt">Anfahrt</a>
 
             <a href="https://wa.me/4915771443156" rel="noopener noreferrer" target="_blank" class="icons-btns three"><img
             width="38" height="38" class=" lazyloaded" data-src="/assests/img/icons/float-mail-nl.svg"
-            src="/uploads/0000/1/2024/09/18/meissner-whatsapp.svg">WhatsApp</a>
+            src="/uploads/0000/1/2024/09/18/meissner-whatsapp.svg" alt="Whatsapp">WhatsApp</a>
     <!-- <a href="mailto:{{ setting_item_with_lang("email") }}" rel="noopener noreferrer" target="_blank" class="icons-btns three"><img
             width="60" height="60" class=" lazyloaded" data-src="/assests/img/icons/float-mail-nl.svg"
             src="/assests/img/icons/float-mail-nl.svg"> {{ setting_item_with_lang("email") }}</a> -->
