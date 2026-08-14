@@ -1164,3 +1164,72 @@ ul.svc-sec.devide-list {
 }
 
 }
+
+
+/* mega menu css */
+.row.srv-list {
+    padding: 14px 25px 15px 25px;
+    background-color: #fff;
+    z-index: 9999;
+    position: relative;
+}
+.ul-service .srv-list > div > a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 2px;
+  border-bottom: 1px dotted #e9e5f2;
+  color: #26265f;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.3;
+  text-decoration: none;
+  transition: color .2s ease;
+  margin-inline-end: 10px;
+}
+.ul-service .srv-list > div > a:hover {
+  color: #3fae49;
+}
+
+/* Green circle bullet */
+.ul-service .srv-list .mega-icon {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  background: #cfde29;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 0;
+}
+
+/* Hide the old SVG arrow, draw a yellow chevron instead */
+.ul-service .srv-list .mega-icon img {
+  display: none;
+}
+.ul-service .srv-list .mega-icon::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
+  transform: rotate(45deg);
+  margin-left: -2px;
+}
+
+/* Nudge chevron on hover */
+.ul-service .srv-list > div > a:hover .mega-icon::before {
+  animation: srv-chev .3s ease;
+}
+@keyframes srv-chev {
+  50% { transform: rotate(45deg) translate(2px, -2px); }
+}
+
+/* Mobile: full-width rows */
+@media (max-width: 767px) {
+  .ul-service .srv-list > div > a {
+    padding: 12px 4px;
+  }
+}

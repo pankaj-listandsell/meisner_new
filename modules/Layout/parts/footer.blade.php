@@ -119,7 +119,7 @@
         data-bs-target="#ruckruf"><img width="60" height="60" class=" lazyloaded"
             data-src="/assests/img/icons/float-phone-icon.svg"
             src="/assests/img/icons/float-phone-icon.svg" alt="Anruf"> Anruf</a>
-    <a href="https://maps.app.goo.gl/Mhccryq3Bk57sU1q8" rel="noopener noreferrer" target="_blank" class="icons-btns two"><img width="60"
+    <a href="https://maps.app.goo.gl/ZjYeoRMyambFWavz5" rel="noopener noreferrer" target="_blank" class="icons-btns two"><img width="60"
             height="60" class=" lazyloaded" data-src="/assests/img/icons/float-location-icon.svg"
             src="/assests/img/icons/float-location-icon.svg" alt="Anfahrt">Anfahrt</a>
 
@@ -239,7 +239,7 @@
 <!--side menu--->
 <div id="mymenu" class="overlay">
     <!-- Button to close the overlay navigation -->
-    <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()" aria-label="Menü schließen"><svg xmlns="http://www.w3.org/2000/svg"
+    <a href="#" class="closebtn" onclick="closeMenu()" aria-label="Menü schließen"><svg xmlns="http://www.w3.org/2000/svg"
             version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="35" height="35" x="0" y="0"
             viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
             <g>
@@ -285,7 +285,7 @@
 
 <div id="mynav" class="overlay">
     <!-- Button to close the overlay navigation -->
-    <a href="javascript:void(0)" class="closebtn" onclick="closeServiceMenu()" aria-label="Menü schließen"><svg xmlns="http://www.w3.org/2000/svg"
+    <a href="#" class="closebtn" onclick="closeServiceMenu()" aria-label="Menü schließen"><svg xmlns="http://www.w3.org/2000/svg"
             version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="35" height="35" x="0" y="0"
             viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
             <g>
