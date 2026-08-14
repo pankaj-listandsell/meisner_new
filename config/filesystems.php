@@ -48,6 +48,11 @@ return [
         'uploads' => [
             'driver' => 'local',
             'root' => public_path('uploads'),
+            // Files here are served directly by the web server, so new files and
+            // folders must be world-readable (0644 / 0755). Without this Flysystem
+            // defaults to private (0600 / 0700) and Apache returns 403.
+            'visibility' => 'public',
+            'directory_visibility' => 'public',
         ],
 
         'public' => [
