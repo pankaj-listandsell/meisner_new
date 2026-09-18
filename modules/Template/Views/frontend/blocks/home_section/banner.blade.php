@@ -11,7 +11,7 @@ $mobile_image_url = !empty($mobile_bg_image) ? get_file_url($mobile_bg_image, 'b
      CSS backgrounds aren't seen by the preload scanner, so without these the LCP image starts late. --}}
 @push('preload_top')
 <link rel="preload" as="image" href="{{ $image_url }}" fetchpriority="high" media="(min-width: 1051px)">
-<link rel="preload" as="image" href="{{ asset('uploads/0000/1/2024/09/11/berlin-gate.webp') }}" fetchpriority="high" media="(max-width: 1050px)">
+<link rel="preload" as="image" href="{{ $mobile_image_url }}" fetchpriority="high" media="(max-width: 1050px)">
 @endpush
 {{-- LCP element: background set eagerly via inline style (not lazysizes data-bg) so it is not async-deferred.
      Narrower-breakpoint backgrounds in home-page.css use !important and still override this. --}}
@@ -25,7 +25,7 @@ $mobile_image_url = !empty($mobile_bg_image) ? get_file_url($mobile_bg_image, 'b
                     <div class="col-lg-5 col-md-4 col-sm-12"><a href="{{ rtrim($button_link, '/') . '/' }}"><button id="banner_btnid" class="banner-btn">{{ $button_text }}</button></a></div>
                     <div class="col-lg-5 col-md-6 col-sm-12 banner-sel">
                         <div class="banner-cta">
-                            <a href="tel:{{ setting_item("phone_no_link") }}"><img class="lazyload" width="20" height="20" title="{{ setting_item("phone_no") }}" alt="{{ setting_item("phone_no") }}" data-src="/assests/img/icons/green-telephone.svg"> {{ setting_item("phone_no") }}</a>
+                            <a href="tel:{{ setting_item("phone_no_link") }}"><img width="20" height="20" title="{{ setting_item("phone_no") }}" alt="{{ setting_item("phone_no") }}" src="/assests/img/icons/green-telephone.svg"> {{ setting_item("phone_no") }}</a>
                         </div>
                         <?php
                         $mobile_bg_image = $mobile_bg_image ?? "";
@@ -39,7 +39,7 @@ $mobile_image_url = !empty($mobile_bg_image) ? get_file_url($mobile_bg_image, 'b
                              display:contents keeps the <img> a direct child of .banner-sel for the float/width CSS. --}}
                         <picture style="display:contents">
                             <source media="(max-width:1050px)" srcset="{{ $image_url }}">
-                            <img title="{{ isset($image_details['title']) ? $image_details['title'] : "#" }}" alt="{{ isset($image_details['alt']) ? $image_details['alt'] : "#" }}" class="banner-mob-img" width="800" height="397" fetchpriority="high" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                            <img title="{{ isset($image_details['title']) ? $image_details['title'] : "#" }}" alt="{{ isset($image_details['alt']) ? $image_details['alt'] : "#" }}" class="banner-mob-img" width="800" height="397" fetchpriority="high" src="{{ $image_url }}">
                         </picture>
                     </div>
                 </div>

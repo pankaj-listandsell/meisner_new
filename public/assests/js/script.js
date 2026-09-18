@@ -607,6 +607,37 @@ function scrollToTop() {
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
+// Lazy-load videos on scroll to save initial page payload
+document.addEventListener("DOMContentLoaded", function() {
+    var lazyVideos = [].slice.call(document.querySelectorAll("video.lazy-video"));
+    if ("IntersectionObserver" in window) {
+        var lazyVideoObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(video) {
+                if (video.isIntersecting) {
+                    var el = video.target;
+                    if (el.dataset.src && !el.src) {
+                        el.src = el.dataset.src;
+                        el.load();
+                        el.play().catch(function() {});
+                    }
+                    lazyVideoObserver.unobserve(el);
+                }
+            });
+        }, { rootMargin: "250px 0px" });
+        lazyVideos.forEach(function(lazyVideo) {
+            lazyVideoObserver.observe(lazyVideo);
+        });
+    } else {
+        lazyVideos.forEach(function(el) {
+            if (el.dataset.src && !el.src) {
+                el.src = el.dataset.src;
+                el.load();
+                el.play().catch(function() {});
+            }
+        });
+    }
+});
+
 
 
 

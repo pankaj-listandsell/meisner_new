@@ -17,7 +17,7 @@
                                 $image_url = get_file_url($item['icon'], 'full');
                                 $image_details = get_file_details($item['icon'], '#');
                             ?>
-                    <img class="lazyload" title="{{ isset($image_details['title']) ? $image_details['title'] : "#" }}" alt="{{ isset($image_details['alt']) ? $image_details['alt'] : "#" }}" data-src="{{ $image_url }}">
+                    <img class="lazyload" width="50" height="50" title="{{ isset($image_details['title']) ? $image_details['title'] : "#" }}" alt="{{ isset($image_details['alt']) ? $image_details['alt'] : "#" }}" data-src="{{ $image_url }}">
                             <h3>{!! $item['title'] !!}</h3>
                         </div>
                         <p>{!! $item['content'] !!}</p>
