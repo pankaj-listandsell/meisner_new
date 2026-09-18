@@ -48,6 +48,24 @@ class Page extends BaseModel
         return __("Page");
     }
 
+    public function getForSitemap()
+    {
+        $data = parent::getForSitemap();
+
+        $home_page_id = setting_item('home_page_id');
+        if ($home_page_id) {
+            $home_page = static::where('id', $home_page_id)->where('status', 'publish')->first();
+            if ($home_page) {
+                array_unshift($data, [
+                    'loc'     => url('/'),
+                    'lastmod' => date('c', strtotime($home_page->updated_at ? $home_page->updated_at : $home_page->created_at)),
+                ]);
+            }
+        }
+
+        return $data;
+    }
+
     public static function getAsMenuItem($id)
     {
         return parent::select('id', 'title as name')->find($id);

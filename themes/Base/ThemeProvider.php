@@ -34,10 +34,12 @@ class ThemeProvider extends AbstractThemeProvider
         'news'=>\Modules\News\ModuleProvider::class,
         'user'=>\Modules\User\ModuleProvider::class,
         'template'=>\Modules\Template\ModuleProvider::class,
-        'redirection'=>\Modules\Redirection\ModuleProvider::class,
         'gallery'=>\Modules\Gallery\ModuleProvider::class,
         'form'=>\Modules\Form\ModuleProvider::class,
         'page'=>\Modules\Page\ModuleProvider::class,
+        // Registered last so admin-managed redirects always win over any
+        // module route with the same URL (e.g. the per-language homepage routes).
+        'redirection'=>\Modules\Redirection\ModuleProvider::class,
     ];
 
     public function boot(Kernel $kernel){
