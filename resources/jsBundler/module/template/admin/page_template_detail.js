@@ -104,6 +104,8 @@ export default function()
             template_id: 0,
             templates: [],
             editor: null,
+            addBlockModal: false,
+            randomNumber: 0,
         },
         created(){
             this.reloadBlockItems();
@@ -139,12 +141,30 @@ export default function()
             },
             setBlockItem(items) {
                 this.items = items;
+                this.randomNumber++;
             },
             reloadBlockItems() {
                 this.items = [...current_template_items];
+                this.randomNumber++;
             },
             deleteBlock(index){
                 this.items.splice(index,1);
+            },
+            showAddBlockModal(){
+                this.addBlockModal = true;
+            },
+            hideAddBlockModal(){
+                this.addBlockModal = false;
+            },
+            addNewBlock(block){
+                this.addBlock(block);
+                this.hideAddBlockModal();
+            },
+            // Keyed on the draggable list so replacing `items` wholesale (e.g. switching
+            // template) remounts it. Bumped by setBlockItem/reloadBlockItems rather than
+            // randomised per render, which would remount on every re-render and drop drag state.
+            getRandomNumber(){
+                return this.randomNumber;
             },
             saveTemplate(){
                 var me = this;

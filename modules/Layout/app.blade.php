@@ -674,7 +674,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     })();
 </script>
 <script src="{{ asset('assests/js/slick.min.js') }}" defer></script>
-<script src="{{ asset('assests/js/script.js') }}" defer></script>
+{{-- Cache-busted on file modification time: script.js was previously served with no query
+     string at all, so browsers kept an old copy indefinitely and edits to it never reached
+     visitors. filemtime rather than config('app.asset_version'), which is a fixed string and
+     would not change when this file does. --}}
+<script src="{{ asset('assests/js/script.js') }}?_ver={{ @filemtime(public_path('assests/js/script.js')) ?: config('app.asset_version') }}" defer></script>
 @stack('js')
 <script>
 

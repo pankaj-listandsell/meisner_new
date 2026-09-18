@@ -608,3 +608,60 @@ function scrollToTop() {
 }
 
 
+
+
+/* Read more / read less for the service-page blocks:
+     .srv5-*   -> "Left Image Right Contant (Read More)"
+     .twocol-* -> "Two Column Text" (one button clamping BOTH columns at once, because the
+                  collapsing element wraps the whole .row rather than either column)
+
+   Delegated and scoped to the clicked block, so several of these on one page open
+   independently — unlike the older .sec5_read_more_btn handler above, which toggles every
+   .sec5_readmore on the page at once and reads a hard-coded pixel height. */
+(function () {
+    var readMoreBlocks = [
+        { section: '.service-section5',   content: '.srv5-readmore',   button: '.srv5-readmore-btn' },
+        { section: '.service-two-column', content: '.twocol-readmore', button: '.twocol-readmore-btn' }
+    ];
+
+    readMoreBlocks.forEach(function (cfg) {
+        $(document).on('click', cfg.button, function (e) {
+            e.preventDefault();
+
+            var $btn = $(this);
+            var $content = $btn.siblings(cfg.content);
+            if (!$content.length) {
+                $content = $btn.closest(cfg.section).find(cfg.content).first();
+            }
+            if (!$content.length) {
+                return;
+            }
+
+            var expanded = $content.hasClass('is-expanded');
+            $content.toggleClass('is-expanded', !expanded);
+            $btn.text((expanded ? $btn.data('more') : $btn.data('less')) + ' ➞');
+        });
+    });
+
+    /* Content that already fits inside the collapsed height has nothing to expand, so drop
+       the clamp and the button. Run directly (script.js is deferred, so the DOM is parsed)
+       and again on load, once images have settled the real height — not in a ready callback,
+       because an exception in any earlier ready handler would skip it. */
+    function hideRedundantReadMore() {
+        readMoreBlocks.forEach(function (cfg) {
+            $(cfg.section + ' ' + cfg.content).each(function () {
+                var $content = $(this);
+                if ($content.hasClass('is-expanded')) {
+                    return;
+                }
+                if (this.scrollHeight <= this.clientHeight + 2) {
+                    $content.addClass('is-expanded');
+                    $content.siblings(cfg.button).hide();
+                }
+            });
+        });
+    }
+
+    hideRedundantReadMore();
+    $(window).on('load', hideRedundantReadMore);
+})();

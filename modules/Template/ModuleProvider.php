@@ -37,11 +37,14 @@ class ModuleProvider extends ModuleServiceProvider
             // other page section
             'banner'=>"\\Modules\\Template\\Blocks\\Template1\\Banner",
             'left_image_right_contant'=>"\\Modules\\Template\\Blocks\\Template1\\LeftImageRightContant",
+            'left_image_right_contant_read_more'=>"\\Modules\\Template\\Blocks\\Template1\\LeftImageRightContantReadMore",
             'services'=>"\\Modules\\Template\\Blocks\\Template1\\Services",
             'left_contant_right_image'=>"\\Modules\\Template\\Blocks\\Template1\\LeftContantRightImage",
             'any_questions'=>"\\Modules\\Template\\Blocks\\Template1\\AnyQuestions",
             'five_steps'=>"\\Modules\\Template\\Blocks\\Template1\\FiveSteps",
             'request_service'=>"\\Modules\\Template\\Blocks\\Template1\\RequestService",
+            'service_cta'=>"\\Modules\\Template\\Blocks\\Template1\\CallToAction",
+            'two_column_text'=>"\\Modules\\Template\\Blocks\\Template1\\TwoColumnText",
             'Left_contant_right_image_second'=>"\\Modules\\Template\\Blocks\\Template1\\LeftContantRightImageSecond",
             'why_choice'=>"\\Modules\\Template\\Blocks\\Template1\\WhyChoice",
             'faq'=>"\\Modules\\Template\\Blocks\\Template1\\FAQ",
@@ -85,6 +88,15 @@ class ModuleProvider extends ModuleServiceProvider
              'all_services_any_questions'=>"\\Modules\\Template\\Blocks\\AllServiceSection\\AnyQuestions",
              'video'=>"\\Modules\\Template\\Blocks\\AllServiceSection\\Video",
              'clearing_solution'=>"\\Modules\\Template\\Blocks\\AllServiceSection\\ClearingSolution",
+
+             //about us page section
+
+             'about_banner'=>"\\Modules\\Template\\Blocks\\AboutSection\\Banner",
+             'about_our_story'=>"\\Modules\\Template\\Blocks\\AboutSection\\OurStory",
+             'about_trust_badges'=>"\\Modules\\Template\\Blocks\\AboutSection\\TrustBadges",
+             'about_why_choose'=>"\\Modules\\Template\\Blocks\\AboutSection\\WhyChoose",
+             'about_our_process'=>"\\Modules\\Template\\Blocks\\AboutSection\\OurProcess",
+             'about_cta'=>"\\Modules\\Template\\Blocks\\AboutSection\\CallToAction",
 
              'custom_html'=>"\\Modules\\Template\\Blocks\\CustomSection",
 
