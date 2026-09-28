@@ -196,10 +196,9 @@
       "priceRange": "€€",
       "email": "info@meissner-entruempelung.de",
       "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Oranienburger Str. 47",
+        "streetAddress": "Thyssenstraße 7-17",
         "addressLocality": "Berlin",
-        "postalCode": "13437",
+        "postalCode": "13407 ",
         "addressCountry": "DE"
       },
       "geo": {
@@ -454,12 +453,6 @@
           "alternateName": "Germany"
         }
       ],
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5.0",
-        "reviewCount": "32",
-        "bestRating": "5"
-      },
       "hasMap": "https://maps.app.goo.gl/PviBm5i3W8U2hQzm9"
     },
     {

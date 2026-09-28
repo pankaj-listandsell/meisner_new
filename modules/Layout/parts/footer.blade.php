@@ -84,10 +84,27 @@
                         <div class="f-5">
                             <a href="https://de.trustpilot.com/review/meissner-entruempelung.de"  target="_blank">
                                 <img src="/uploads/0000/14/2026/04/14/trustpilot-lgo-150.png" alt="Meissner Entrümpelung Bewertungen auf Trustpilot" srcset="">
-                            </a> 
+                            </a>
                         </div>
-                         
-                    </div> 
+
+                    </div>
+                    <div class="ps-cta ps-cta--footer" data-ps-schliessbar="1" style="display:flex;align-items:center;justify-content:flex-start;gap:10px;flex-wrap:wrap;position:static;margin:14px 0 16px;padding:0;border:0;background:none;font-family:Helvetica,Arial,sans-serif">
+                      <a class="ps-btn" style="display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:11px 16px;border:1px solid #d4d8d8;border-radius:10px;background:#fff;color:#1f1d20;font:700 13.5px/1.3 Helvetica,Arial,sans-serif;text-decoration:none;box-shadow:0 1px 2px rgba(20,15,10,.07);max-width:100%"
+                         href="https://www.google.com/preferences/source?q=meissner-entruempelung.de&hl=de"
+                         target="_blank" rel="noopener nofollow"
+                         aria-label="Als bevorzugte Quelle speichern: Meissner Entrümpelung bei Google als bevorzugte Quelle hinterlegen - oeffnet Google in einem neuen Tab">
+                        <svg class="ps-g" style="width:19px;height:19px;flex-shrink:0;display:block" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+                          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+                          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+                          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+                        </svg>
+                        <span>Als bevorzugte Quelle speichern</span>
+                        <svg class="ps-ext" style="width:13px;height:13px;flex-shrink:0;fill:#8d8e91;display:block" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                          <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h5v2H7v10h10v-3h2v5H5V5z"></path>
+                        </svg>
+                      </a>
+                    </div>
                 </div>
                 <div class="footer-box-2 footer_list">
                     <p class="f-title">Wichtige Links</p>
@@ -100,6 +117,10 @@
                 <div class="footer-box-4 footer_list">
                     <p class="f-title">Rechtliches</p>
                     {!! generate_menu_by_slug('Rechtliches') !!}
+                    <div class="footer-office-hours">
+                        <p class="f-title">Öffnungszeiten</p>
+                        @include('Layout::parts.office-hours')
+                    </div>
                 </div>
             </div>
         </div>

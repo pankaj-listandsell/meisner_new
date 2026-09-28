@@ -15,6 +15,7 @@
                 <a href="mailto:{{ setting_item_with_lang("email") }}">
                    <img src="/assests/img/icons/header-icon-3.svg">{{ setting_item_with_lang("email") }}
                 </a></li>
+                <li class="office-hours-item">@include('Layout::parts.office-hours')</li>
             </ul>
         </div>
     </div>
