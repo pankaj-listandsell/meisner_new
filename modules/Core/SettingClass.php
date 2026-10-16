@@ -22,6 +22,7 @@
                         'email',
                         'phone_no',
                         'phone_no_link',
+                        'office_hours',
                         'site_desc',
                         'site_favicon',
 

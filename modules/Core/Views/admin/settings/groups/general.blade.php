@@ -36,6 +36,15 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="">{{__("Office Hours")}}</label>
+                    <div class="form-controls">
+                        <input type="text" class="form-control" name="office_hours"
+                               placeholder="{{__('e.g. Mo – Fr: 8 Uhr – 19 Uhr')}}"
+                               value="{{setting_item_with_lang('office_hours', $lang)}}">
+                        <small class="form-text text-muted">{{__("Shown in the header bar and the footer. Leave empty to hide it.")}}</small>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label>{{__("Site Desc")}}</label>
                     <div class="form-controls">
                         <textarea name="site_desc" class="form-control" cols="30"
