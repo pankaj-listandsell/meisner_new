@@ -78,7 +78,7 @@
                         </div>                       
                         <div class="f-4">
                              <a href="https://www.google.com/search?sca_esv=46e9a135ed8bd27b&sxsrf=ANbL-n68BX9l2RSMuyvm1sB0rVW4ONE8lQ:1776075675579&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOWJl6N3M7ntI6eUQTSsbH7Jd2yAHK224ifJ8K3z6hd1vaRJ5H-YxhlgB4z7caXbeZ-v-MzDrvSMVL8slB-d61Fdobxi099aq4Bjxvpnf4uU02BURl4PieOJJgJ2c6Z3W6UV1ULgg1Fun-KDhdqrYngoWhNWm&q=Meissner+Entr%C3%BCmpelung+-+Wohnungsaufl%C3%B6sung+%26+Entsorgung+Reviews&sa=X&ved=2ahUKEwj0t_K9zeqTAxXsTWwGHYltCrgQ0bkNegQIMhAH&biw=1707&bih=772&dpr=1.25" target="_blank">
-                                <img src="/uploads/0000/14/2026/04/13/aflex-google-review.webp" alt="Meissner Entrümpelung Bewertungen auf Google" srcset="">
+                                <img src="/uploads/0000/14/2026/10/22/meissner-google-review.webp" alt="Meissner Entrümpelung Bewertungen auf Google" srcset="">
                             </a>
                         </div> 
                         <div class="f-5">
@@ -120,6 +120,27 @@
                     <div class="footer-office-hours">
                         <p class="f-title">Öffnungszeiten</p>
                         @include('Layout::parts.office-hours')
+                    </div>
+                    <div class="footer-social">
+                        <p class="f-title">Folgen Sie uns</p>
+                        {{-- SVGs are inlined rather than <img src="...svg"> so the colour can be
+                             driven by CSS: an external SVG in an <img> is an opaque image and
+                             cannot be restyled from the page. fill="currentColor" lets the
+                             white -> lime hover live in general.css. --}}
+                        <div class="footer-social-icons">
+                            <a href="https://www.linkedin.com/company/meissner-entruempelung/" target="_blank" rel="noopener noreferrer" aria-label="Meissner Entrümpelung auf LinkedIn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="currentColor"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.instagram.com/meissner.ent?stkn=azJiMzh4dHNzY2Fy" target="_blank" rel="noopener noreferrer" aria-label="Meissner Entrümpelung auf Instagram">
+                                <svg width="21" height="20" viewBox="0 0 26 25" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                                    <path d="M18.962 0H7.03795C3.15716 0 0 3.03573 0 6.76726V18.2329C0 21.9642 3.15716 25 7.03795 25H18.9622C22.8428 25 26 21.9642 26 18.2329V6.76726C26 3.03573 22.8428 0 18.962 0ZM24.4757 18.2329C24.4757 21.1561 22.0023 23.5343 18.962 23.5343H7.03795C3.99763 23.5343 1.52423 21.1561 1.52423 18.2329V6.76726C1.52423 3.84387 3.99763 1.4656 7.03795 1.4656H18.9622C22.0023 1.4656 24.4757 3.84387 24.4757 6.76726V18.2329Z" fill="currentColor"/>
+                                    <path d="M13 5.66431C9.07997 5.66431 5.89087 8.73074 5.89087 12.5C5.89087 16.2693 9.07997 19.3358 13 19.3358C16.9201 19.3358 20.1092 16.2693 20.1092 12.5C20.1092 8.73074 16.9201 5.66431 13 5.66431ZM13 17.8702C9.92063 17.8702 7.4151 15.4612 7.4151 12.5C7.4151 9.53908 9.92063 7.12991 13 7.12991C16.0796 7.12991 18.585 9.53908 18.585 12.5C18.585 15.4612 16.0796 17.8702 13 17.8702Z" fill="currentColor"/>
+                                    <path d="M20.2791 3.23633C19.1207 3.23633 18.1785 4.14251 18.1785 5.25621C18.1785 6.3701 19.1207 7.27628 20.2791 7.27628C21.4376 7.27628 22.38 6.3701 22.38 5.25621C22.38 4.14232 21.4376 3.23633 20.2791 3.23633ZM20.2791 5.81048C19.9614 5.81048 19.7027 5.56176 19.7027 5.25621C19.7027 4.95046 19.9614 4.70193 20.2791 4.70193C20.5971 4.70193 20.8558 4.95046 20.8558 5.25621C20.8558 5.56176 20.5971 5.81048 20.2791 5.81048Z" fill="currentColor"/>
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -336,7 +357,7 @@
         <img src="/uploads/0000/1/2024/08/30/down-chevron.svg" alt="miss-arrow-bottom.svg" style="transition: 0.5s linear; transform: rotate(0deg);" class="icon_m">
       </div>
       <div class="drop_body">
-      {!! generate_menu_by_slug('Entrümpelung') !!}
+      {!! generate_menu_by_slug('entrumpelung') !!}
       </div>
     </li>
     <li class="box">

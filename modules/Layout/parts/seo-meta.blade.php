@@ -10,11 +10,13 @@
         if(empty($page_title)){
             $page_title = setting_item_with_lang('site_title' ,false,config('app.name'));
         }
+        // Strip query/fragment, then ensure a single trailing slash (matches canonical)
+        $og_url = !empty($seo_meta['full_url']) ? rtrim(preg_split('/[?#]/', $seo_meta['full_url'])[0], '/').'/' : '';
     ?>
     <title>{{ $page_title }}</title>
     <meta name="description" content="{{$seo_meta['seo_desc'] ?? $seo_meta['service_desc'] ?? setting_item_with_lang("site_desc")}}"/>
     {{-- Facebook share --}}
-    <meta property="og:url" content="{{$seo_meta['full_url'] ?? ""}}"/>
+    <meta property="og:url" content="{{ $og_url }}"/>
     <meta property="og:type" content="article"/>
     <meta property="og:title" content="{{$seo_meta['seo_share']['facebook']['title'] ?? $seo_meta['seo_title'] ?? $seo_meta['service_title'] ?? $page_title ?? ""}}"/>
     <meta property="og:description" content="{{$seo_meta['seo_share']['facebook']['desc'] ?? $seo_meta['seo_desc'] ?? $seo_meta['service_desc'] ?? ""}}"/>
