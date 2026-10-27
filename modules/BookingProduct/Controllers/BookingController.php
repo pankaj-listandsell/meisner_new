@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Matrix\Exception;
 use Modules\BookingProduct\Emails\NotificationToAdmin;
 // use Illuminate\Support\Facades\Validator;
 use Modules\BookingProduct\Models\BookingProduct;
@@ -107,6 +106,9 @@ class BookingController extends Controller
                 // Generate PDF
                 $pdf = Pdf::loadView('BookingProduct::.frontend.blocks.booking.pdf', compact('row', 'detail'));
                 $pdfPath = storage_path('app/public/booking_product/invoice_' . $row->id . '.pdf');
+                if (!is_dir(dirname($pdfPath))) {
+                    @mkdir(dirname($pdfPath), 0775, true);
+                }
                 $pdf->save($pdfPath);
                 // Send Mail
                 try {
@@ -115,7 +117,11 @@ class BookingController extends Controller
                     unlink($pdfPath);
                     $request->session()->flash('success', 'Ihre Anfrage wurde erfolgreich verschickt.');
                     return response()->json(['status'=>1,'message'=>'Ihre Anfrage wurde erfolgreich verschickt.']);
-                }catch (Exception $exception){
+                }catch (\Throwable $exception){
+                    Log::error('Booking mail failed for ' . $row->booking_id . ': ' . $exception->getMessage());
+                    if (file_exists($pdfPath)) {
+                        @unlink($pdfPath);
+                    }
                     $request->session()->flash('success', 'Ihre Anfrage wurde erfolgreich verschickt.');
                     return response()->json(['status'=>1,'message'=>'Ihre Anfrage wurde erfolgreich verschickt.']);
                 }
