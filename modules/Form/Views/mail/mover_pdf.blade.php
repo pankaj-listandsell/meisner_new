@@ -206,9 +206,9 @@ table.location-detail-title tr td.timetd {
                 <div class="header-detail">
                     <strong> @lang('Meissner Entrümpelung')</strong>
                     <br/>
-                    Oranienburgerstr. 47
+                    Thyssenstraße 7-17
                     <br/>
-                    13437 Berlin
+                    13407 Berlin
                     <br/>
                     @lang('Telephone'): 030 4172 3130
                 </div>

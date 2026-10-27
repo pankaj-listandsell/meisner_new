@@ -128,8 +128,8 @@
                 <td width="50%"> 
                         <img style="padding: 10px 0;" src="https://meissner-entruempelung.de/uploads/0000/14/2025/03/04/meissner-logo.png" alt="Meissner Entrümpelung" width="250px">
                 </td>
-                <td class="company-info" style="text-align: right;" width="50%">Meissner Entrümpelung<br>Oranienburgerstr. 47
-                <br>13437 Berlin<br>Telefon: 030 4172 3130</td>
+                <td class="company-info" style="text-align: right;" width="50%">Meissner Entrümpelung<br>Thyssenstraße 7-17
+                <br>13407 Berlin<br>Telefon: 030 4172 3130</td>
             </tr>
         </tbody>
     </table>
@@ -149,7 +149,7 @@
     <table class="content-table" style="border: none; width: 100%; margin-bottom: 0; border-collapse: collapse;">
         <tbody>
             <tr>
-                <th style="text-align:left; color: #000; padding: 10px; font-size: 11pt;">Buchungsdatum: {{ $row->date }} | {{ $row->time }}</th>
+                <th style="text-align:left; color: #000; padding: 10px; font-size: 11pt;">Buchungsdatum: {{ $row->date ? \Carbon\Carbon::parse($row->date)->format('d.m.Y') : '-' }} | {{ $row->time }}</th>
                 <th style="text-align:right; color: #000; padding: 10px; font-size: 11pt;">Geschätzter Preis: {{priceConvert($row->grand_amount)}} €</th>
             </tr>
         </tbody>

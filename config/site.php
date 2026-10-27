@@ -2,7 +2,7 @@
 
 return [
     'name'  => 'Meisner',
-    'location' => "Oranienburgerstr. 47, 13437 Berlin",
+    'location' => "Thyssenstraße 7-17, 13407 Berlin",
     'phone_no' => '+49 (0)30 4172 3130',
     'phone_no_only' => '00493041723130',
     'phone_no_2' => '+49 (0)30 4172 3130',

@@ -17,6 +17,7 @@ use Illuminate\Support\Str;
 use Modules\BookingProduct\Models\BookingProductDetail;
 use Modules\Products\Models\ProductsCategory;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class BookingController extends Controller
 {
@@ -79,7 +80,7 @@ class BookingController extends Controller
         $row->full_name = $request->gender.' '.$request->fname.' '.$request->lname;
         $row->email = $request->email;
         $row->phone = $request->telephone;
-        $row->date = $request->date;
+        $row->date = $this->normalizeBookingDate($request->date);
         $row->time = $request->time;
         $row->note = $request->note;
         $row->company_name = $request->company_name;
@@ -175,5 +176,27 @@ class BookingController extends Controller
             }
         }
     }
-}
 
+    /**
+     * The datepicker sends dates as dd.mm.yyyy, but the DB column is DATE (Y-m-d).
+     * Without conversion MySQL stores 0000-00-00.
+     */
+    private function normalizeBookingDate($date)
+    {
+        $date = trim((string) $date);
+        if ($date === '') {
+            return null;
+        }
+        foreach (['d.m.Y', 'd.m.y', 'Y-m-d', 'd/m/Y'] as $format) {
+            try {
+                $parsed = Carbon::createFromFormat('!' . $format, $date);
+                if ($parsed && $parsed->format($format) === $date) {
+                    return $parsed->format('Y-m-d');
+                }
+            } catch (\Throwable $e) {
+                // try next format
+            }
+        }
+        return null;
+    }
+}

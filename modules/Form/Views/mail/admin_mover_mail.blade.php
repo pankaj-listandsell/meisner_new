@@ -121,7 +121,7 @@
         </table>
 
         <hr>
-        <div style="text-align:center">Meissner Entrümpelung<br><span style="color:#000000!important">Oranienburgerstr. 47</span><br>13437 Berlin<br><br>Telefon: 030 4172 3130<br><a href="mailto:info@meissner-entruempelung.de" style="color: #000000;">
+        <div style="text-align:center">Meissner Entrümpelung<br><span style="color:#000000!important">Thyssenstraße 7-17</span><br>13407 Berlin<br><br>Telefon: 030 4172 3130<br><a href="mailto:info@meissner-entruempelung.de" style="color: #000000;">
         info@meissner-entruempelung.de</a><br></div>
     </div>
 </div>
