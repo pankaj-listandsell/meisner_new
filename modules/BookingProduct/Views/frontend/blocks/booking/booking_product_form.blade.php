@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{{ asset('assests/css/jquery-ui.min.css') }}">
 @endpush
 @push('js')
-<script src="{{ asset('assests/js/jquery-ui.min.js') }}" defer></script>
+<script src="{{ asset('assests/js/jquery-ui.min.js') }}"></script>
 @endpush
 <div class="entr-rec-logo">
 <a href="{{ getHomePageUrl() }}">
@@ -590,7 +590,7 @@
 
             $(document).ready(function () {
                 $(".submitbooking").on("click", function () {
-                    if (localStorage.getItem('grand_amount_cart') < localStorage.getItem('max_order_amount')) {
+                    if ((parseFloat(localStorage.getItem('grand_amount_cart')) || 0) < (parseFloat(localStorage.getItem('max_order_amount')) || 0)) {
                         toastr.error('Sie können mindestens '+localStorage.getItem('max_order_amount')+'€ bezahlen, Bitte fügen Sie weitere Artikel hinzu');
                         return false;
                     }
