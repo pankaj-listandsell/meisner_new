@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="512" height="512" x="0" y="0" viewBox="0 0 32 32" style="enable-background:new 0 0 512 512" xml:space="preserve"><g>
+<path d="M23 1H9a4 4 0 0 0-4 4v22a4 4 0 0 0 4 4h14a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4zm2 26a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" fill="#cfde29" opacity="1" data-original="#000000"></path>
+<path d="M21 5H11a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 5H11V7h10z" fill="#cfde29" opacity="1" data-original="#000000"></path>
+<circle cx="11" cy="16.5" r="1.6" fill="#cfde29" opacity="1" data-original="#000000"></circle>
+<circle cx="16" cy="16.5" r="1.6" fill="#cfde29" opacity="1" data-original="#000000"></circle>
+<circle cx="21" cy="16.5" r="1.6" fill="#cfde29" opacity="1" data-original="#000000"></circle>
+<circle cx="11" cy="21.5" r="1.6" fill="#cfde29" opacity="1" data-original="#000000"></circle>
+<circle cx="16" cy="21.5" r="1.6" fill="#cfde29" opacity="1" data-original="#000000"></circle>
+<circle cx="21" cy="21.5" r="1.6" fill="#cfde29" opacity="1" data-original="#000000"></circle>
+<circle cx="11" cy="26.5" r="1.6" fill="#cfde29" opacity="1" data-original="#000000"></circle>
+<circle cx="16" cy="26.5" r="1.6" fill="#cfde29" opacity="1" data-original="#000000"></circle>
+<circle cx="21" cy="26.5" r="1.6" fill="#cfde29" opacity="1" data-original="#000000"></circle>
+</g></svg>

@@ -419,6 +419,19 @@
                 $('.qty-'+id).val(parseInt(qty)-parseInt(1));
             }
 
+            // The quantity box is typed into directly, so keep it to whole numbers of at least 1.
+            // addtocart() only rejects a qty of 0, so without this a hand-typed "-3" or "2.5"
+            // would go straight into the cart. Delegated because the product list is injected
+            // by AJAX after this script runs.
+            $(document).on('input', '.count-input', function () {
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
+
+            $(document).on('blur change', '.count-input', function () {
+                let qty = parseInt(this.value, 10);
+                this.value = (isNaN(qty) || qty < 1) ? 1 : qty;
+            });
+
             function addAddress() {
                 $('.steofirst_error').hide();
                 var error = true;

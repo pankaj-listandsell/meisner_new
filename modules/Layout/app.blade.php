@@ -182,23 +182,37 @@
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "WebSite",
+      "@id": "https://meissner-entruempelung.de/#website",
+      "url": "https://meissner-entruempelung.de/",
+      "name": "Meissner Entrümpelung",
+      "publisher": {
+        "@id": "https://meissner-entruempelung.de/#company"
+      },
+      "inLanguage": "de-DE"
+    },
+    {
       "@type": "LocalBusiness",
       "@id": "https://meissner-entruempelung.de/#company",
-      "name": "Meissner Entrümpelung - Wohnungsauflösung & Entsorgung",
+      "name": "Meissner Entrümpelung",
       "alternateName": "Meissner Entrümpelungsfirma Berlin",
-      "description": "Meissner Entrümpelung ist ein professionelles Entrümpelungsunternehmen mit Sitz in Berlin, das sich auf Haushaltsauflösungen, Wohnungsentrümpelungen, Kellerentrümpelungen und Entsorgungsdienstleistungen spezialisiert hat. Das Unternehmen bietet umfassende Full-Service-Lösungen einschließlich Bewertung, fachgerechte Entsorgung, Reinigung, Wertstoffankauf und nachhaltige Recycling-Verfahren. Mit langjähriger Erfahrung bedient Meissner Entrümpelung Privat- und Gewerbekunden in Berlin, Brandenburg und deutschlandweit.",
+      "description": "Meissner Entrümpelung ist ein professionelles Entrümpelungsunternehmen mit Sitz in Berlin, das sich auf Haushaltsauflösungen, Wohnungsentrümpelungen, Kellerentrümpelungen und fachgerechte Entsorgungsdienstleistungen spezialisiert hat. Das Unternehmen bietet Full-Service-Lösungen einschließlich Besichtigung, Wertanrechnung, Entsorgung, Reinigung und nachhaltigem Recycling für Privat- und Gewerbekunden in Berlin, Brandenburg und deutschlandweit.",
       "url": "https://meissner-entruempelung.de/",
-      "logo": "https://meissner-entruempelung.de/uploads/0000/1/2024/08/03/logo-site1.svg",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://meissner-entruempelung.de/uploads/0000/1/2024/08/03/logo-site1.svg"
+      },
       "image": [
-        "https://meissner-entruempelung.de/uploads/0000/1/2024/08/03/logo-site1.svg"
+        "https://meissner-entruempelung.de/uploads/0000/1/2024/09/06/umzugswagen-img-800.webp"
       ],
       "telephone": "+493041723130",
-      "priceRange": "€€",
       "email": "info@meissner-entruempelung.de",
+      "priceRange": "€€",
       "address": {
+        "@type": "PostalAddress",
         "streetAddress": "Thyssenstraße 7-17",
         "addressLocality": "Berlin",
-        "postalCode": "13407 ",
+        "postalCode": "13407",
         "addressCountry": "DE"
       },
       "geo": {
@@ -234,226 +248,23 @@
       "areaServed": [
         {
           "@type": "City",
-          "name": "Berlin",
-          "containedInPlace": {
-            "@type": "Country",
-            "name": "Deutschland"
-          }
+          "name": "Berlin"
         },
         {
-          "@type": "Place",
-          "name": "Berlin Mitte",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-mitte"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Pankow",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-pankow"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Neukölln",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-neukoelln"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Charlottenburg",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-charlottenburg"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Friedrichshain",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-friedrichshain"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Lichtenberg",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-lichtenberg"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Marzahn",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-marzahn"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Wilmersdorf",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-wilmersdorf"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Prenzlauer Berg",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-prenzlauer-berg"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Reinickendorf",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-reinickendorf"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Spandau",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-spandau"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Steglitz",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-steglitz"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Tempelhof",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-tempelhof"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Tiergarten",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-tiergarten"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Treptow",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-treptow"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Wedding",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-wedding"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Weissensee",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-weissensee"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Hellersdorf",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-hellersdorf"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Hohenschönhausen",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-hohenschoenhausen"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Köpenick",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-koepenick"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Kreuzberg",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-kreuzberg"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Schöneberg",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-schoeneberg"
-        },
-        {
-          "@type": "Place",
-          "name": "Berlin Zehlendorf",
-          "containedInPlace": {
-            "@type": "City",
-            "name": "Berlin"
-          },
-          "url": "https://meissner-entruempelung.de/berlin-zehlendorf"
+          "@type": "AdministrativeArea",
+          "name": "Brandenburg"
         },
         {
           "@type": "Country",
-          "name": "Deutschland",
-          "alternateName": "Germany"
+          "name": "Deutschland"
         }
       ],
-      "hasMap": "https://maps.app.goo.gl/PviBm5i3W8U2hQzm9"
+      "hasMap": "https://maps.app.goo.gl/PviBm5i3W8U2hQzm9",
+      "sameAs": [
+        "https://maps.app.goo.gl/PviBm5i3W8U2hQzm9",
+        "https://www.linkedin.com/company/meissner-entruempelung/",
+        "https://www.instagram.com/meissner.ent/"
+      ]
     },
     {
       "@type": "Service",
@@ -462,10 +273,20 @@
       "provider": {
         "@id": "https://meissner-entruempelung.de/#company"
       },
-      "areaServed": {
-        "@type": "Country",
-        "name": "Deutschland"
-      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Berlin"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Brandenburg"
+        },
+        {
+          "@type": "Country",
+          "name": "Deutschland"
+        }
+      ],
       "availableChannel": {
         "@type": "ServiceChannel",
         "serviceUrl": "https://meissner-entruempelung.de/",
@@ -618,6 +439,7 @@
     }
   ]
 }
+
     @endverbatim
    </script>
     <?php

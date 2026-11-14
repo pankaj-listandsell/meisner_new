@@ -37,9 +37,9 @@
                         <a href="/anfrage/">Entrümpelung planen</a>
                     </div>
                 </div>
-                <!-- <div class="entrec-btn">
+                <div class="entrec-btn">
                     <a href="/entruempelung-rechner/"><img src="/uploads/0000/14/2025/04/03/profit.png"> Entrümpelung Rechner</a>
-                </div> -->
+                </div>
             </div>
         
     </div>

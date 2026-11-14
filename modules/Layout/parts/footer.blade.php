@@ -133,7 +133,7 @@
                                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="currentColor"/>
                                 </svg>
                             </a>
-                            <a href="https://www.instagram.com/meissner.ent?stkn=azJiMzh4dHNzY2Fy" target="_blank" rel="noopener noreferrer" aria-label="Meissner Entrümpelung auf Instagram">
+                            <a href="https://www.instagram.com/meissner.ent" target="_blank" rel="noopener noreferrer" aria-label="Meissner Entrümpelung auf Instagram">
                                 <svg width="21" height="20" viewBox="0 0 26 25" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
                                     <path d="M18.962 0H7.03795C3.15716 0 0 3.03573 0 6.76726V18.2329C0 21.9642 3.15716 25 7.03795 25H18.9622C22.8428 25 26 21.9642 26 18.2329V6.76726C26 3.03573 22.8428 0 18.962 0ZM24.4757 18.2329C24.4757 21.1561 22.0023 23.5343 18.962 23.5343H7.03795C3.99763 23.5343 1.52423 21.1561 1.52423 18.2329V6.76726C1.52423 3.84387 3.99763 1.4656 7.03795 1.4656H18.9622C22.0023 1.4656 24.4757 3.84387 24.4757 6.76726V18.2329Z" fill="currentColor"/>
                                     <path d="M13 5.66431C9.07997 5.66431 5.89087 8.73074 5.89087 12.5C5.89087 16.2693 9.07997 19.3358 13 19.3358C16.9201 19.3358 20.1092 16.2693 20.1092 12.5C20.1092 8.73074 16.9201 5.66431 13 5.66431ZM13 17.8702C9.92063 17.8702 7.4151 15.4612 7.4151 12.5C7.4151 9.53908 9.92063 7.12991 13 7.12991C16.0796 7.12991 18.585 9.53908 18.585 12.5C18.585 15.4612 16.0796 17.8702 13 17.8702Z" fill="currentColor"/>
@@ -168,6 +168,9 @@
             <a href="https://wa.me/4915771443156" rel="noopener noreferrer" target="_blank" class="icons-btns three"><img
             width="38" height="38" class=" lazyloaded" data-src="/assests/img/icons/float-mail-nl.svg"
             src="/uploads/0000/1/2024/09/18/meissner-whatsapp.svg" alt="Whatsapp">WhatsApp</a>
+    <a href="/entruempelung-rechner/" class="icons-btns four"><img width="60" height="60"
+            class=" lazyloaded" data-src="/assests/img/icons/float-calculator-icon.svg"
+            src="/assests/img/icons/float-calculator-icon.svg" alt="Entrümpelung Rechner">Rechner</a>
     <!-- <a href="mailto:{{ setting_item_with_lang("email") }}" rel="noopener noreferrer" target="_blank" class="icons-btns three"><img
             width="60" height="60" class=" lazyloaded" data-src="/assests/img/icons/float-mail-nl.svg"
             src="/assests/img/icons/float-mail-nl.svg"> {{ setting_item_with_lang("email") }}</a> -->
@@ -212,11 +215,11 @@
         </a>
     </div>
     <div class="col">
-        <a href="tel:00493041723130">
-            <span class="img"><img src="/assests/img/icons/f-telephone-icon.svg" alt="Anruf"
+        <a href="/entruempelung-rechner/">
+            <span class="img"><img src="/assests/img/icons/f-calculator-icon.svg" alt="Entrümpelung Rechner"
                     width="28" height="28"></span>
             <span class="text">
-                Anruf </span>
+                Rechner </span>
         </a>
     </div>
     <div class="col">

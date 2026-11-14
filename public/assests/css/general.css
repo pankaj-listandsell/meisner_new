@@ -105,3 +105,19 @@ width: auto;
 height: 20px;
 display: block;
 }
+/* Fourth floating tab: Entrümpelung Rechner. Follows the existing stack - each tab is offset
+   69px below the previous one - and keeps the same 58px sliver visible when closed
+   (width 204 - 146 = 58, 320 - 262 = 58, so 268 - 210 = 58 here). Wider than the default
+   because "Entrümpelung Rechner" is a long label. */
+.float-container-btns a:nth-child(4) {
+    margin-top: 207px;
+    width: 210px;
+    right: -155px;
+}
+
+/* The shared `.float-container-btns a:hover { right:0 }` sits earlier in this file and has
+   the same specificity as the rule above, so on source order alone the closed position would
+   win and this tab would never slide out. Restate it with the nth-child attached. */
+.float-container-btns a:nth-child(4):hover {
+  right: 0;
+}
