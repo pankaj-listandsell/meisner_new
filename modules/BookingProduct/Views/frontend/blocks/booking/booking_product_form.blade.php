@@ -289,8 +289,27 @@
     @push('js')
         <script
             src="https://maps.googleapis.com/maps/api/js?language=de&region=DE&key=AIzaSyC6FL8cKJSHFIkwZzQZlbgesNpcmkyXC6Q&libraries=places&&callback=Function.prototype"></script>
-        <script type="text/javascript" src="/ls-template/assets/js/form.js" async></script>
         <script type="text/javascript">
+            /* Minimum net price for a request, from the min_net_price() helper - the same
+               number BookingController::cartTotals() uses for the stored figures. Rendered in
+               here so the running total in the basket badge is already floored on the very
+               first "Hinzufügen", before the cart AJAX has run once. */
+            const MIN_NET_PRICE = {{ min_net_price() }};
+
+            /* The effective minimum: the last value the server sent, else the rendered one. */
+            function minNetPrice() {
+                return parseFloat(localStorage.getItem('min_net_price')) || MIN_NET_PRICE;
+            }
+
+            /* A request never costs less than the minimum, so anything below it is shown as
+               the minimum. An empty basket stays at 0 - the floor is for actual requests. */
+            function applyMinNetPrice(total) {
+                total = parseFloat(total) || 0;
+                let min = minNetPrice();
+
+                return (total > 0 && total < min) ? min : total;
+            }
+
             const progressSteps = document.querySelectorAll('.progress-step');
             const progressLineFill = document.querySelector('.progress-line-fill');
             const formSteps = document.querySelectorAll('.form-step');
@@ -527,9 +546,12 @@
                 //Summary
                 let main_total = 0;
                 $('input[name="cart_item[]"]').each(function() {
-                    let parts = $(this).val().split(','); 
+                    let parts = $(this).val().split(',');
                     main_total +=  parts[1] * parts[2];
                 });
+                // The badge shows what the request will cost, so it is floored at the minimum
+                // just like the summary and the stored booking.
+                main_total = applyMinNetPrice(main_total);
                 if(main_total > 0){
                    $('.main_total').html(priceConvert(main_total) + ' €');
                 }
@@ -563,6 +585,9 @@
                             }
                             $('#address_view').html($('#address').val() + ', ' +$('#zipcode').val() +' '+ $('#city').val());
                             $('#cart_section_view').html(response.data);
+                            // Below the minimum net price the single line prices no longer add up
+                            // to the total, so they are hidden instead of contradicting it.
+                            $('#cart_section_view').toggleClass('hide-item-prices', !!response.summary.minimum_applied);
                             $('#total_pieces').html(response.summary.total_pieces);
                             $('#net_amount').html(priceConvert(response.summary.net_amount) + ' €');
                             $('#vat').html(priceConvert(response.summary.vatTaxAmount) + ' €');
@@ -576,6 +601,7 @@
                             localStorage.setItem('additional_cost_cart', response.summary.additional_cost);
                             localStorage.setItem('grand_amount_cart', response.summary.gross_total_amount);
                             localStorage.setItem('max_order_amount', response.summary.max_order_amount);
+                            localStorage.setItem('min_net_price', response.summary.min_net_price);
                         }
                     },
                     error: function (e) {
@@ -775,14 +801,26 @@
                     $('#cart_total_amount').val(calculate_total)
                 }
 
-                let vatTaxAmount = (calculate_total * localStorage.getItem('vat_cart')) / 100;
+                // Minimum net price: the running total in #cart_total_amount stays the raw sum
+                // of the lines (the +/- buttons add and subtract a unit price from it), but
+                // everything shown and stored is floored, so the summary never drops below the
+                // minimum. The server applies the same floor in BookingController::cartTotals().
+                let net_total = applyMinNetPrice(calculate_total);
+                let minimum_applied = (net_total !== calculate_total);
+
+                // While the total sits on the minimum the line prices would not add up to it,
+                // so they are hidden here as well - the quantity buttons change the cart
+                // without going back to the server.
+                $('#cart_section_view').toggleClass('hide-item-prices', minimum_applied);
+
+                let vatTaxAmount = (net_total * localStorage.getItem('vat_cart')) / 100;
                 // alert(vatTaxAmount);
-                $('#net_amount').html(priceConvert(calculate_total) + ' €');
-                $('#gross_total_amount').html(priceConvert(calculate_total) + ' €');
+                $('#net_amount').html(priceConvert(net_total) + ' €');
+                $('#gross_total_amount').html(priceConvert(net_total) + ' €');
                 $('#vat').html(priceConvert(Math.floor(vatTaxAmount * 100) / 100) + ' €');
-                
-                if(calculate_total > 0){
-                   $('.main_total').html(priceConvert(calculate_total) + ' €');
+
+                if(net_total > 0){
+                   $('.main_total').html(priceConvert(net_total) + ' €');
                 }
 
                 if ($('input[prod-id="'+id+'"]').length > 0) {
@@ -790,8 +828,8 @@
                 }
 
                 localStorage.setItem('vat_cart_amount', vatTaxAmount);
-                localStorage.setItem('net_amount_cart', calculate_total);
-                localStorage.setItem('grand_amount_cart', calculate_total);
+                localStorage.setItem('net_amount_cart', net_total);
+                localStorage.setItem('grand_amount_cart', net_total);
                 // $('#net_amount_cart').val(calculate_total);
                 // $('#grand_amount_cart').val(calculate_total);
                 $('.min_order_content').hide();
@@ -921,14 +959,18 @@
                             }
                             $('#address_view').html($('#address').val() + ', ' +$('#zipcode').val() +' '+ $('#city').val());
                             $('#cart_section_view').html(response.data);
+                            // See the note in addtocart(): line prices are hidden while the
+                            // total sits on the minimum net price.
+                            $('#cart_section_view').toggleClass('hide-item-prices', !!response.summary.minimum_applied);
                             $('#total_pieces').html(response.summary.total_pieces);
                             $('#net_amount').html(priceConvert(response.summary.net_amount) + ' €');
                             $('#vat').html(priceConvert(response.summary.vatTaxAmount) + ' €');
                             $('#additional_cost').html(priceConvert(response.summary.additional_cost) + ' €');
                             $('#gross_total_amount').html(priceConvert(response.summary.gross_total_amount) + ' €');
-                            if(response.summary.gross_total_amount > 0){
-                                $('.main_total').html(priceConvert(response.summary.gross_total_amount) + ' €');
-                            }
+                            // Set unconditionally: removing the last item leaves a total of 0,
+                            // and the badge must not keep showing the minimum for an empty
+                            // basket. The server figure is already floored.
+                            $('.main_total').html(priceConvert(response.summary.gross_total_amount) + ' €');
 
                             localStorage.setItem('total_pieces_cart', response.summary.total_pieces);
                             localStorage.setItem('net_amount_cart', response.summary.net_amount);
@@ -937,6 +979,7 @@
                             localStorage.setItem('additional_cost_cart', response.summary.additional_cost);
                             localStorage.setItem('grand_amount_cart', response.summary.gross_total_amount);
                             localStorage.setItem('max_order_amount', response.summary.max_order_amount);
+                            localStorage.setItem('min_net_price', response.summary.min_net_price);
                         }
                     },
                     error: function (e) {

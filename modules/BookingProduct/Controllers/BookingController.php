@@ -45,25 +45,102 @@ class BookingController extends Controller
         return response()->json(['status'=>1,'data'=>$viewRender]);
     }
 
+    /**
+     * Minimum net price for any disposal request, however few items are selected.
+     * The value itself lives in the min_net_price() helper, which the calculator view also
+     * reads so the browser floors its running figures against the same number.
+     */
+    protected function minNetPrice()
+    {
+        return min_net_price();
+    }
+
+    /**
+     * Net / VAT / gross for a cart, with the minimum net price applied.
+     *
+     * Single source of truth for both cartdata() and booking(): unit prices are read from
+     * the database rather than taken from the request, so the figures that end up on the
+     * PDF, in the e-mails and in the booking row cannot be edited in the browser.
+     *
+     * An empty cart stays at 0 - the floor is for actual requests, so the summary does not
+     * show 130 EUR before anything has been chosen.
+     */
+    protected function cartTotals($cart_items)
+    {
+        $lines = [];
+        $net_amount = 0;
+
+        foreach ((array) $cart_items as $val) {
+            $getCart = explode(',', $val);
+            $prodid  = $getCart[0] ?? null;
+            $qty     = max(1, (int) ($getCart[1] ?? 1));
+
+            $product = Products::select('id','title','cat_id','price','content','image_id')
+                ->where('id', $prodid)->first();
+            if (empty($product)) {
+                continue;
+            }
+
+            $lines[] = ['product' => $product, 'qty' => $qty];
+            $net_amount += $product->price * $qty;
+        }
+
+        $items_net_amount = $net_amount;
+        $min_net_price    = $this->minNetPrice();
+        $minimum_applied  = ($net_amount > 0 && $net_amount < $min_net_price);
+
+        if ($minimum_applied) {
+            $net_amount = $min_net_price;
+        }
+
+        $vatTax          = setting_item_with_lang('vat', 'de');
+        $vatTaxAmount    = ($net_amount * (float) $vatTax) / 100;
+        $additional_cost = 0;
+
+        return [
+            'lines'              => $lines,
+            'items_net_amount'   => $items_net_amount,
+            'net_amount'         => $net_amount,
+            'min_net_price'      => $min_net_price,
+            'minimum_applied'    => $minimum_applied,
+            'vat'                => $vatTax,
+            'vatTaxAmount'       => floor($vatTaxAmount * 100) / 100,
+            'additional_cost'    => $additional_cost,
+            'gross_total_amount' => $net_amount + $additional_cost,
+        ];
+    }
+
     public function cartdata (Request $request)
     {
+        $totals = $this->cartTotals($request->cart_item);
+
         $result = [];
-        $net_amount = 0;
-        foreach($request->cart_item as $val){
-            $getCart = explode(',',$val);
-            $prodid = $getCart[0];
-            $qty = $getCart[1];
-            $getProducts = Products::select('id','title','price','content','image_id')->where('id',$prodid)->first();
-            $result[] = ['id'=>$getProducts->id,'title'=>$getProducts->title,'price'=>$getProducts->price,'qty'=>$qty,'image_id'=>$getProducts->image_id];
-            $net_amount += $getProducts->price*$qty;
+        foreach ($totals['lines'] as $line) {
+            $result[] = [
+                'id'       => $line['product']->id,
+                'title'    => $line['product']->title,
+                'price'    => $line['product']->price,
+                'qty'      => $line['qty'],
+                'image_id' => $line['product']->image_id,
+            ];
         }
-        $viewRender = "";
+
         $viewRender = view('BookingProduct::.frontend.blocks.booking.cart',compact('result'))->render();
-        $vatTax = setting_item_with_lang('vat', 'de');
-        $vatTaxAmount = ($net_amount * (float)$vatTax) / 100;
-        $additional_cost = 0;
-        $gross_total_amount = $net_amount + $additional_cost;
-        $summary = ['address'=>$request->address,'total_pieces'=>count($request->cart_item),'net_amount'=>$net_amount,'vat'=>$vatTax,'vatTaxAmount'=> floor($vatTaxAmount * 100) / 100, 'max_order_amount'=>setting_item_with_lang('max_order_amount', 'de'),'additional_cost'=>$additional_cost,'gross_total_amount'=>$gross_total_amount];
+
+        $summary = [
+            'address'            => $request->address,
+            'total_pieces'       => count($result),
+            'net_amount'         => $totals['net_amount'],
+            'items_net_amount'   => $totals['items_net_amount'],
+            'min_net_price'      => $totals['min_net_price'],
+            'minimum_applied'    => $totals['minimum_applied'],
+            'vat'                => $totals['vat'],
+            'vatTaxAmount'       => $totals['vatTaxAmount'],
+            'max_order_amount'   => setting_item_with_lang('max_order_amount', 'de'),
+            'additional_cost'    => $totals['additional_cost'],
+            'gross_total_amount' => $totals['gross_total_amount'],
+        ];
+
         return response()->json(['status'=>1,'data'=>$viewRender,'summary'=>$summary]);
     }
     
@@ -85,12 +162,17 @@ class BookingController extends Controller
         $row->note = $request->note;
         $row->company_name = $request->company_name;
         $row->vat_id = $request->vat_id;
-        $row->total_pieces = $request->total_pieces_cart;
-        $row->net_amount = $request->net_amount_cart;
-        $row->vat = $request->vat_cart_amount;
-        $row->vat_percent = setting_item_with_lang('vat', 'de');
-        $row->additional_cost = $request->additional_cost_cart;
-        $row->grand_amount = $request->grand_amount_cart;
+        // Recomputed here rather than taken from the posted localStorage values, so the
+        // minimum net price is guaranteed on the stored booking, the PDF and the e-mails
+        // even if the browser sends something lower.
+        $totals = $this->cartTotals($request->cart_item);
+
+        $row->total_pieces = count($totals['lines']);
+        $row->net_amount = $totals['net_amount'];
+        $row->vat = $totals['vatTaxAmount'];
+        $row->vat_percent = $totals['vat'];
+        $row->additional_cost = $totals['additional_cost'];
+        $row->grand_amount = $totals['gross_total_amount'];
         $row->status = '1';
         if ($row->save()) {
             $detail = [];

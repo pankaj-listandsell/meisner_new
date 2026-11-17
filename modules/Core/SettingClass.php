@@ -43,6 +43,7 @@
                         'address',
                         'address_link',
                         'max_order_amount',
+                        'min_net_price',
                         'vat',
                         'booking_term_conditions'
 					],

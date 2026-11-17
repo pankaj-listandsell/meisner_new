@@ -121,3 +121,17 @@ display: block;
 .float-container-btns a:nth-child(4):hover {
   right: 0;
 }
+
+
+/* ---------------------------------------------------------------------------
+   Entrümpelung Rechner - cart line prices below the minimum net price
+   ---------------------------------------------------------------------------
+   Every request costs at least the minimum net price (setting `min_net_price`,
+   130 EUR by default). When the selected items add up to less than that, the
+   total is raised to the minimum and the single line prices no longer sum to
+   it, so they are left out. The class is toggled in
+   booking_product_form.blade.php - both after the cart AJAX render and in
+   updateSummary(), which the +/- buttons use without calling the server. */
+#cart_section_view.hide-item-prices .item-price {
+  display: none;
+}

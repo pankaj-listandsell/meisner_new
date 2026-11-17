@@ -120,6 +120,14 @@
     </style>
 </head>
 
+<?php
+    /*
+     * When the net amount was raised to the minimum net price the single line prices no longer
+     * sum to the total shown below, so the price column is left out rather than printing
+     * figures that contradict it. See BookingProduct::minimumApplied().
+     */
+    $show_item_prices = ! $row->minimumApplied($detail);
+?>
 <body>
 <div class="container" style="width: 100%; max-width: 770px; margin: auto; padding: 20px;">
     <table class="header" style="width: 100%; margin-bottom: 20px;">
@@ -189,25 +197,27 @@
         <tr>
             <th>Produktname</th>
             <th style="text-align:right">Menge</th>
-            <th style="text-align:right">Preis</th>
+            @if($show_item_prices)<th style="text-align:right">Preis</th>@endif
         </tr>
          @foreach($detail as $item)
             <tr>
                 <td>{{ $item->product_title }}</td>
                 <td>{{ $item->qty }}</td>
-                <td>{{ priceConvert($item->total_price) }} €</td>
+                @if($show_item_prices)<td>{{ priceConvert($item->total_price) }} €</td>@endif
             </tr>
          @endforeach
+        {{-- The label spans every column but the last one, so it stays flush against the
+             figures whether or not the price column is printed. --}}
         <tr class="summary-row">
-            <td style="text-align:right" colspan="2">Stücke insgesamt:</td>
+            <td style="text-align:right" colspan="{{ $show_item_prices ? 2 : 1 }}">Stücke insgesamt:</td>
             <td>{{$row->total_pieces}}</td>
         </tr>
         <tr class="summary-row">
-            <td style="text-align:right" colspan="2">inkl. {{$row->vat_percent}}% MwSt.:</td>
+            <td style="text-align:right" colspan="{{ $show_item_prices ? 2 : 1 }}">inkl. {{$row->vat_percent}}% MwSt.:</td>
             <td>{{priceConvert($row->vat)}} €</td>
         </tr>
         <tr class="summary-row">
-            <td style="text-align:right;font-size:16px" colspan="2">Gesamtsumme:</td>
+            <td style="text-align:right;font-size:16px" colspan="{{ $show_item_prices ? 2 : 1 }}">Gesamtsumme:</td>
             <td style="font-size:16px">{{priceConvert($row->grand_amount)}} €</td>
         </tr>
     </table>

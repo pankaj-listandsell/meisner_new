@@ -93,6 +93,15 @@
                              value="{{setting_item_with_lang('max_order_amount', $lang)}}">
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="">{{__("Mindestpreis netto (Entrümpelung Rechner)")}}</label>
+                    <div class="form-controls">
+                        <input type="text" class="form-control" name="min_net_price"
+                             placeholder="130"
+                             value="{{setting_item_with_lang('min_net_price', $lang)}}">
+                        <small class="form-text text-muted">{{__("Every request costs at least this much net. A smaller calculated total is raised to it. Empty = 130.")}}</small>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

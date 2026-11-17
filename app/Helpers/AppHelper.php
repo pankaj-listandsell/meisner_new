@@ -2409,3 +2409,19 @@ function priceConvert($price)
 {
     return number_format((float)$price, 2, ',', '.');
 }
+
+/**
+ * Minimum net price for a disposal request (Entrümpelung Rechner).
+ *
+ * Every request costs at least this much net, however few or cheap the chosen items are.
+ * Falls back to 130 EUR when the setting is empty, so the floor applies before anyone fills
+ * the field in. Single source of truth for BookingController::cartTotals() (which computes
+ * the stored figures) and for the calculator's JS, which floors what it shows between
+ * server calls.
+ */
+function min_net_price()
+{
+    $min = setting_item_with_lang('min_net_price', 'de');
+
+    return ($min === '' || $min === null) ? 130.0 : (float) $min;
+}

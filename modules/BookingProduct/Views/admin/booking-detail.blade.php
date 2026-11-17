@@ -26,6 +26,14 @@
     }
 </style>
 @section('content')
+        <?php
+            /*
+             * When the net amount was raised to the minimum net price the single item prices no
+             * longer add up to the total, so they are left out here too - the same as on the
+             * calculator and in the customer PDF. See BookingProduct::minimumApplied().
+             */
+            $show_item_prices = ! $row->minimumApplied($detail);
+        ?>
         <div class="container-fluid">
             <div class="d-flex justify-content-between mb20">
                 <div class="">
@@ -63,8 +71,10 @@
                                                 <th>Bild</th>
                                                 <th>Produkt</th>
                                                 <th class="text-center">QTY</th>
-                                                <th class="text-right">Preis pro Einheit</th>
-                                                <th class="text-right">Insgesamt</th>
+                                                @if($show_item_prices)
+                                                    <th class="text-right">Preis pro Einheit</th>
+                                                    <th class="text-right">Insgesamt</th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -77,8 +87,10 @@
                                                 <td><img style="height: 50px;width: 50px" src="{{$image_url}}" title="Container zur Gewerbemüllentsorgung bestellen" alt="Container zur Gewerbemüllentsorgung bestellen"></td>
                                                 <td>{{$val->product_title}}</td>
                                                 <td class="text-center">{{$val->qty}}</td>
-                                                <td class="text-right">{{priceConvert($val->unit_price)}} €</td>
-                                                <td class="text-right">{{priceConvert($val->total_price)}} €</td>
+                                                @if($show_item_prices)
+                                                    <td class="text-right">{{priceConvert($val->unit_price)}} €</td>
+                                                    <td class="text-right">{{priceConvert($val->total_price)}} €</td>
+                                                @endif
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -94,6 +106,13 @@
                                         <th>Nettobetrag:</th>
                                         <td class="text-right">{{priceConvert($row->net_amount)}} €</td>
                                     </tr>
+                                    @if(!$show_item_prices)
+                                        {{-- Says why the item prices above are missing. --}}
+                                        <tr>
+                                            <th>Mindestpreis (netto) angewendet:</th>
+                                            <td class="text-right">{{priceConvert($row->net_amount)}} €</td>
+                                        </tr>
+                                    @endif
                                     <tr>
                                         <th>Vat :</th>
                                         <td class="text-right">{{priceConvert($row->vat)}} €</td>
